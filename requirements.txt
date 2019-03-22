@@ -1,0 +1,3 @@
+netmiko
+netaddr
+napalm>=2.0.0
