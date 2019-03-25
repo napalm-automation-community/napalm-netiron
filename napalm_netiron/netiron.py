@@ -30,6 +30,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 import functools
+import json
 import re
 import os
 import uuid
@@ -42,13 +43,13 @@ from itertools import islice
 from napalm_netiron.netiron_file_transfer import NetironFileTransfer
 
 from netmiko import ConnectHandler, redispatch
-from napalm.base import NetworkDriver
-from napalm.base.exceptions import ReplaceConfigException, MergeConfigException, \
+from napalm_base import NetworkDriver
+from napalm_base.exceptions import ReplaceConfigException, MergeConfigException, \
             ConnectionClosedException, CommandErrorException
 
 from netaddr import IPAddress, IPNetwork
-from napalm.base.utils import py23_compat
-import napalm.base.helpers
+from napalm_base.utils import py23_compat
+import napalm_base.helpers
 
 import time
 
@@ -1408,8 +1409,8 @@ class NetIronDriver(NetworkDriver):
                         'remote_as': 'n/a',
                         'communities': [],
                         'preference2': 0,
-                        'metric': napalm.base.helpers.convert(int, r1.group('med'), 0),
-                        'weight': napalm.base.helpers.convert(int, r1.group('weight'), 0),
+                        'metric': napalm_base.helpers.convert(int, r1.group('med'), 0),
+                        'weight': napalm_base.helpers.convert(int, r1.group('weight'), 0),
                         'status': r1.group('status'),
                         'local_as': 22822,
                         'as_path': r2.group('path').split(),
@@ -1525,7 +1526,7 @@ class NetIronDriver(NetworkDriver):
                 r'\s+(?P<tosend_prefixes>\d+)'.format(
                     IPV4_ADDR_REGEX, IPV6_ADDR_REGEX, ASN_REGEX), line)
             if r2:
-                remote_addr = napalm.base.helpers.IPAddress(r2.group('remote_addr'))
+                remote_addr = napalm_base.helpers.IPAddress(r2.group('remote_addr'))
 
                 afi = "ipv4" if remote_addr.version == 4 else 'ipv6'
                 received_prefixes = int(r2.group('accepted_prefixes'))+int(r2.group('filtered_prefixes'))
@@ -1556,7 +1557,7 @@ class NetIronDriver(NetworkDriver):
                 logger.info('brocade overflow bug: line: {}'.format(line))
                 logger.info(r2.group())
                 try:
-                    remote_addr = napalm.base.helpers.IPAddress(r2.group('remote_addr'))
+                    remote_addr = napalm_base.helpers.IPAddress(r2.group('remote_addr'))
                     bgp_data['global']['peers'][str(remote_addr)] = {
                         'local_as': local_as,
                         'remote_as': r2.group('remote_as'),
@@ -1658,7 +1659,7 @@ class NetIronDriver(NetworkDriver):
                     r'\s+(?P<tosend_prefixes>\d+)'.format(
                         IPV4_ADDR_REGEX, IPV6_ADDR_REGEX, ASN_REGEX), line)
                 if r2:
-                    remote_addr = napalm.base.helpers.IPAddress(r2.group('remote_addr'))
+                    remote_addr = napalm_base.helpers.IPAddress(r2.group('remote_addr'))
 
                     afi = "ipv4" if remote_addr.version == 4 else 'ipv6'
                     received_prefixes = int(r2.group('accepted_prefixes')) + int(r2.group('filtered_prefixes'))
@@ -1689,7 +1690,7 @@ class NetIronDriver(NetworkDriver):
                     logger.info('brocade overflow bug: line: {}'.format(line))
                     logger.info(r2.group())
                     try:
-                        remote_addr = napalm.base.helpers.IPAddress(r2.group('remote_addr'))
+                        remote_addr = napalm_base.helpers.IPAddress(r2.group('remote_addr'))
                         bgp_data['global']['peers'][str(remote_addr)] = {
                             'local_as': local_as,
                             'remote_as': r2.group('remote_as'),
@@ -1717,7 +1718,7 @@ class NetIronDriver(NetworkDriver):
 
             # Using preset template to extract peer info
             _peer_info = (
-                napalm.base.helpers.textfsm_extractor(
+                napalm_base.helpers.textfsm_extractor(
                     self, 'bgp_detail', peer_output))
 
             for item in _peer_info:
@@ -1742,7 +1743,7 @@ class NetIronDriver(NetworkDriver):
                 # Converting certain fields into int
                 for key in int_fields:
                     if key in item:
-                        item[key] = napalm.base.helpers.convert(int, item[key], 0)
+                        item[key] = napalm_base.helpers.convert(int, item[key], 0)
 
                 # process maps and lists
                 for f in ['route_map', 'filter_list', 'prefix_list']:
@@ -1757,37 +1758,37 @@ class NetIronDriver(NetworkDriver):
                                 item['{0}_{1}'.format(
                                     'import' if 'in' in r[0] else 'export',
                                     _name
-                                )] = napalm.base.helpers.convert(py23_compat.text_type, r[1])
+                                )] = napalm_base.helpers.convert(py23_compat.text_type, r[1])
 
                             if len(r) == 4:
                                 item['{0}_{1}'.format(
                                     'import' if 'in' in r[2] else 'export',
                                     _name
-                                )] = napalm.base.helpers.convert(py23_compat.text_type, r[3])
+                                )] = napalm_base.helpers.convert(py23_compat.text_type, r[3])
 
                         # remove raw data from item
                         item.pop(f, None)
 
                 # Conforming with the datatypes defined by the base class
                 item['description'] = (
-                    napalm.base.helpers.convert(
+                    napalm_base.helpers.convert(
                         py23_compat.text_type, item.get('description', '')))
                 item['peer_group'] = (
-                    napalm.base.helpers.convert(
+                    napalm_base.helpers.convert(
                         py23_compat.text_type, item.get('peer_group', '')))
-                item['remote_address'] = napalm.base.helpers.ip(item['remote_address'])
+                item['remote_address'] = napalm_base.helpers.ip(item['remote_address'])
                 item['previous_connection_state'] = (
-                    napalm.base.helpers.convert(
+                    napalm_base.helpers.convert(
                         py23_compat.text_type, item['previous_connection_state']))
                 item['connection_state'] = (
-                    napalm.base.helpers.convert(
+                    napalm_base.helpers.convert(
                         py23_compat.text_type, item['connection_state']))
                 item['routing_table'] = (
-                    napalm.base.helpers.convert(
+                    napalm_base.helpers.convert(
                         py23_compat.text_type, item['routing_table']))
-                item['router_id'] = napalm.base.helpers.ip(item['router_id'])
-                item['local_address'] = napalm.base.helpers.convert(
-                    napalm.base.helpers.ip, item['local_address'])
+                item['router_id'] = napalm_base.helpers.ip(item['router_id'])
+                item['local_address'] = napalm_base.helpers.convert(
+                    napalm_base.helpers.ip, item['local_address'])
 
                 peer_details.append(item)
 
@@ -1974,8 +1975,52 @@ class NetIronDriver(NetworkDriver):
             'temperature': {},
             'cpu': [{'%usage': 0.0}],
             'power': {},
-            'fans': {}
+            'fans': {},
+            'memory_detail': {},
+            'cpu_detail': {}
         }
+
+        lines = self.device.send_command('show cpu-utilization average all 300 | include idle')
+        for line in lines.split('\n'):
+            r1 = re.match(r'^idle\s+.*(\d+)$', line)
+            if r1:
+                environment['cpu'][0]['%usage'] = 100 - int(r1.group(1))
+
+        _data = napalm_base.helpers.textfsm_extractor(
+            self, "show_cpu_lp", self.device.send_command('show cpu-utilization lp'))
+        if _data:
+            for d in _data:
+                _slot = d.get('slot')
+                _pct = napalm_base.helpers.convert(int, d.get('util'), 0)
+                if _slot:
+                    environment['cpu_detail']['LP{}'.format(_slot)] = {'%usage': _pct}
+
+        # process memory
+        _data = napalm_base.helpers.textfsm_extractor(self, 'show_memory', self.device.send_command('show memory'))
+        # print(json.dumps(_data, indent=2))
+        if _data:
+            for d in _data:
+                _name = d.get('name')
+                _module = d.get('module')
+                _state = d.get('state')
+                _avail = napalm_base.helpers.convert(int, d.get('avail_ram'), 0)
+                _total = napalm_base.helpers.convert(int, d.get('total_ram'), 0)
+                _used = _avail/_total if _avail > 0 else 0
+                _pct = d.get('avail_ram_pct')
+
+                if _name and _module:
+                    environment['memory_detail'][_module] = {
+                        'used_ram': _used,
+                        'available_ram': _avail
+                    }
+
+                    if 'MP' in _module and _state and _state == 'active':
+                        environment['memory'] = {
+                            'available_ram': _avail,
+                            'used_ram': _avail
+                        }
+
+        # todo replace with 'show chassis' tpl
         command = 'show chassis'
         lines = self.device.send_command(command)
         lines = lines.split("\n")
@@ -2014,10 +2059,40 @@ class NetIronDriver(NetworkDriver):
         return environment
 
     def get_arp_table(self, vrf=""):
-        """get_arp_table method."""
+        """
+        Returns a list of dictionaries having the following set of keys:
+            * interface (string)
+            * mac (string)
+            * ip (string)
+            * age (float)
+
+        'vrf' of null-string will default to all VRFs. Specific 'vrf' will return the ARP table
+        entries for that VRFs (including potentially 'default' or 'global').
+
+        In all cases the same data structure is returned and no reference to the VRF that was used
+        is included in the output.
+
+        Example::
+
+            [
+                {
+                    'interface' : 'MgmtEth0/RSP0/CPU0/0',
+                    'mac'       : '5C:5E:AB:DA:3C:F0',
+                    'ip'        : '172.17.17.1',
+                    'age'       : 1454496274.84
+                },
+                {
+                    'interface' : 'MgmtEth0/RSP0/CPU0/0',
+                    'mac'       : '5C:5E:AB:DA:3C:FF',
+                    'ip'        : '172.17.17.2',
+                    'age'       : 1435641582.49
+                }
+            ]
+
+        """
         arp_table = list()
 
-        arp_cmd = 'show arp'
+        arp_cmd = 'show arp {}'.format(vrf)
         output = self.device.send_command(arp_cmd)
         output = output.split('\n')
         output = output[7:]
@@ -2026,19 +2101,20 @@ class NetIronDriver(NetworkDriver):
             fields = line.split()
 
             if len(fields) == 6:
+                print(fields)
                 num, address, mac, typ, age, interface = fields
                 try:
                     if age == 'None':
                         age = 0
                     age = float(age)
                 except ValueError:
-                    print("Unable to convert age value to float: {}".format(age))
+                    logger.warn("Unable to convert age value to float: {}".format(age))
 
                 # Do not include 'Pending' entries
                 if typ == 'Dynamic' or typ == 'Static':
                     entry = {
                         'interface': interface,
-                        'mac': mac,
+                        'mac': napalm_base.helpers.mac(mac),
                         'ip': address,
                         'age': age
                     }
@@ -2192,7 +2268,7 @@ class NetIronDriver(NetworkDriver):
                         mac_address, port, age, vlan, esi = fields
 
                 is_static = bool('Static' in age)
-                mac_address = napalm.base.helpers.mac(mac_address)
+                mac_address = napalm_base.helpers.mac(mac_address)
 
                 entry = {
                     'mac': mac_address,
@@ -2334,7 +2410,7 @@ class NetIronDriver(NetworkDriver):
         """
         ping_dict = {}
 
-        _ip = napalm.base.helpers.IPAddress(destination)
+        _ip = napalm_base.helpers.IPAddress(destination)
         if not _ip:
             raise ValueError('destination must be a valid IP Address')
         
@@ -2432,7 +2508,7 @@ class NetIronDriver(NetworkDriver):
             * ip_address (str)
             * host_name (str)
         """
-        _ip = napalm.base.helpers.IPAddress(destination)
+        _ip = napalm_base.helpers.IPAddress(destination)
         if not _ip:
             raise ValueError('destination must be a valid IP Address')
 
@@ -2629,8 +2705,8 @@ class NetIronDriver(NetworkDriver):
             # typical format of an entry in the IOS IPv6 neighbors table:
             # 2002:FFFF:233::1 0 2894.0fed.be30  REACH Fa3/1/2.233
             ip, age, mac, state, interface = entry.split()
-            mac = '' if mac == '-' else napalm.base.helpers.mac(mac)
-            ip = napalm.base.helpers.ip(ip)
+            mac = '' if mac == '-' else napalm_base.helpers.mac(mac)
+            ip = napalm_base.helpers.ip(ip)
             ipv6_neighbors_table.append({
                                         'interface': interface,
                                         'mac': mac,
