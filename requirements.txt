@@ -1,3 +1,3 @@
-netmiko
+netmiko>=1.4.3
 netaddr
-napalm>=2.0.0
+napalm_base>=0.25.0
