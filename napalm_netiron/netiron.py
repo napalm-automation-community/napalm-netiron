@@ -119,7 +119,7 @@ logger = logging.getLogger(__name__)
 class NetIronDriver(NetworkDriver):
     """NAPALM Brocade/Foundry netiron Handler."""
 
-    def __init__(self, hostname, username, password, timeout=60, optional_args=None, proxy=None):
+    def __init__(self, hostname, username, password, timeout=60, optional_args=None):
         """NAPALM Brocade/Foundry netiron Handler."""
 
         logger.info('NetIronDriver init')
@@ -133,13 +133,8 @@ class NetIronDriver(NetworkDriver):
         self.password = password
         self.timeout = timeout
 
-        self.proxy = proxy
-
         # default to MLX for now
         self.family = 'MLX'
-
-        # only support SSH
-        self.transport = optional_args.get('transport', 'ssh')
 
         # tmp path
         self._tmp_working_path = optional_args.get('tmp_working_path', '/tmp')
@@ -147,17 +142,20 @@ class NetIronDriver(NetworkDriver):
         # uuid
         self._uuid = optional_args.get('uuid', uuid.uuid4())
 
+        # support optional SSH proxy
+        self._use_proxy = optional_args.pop('use_proxy', None)
+
         # Retrieve file names
-        self.candidate_cfg = optional_args.get('candidate_cfg', 'candidate_config.txt')
-        self.merge_cfg = optional_args.get('merge_cfg', 'merge_config.txt')
-        self.rollback_cfg = optional_args.get(
+        self.candidate_cfg = optional_args.pop('candidate_cfg', 'candidate_config.txt')
+        self.merge_cfg = optional_args.pop('merge_cfg', 'merge_config.txt')
+        self.rollback_cfg = optional_args.pop(
             'rollback_cfg',
             '{0}/{1}-{2}-rollback_config.cfg'.format(
                 self._tmp_working_path, self.hostname, self._uuid))
 
         # None will cause auto detection of dest_file_system
-        self._dest_file_system = optional_args.get('dest_file_system', '/slot1')
-        self.auto_rollback_on_error = optional_args.get('auto_rollback_on_error', False)
+        self._dest_file_system = optional_args.pop('dest_file_system', '/slot1')
+        self.auto_rollback_on_error = optional_args.pop('auto_rollback_on_error', False)
 
         # Control automatic toggling of 'file prompt quiet' for file operations
         self.auto_file_prompt = optional_args.get('auto_file_prompt', True)
@@ -201,10 +199,7 @@ class NetIronDriver(NetworkDriver):
             except KeyError:
                 pass
 
-        default_port = {
-            'ssh': 22,
-        }
-        self.port = optional_args.get('port', default_port[self.transport])
+        self.port = optional_args.get('port', 22)
         self.device = None
         self.config_replace = False
 
@@ -222,29 +217,28 @@ class NetIronDriver(NetworkDriver):
         """Open a connection to the device."""
         device_type = 'brocade_netiron'
 
-        if self.proxy:
-            print('proxy: {0}'.format(self.proxy))
+        if self._use_proxy:
+            logger.info('{0}: using SSH proxy {1}'.format(self.hostname, self._use_proxy))
 
             self.device = ConnectHandler(
-                device_type='terminal_server', host=self.proxy,
+                device_type='terminal_server', host=self._use_proxy,
                 username=self.username, password=self.password,
                 **self.netmiko_optional_args)
-            print('prompt: ', self.device.find_prompt())
+            logger.debug('{0}: proxy prompt: ', self.hostname, self.device.find_prompt())
 
             _cmd = 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null  -t -l {0} {1}\n'.format(
                 self.username, self.hostname)
-            print(_cmd)
+            logger.debug('{0}: proxy cmd: {1}'.format(self.hostname, _cmd))
             self.device.write_channel(_cmd)
+            time.sleep(1)
 
             for t in range(0, 4):
                 _output = self.device.read_channel()
                 # print('output: [{0}]'.format(_output))
                 if 'ssword' in _output:
-                    # print('sent pass')
                     self.device.write_channel(self.password + '\n')
                     time.sleep(2)
                     _output = self.device.read_channel()
-                    # print(_output)
                     break
                 time.sleep(1)
 
@@ -261,14 +255,6 @@ class NetIronDriver(NetworkDriver):
 
         # ensure in enable mode
         self.device.enable()
-
-    def _discover_file_system(self):
-        try:
-            return self.device._autodetect_fs()
-        except Exception:
-            msg = "Netmiko _autodetect_fs failed (to workaround specify " \
-                  "dest_file_system in optional_args.)"
-            raise CommandErrorException(msg)
 
     def close(self):
         """Close the connection to the device."""
@@ -344,10 +330,10 @@ class NetIronDriver(NetworkDriver):
         """
         Transfer file to remote device for either merge or replace operations
 
-        Not Brocades support merging a local config into running-config. MLX devices do support
-        merging slot1 into running-config.  However, other devices do not.
+        netiron does not support merging from flash into running-config. However, MLX devices
+        do support merging slot1 or slot2 into running-config.
 
-        The workaround for devices that do not:
+        The workaround for devices that do not support merging from slot[1,2]:
         - maintain state as instance variables
         - state is not maintained between instances
         - maintain the merge candidate local to the system running this instance
@@ -421,41 +407,6 @@ class NetIronDriver(NetworkDriver):
         if not return_status:
             raise MergeConfigException(msg)
         
-    '''    
-    def load_merge_candidate_old(self, filename=None, config=None):
-        """
-        Brocades do not support merging a local config into running-config. There is support for
-        copying flash or into running-config.  However, there is just not enough support for the
-        napalm load -> merge -> rollback or commit paradigm.
-
-        The workaround:
-        - maintain state as instance variables
-        - state is not maintained between instances
-        - maintain the merge candidate local to the system running this instance
-        - when commit_config is called simply send merge candidate line-by-line
-        """
-        self.config_replace = False
-
-        if filename and config:
-            raise ValueError("Cannot simultaneously set filename and config")
-
-        if config:
-            # convert to CR delimited string if config is a list
-            if isinstance(config, list):
-                config = '\n'.join(config)
-
-            self._current_merge_candidate = self._create_tmp_file(config)
-            self._current_merge_candidate_tmp_file = True
-            logger.info('candidate: {}'.format(self._current_merge_candidate))
-
-            # if tmp_file and os.path.isfile(tmp_file):
-            #    os.remove(tmp_file)
-        if filename:
-            if not os.path.isfile(filename):
-                raise MergeConfigException('File {} not found'.format(filename))
-            self._current_merge_candidate = filename
-    '''
-    
     def _normalize_compare_config(self, diff):
         """Filter out strings that should not show up in the diff."""
         ignore_strings = ['Contextual Config Diffs', 'No changes were found',
@@ -869,34 +820,6 @@ class NetIronDriver(NetworkDriver):
         return optics_detail
         '''
         raise NotImplementedError
-
-    def get_lldp_neighbors(self):
-        """
-        LLNW does not implement LLDP in production. Instead of raising an error just return empty results.
-        :return: {}
-        """
-        return {}
-
-    def _get_lldp_neighbors(self, expand_name=True):
-        """
-        LLNW does not implement LLDP in production. Instead of raising an error just return empty results.
-        :return: {}
-        """
-        return {}
-
-    def _lldp_detail_parser(self, interface, lldp_entry=None):
-        """
-        LLNW does not implement LLDP in production. Instead of raising an error just return empty results.
-        :return: None
-        """
-        return None
-
-    def get_lldp_neighbors_detail(self, interface=''):
-        """
-        LLNW does not implement LLDP in production. Instead of raising an error just return empty results.
-        :return: {}
-        """
-        return {}
 
     def get_facts(self):
         """get_facts method."""
@@ -1479,7 +1402,7 @@ class NetIronDriver(NetworkDriver):
         """
         Retrieve BGP neighbors.
 
-        FIXME: No VRF support (note LLNW doesn't use VRFs, currently)
+        FIXME: No VRF support
         :return: dict()
         """
         bgp_data = dict()
@@ -2023,6 +1946,32 @@ class NetIronDriver(NetworkDriver):
         # todo replace with 'show chassis' tpl
         command = 'show chassis'
         lines = self.device.send_command(command)
+        _data = napalm_base.helpers.textfsm_extractor(self, 'show_chassis', lines)
+
+        _chassis_modules = {'TEMP': 'temperature', 'FAN': 'fans', 'POWER': 'power'}
+        if _data:
+            for d in _data:
+                _module = d.get('module')
+                _mod_name = _chassis_modules.get(_module)
+                if not _mod_name:
+                    continue
+
+                _name = d.get('name')
+                _status = d.get('status')
+                if _module and _name:
+                    if _module == 'TEMP':
+                        environment[_mod_name][_name] = {'temperature': d.get('temp', '0')}
+                    elif _module == 'FAN':
+                        environment[_mod_name][_name] = {
+                            'status': _status, 'speed': d.get('speed', '')
+                        }
+                    elif _module == 'POWER':
+                        environment[_mod_name][_name] = {
+                            'status': _status, 'capacity': d.get('value', 'N/A'), 'output': 'N/A'}
+
+        '''
+        print(json.dumps(_data, indent=2))
+
         lines = lines.split("\n")
 
         lines = lines[3:]
@@ -2047,6 +1996,7 @@ class NetIronDriver(NetworkDriver):
                 environment['power'][psu] = {'status': True, 'capacity': r3.group(2), 'output': 'N/A'}
 
             # Back Fan A-1: Status = OK, Speed = MED (60%)
+            
             r3 = re.match(r'^(.*):\s+Status = (\S+),\s+Speed\s+=\s+(\S+)\s+\((\d+)%\)', line)
             if r3:
                 fan = r3.group(1)
@@ -2055,6 +2005,7 @@ class NetIronDriver(NetworkDriver):
                     status = True
 
                 environment['fans'][fan] = {'status': status}
+        '''
 
         return environment
 
@@ -2101,7 +2052,6 @@ class NetIronDriver(NetworkDriver):
             fields = line.split()
 
             if len(fields) == 6:
-                print(fields)
                 num, address, mac, typ, age, interface = fields
                 try:
                     if age == 'None':
@@ -2718,9 +2668,9 @@ class NetIronDriver(NetworkDriver):
 
     @property
     def dest_file_system(self):
-
-        # The self.device check ensures napalm has an open connection
-        # if self.device and self._dest_file_system is None:
-
-        #    self._dest_file_system = self._discover_file_system()
+        """
+        Return the destination file system. Since netiron only supports copying from slotX to running, it
+        might not make sense to return anything but the slot info.  For now just return the value of
+        self._dest_file_system which defaults to '/slot1'
+        """
         return self._dest_file_system
