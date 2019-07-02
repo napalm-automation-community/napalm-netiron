@@ -868,13 +868,13 @@ class NetIronDriver(NetworkDriver):
 
         facts = {
             'uptime': uptime,
-            'vendor': unicode(vendor),
-            'model': unicode(model),
-            'hostname': unicode(hostname),
+            'vendor': py23_compat.text_type(vendor),
+            'model': py23_compat.text_type(model),
+            'hostname': py23_compat.text_type(hostname),
             # FIXME: fqdn
-            'fqdn': unicode("Unknown"),
-            'os_version': unicode(version),
-            'serial_number': unicode(serial),
+            'fqdn': py23_compat.text_type("Unknown"),
+            'os_version': py23_compat.text_type(version),
+            'serial_number': py23_compat.text_type(serial),
             'interface_list': []
         }
 
@@ -997,10 +997,10 @@ class NetIronDriver(NetworkDriver):
             interface_list[port] = {
                 'is_up': is_up,
                 'is_enabled': is_enabled,
-                'description': unicode(port_detail[1]),
+                'description': py23_compat.text_type(port_detail[1]),
                 'last_flapped': float(port_detail[0]),
                 'speed': int(port_detail[2]),
-                'mac_address': unicode(port_detail[3]),
+                'mac_address': py23_compat.text_type(port_detail[3]),
             }
         return interface_list
 
@@ -2222,7 +2222,7 @@ class NetIronDriver(NetworkDriver):
 
                 entry = {
                     'mac': mac_address,
-                    'interface': unicode(port),
+                    'interface': py23_compat.text_type(port),
                     'vlan': int(vlan),
                     'active': bool(1),
                     'static': is_static,
