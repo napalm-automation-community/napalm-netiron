@@ -1473,7 +1473,7 @@ class NetIronDriver(NetworkDriver):
             # 2607:f4e8::26             22822       ESTAB   349d16h40m    1466        1191838648268     0
             # in this case just grab the 1st (4) fields and add the remote_addr to the _stats_error dict
             r2 = re.match(
-                r'^\s+(?P<remote_addr>({}|{})\s+(?P<remote_as>({}))\s+(?P<state>\S+)\s+'
+                r'^\s+(?P<remote_addr>({}|{}))\s+(?P<remote_as>({}))\s+(?P<state>\S+)\s+'
                 r'(?P<uptime>.+)\s'.format(
                     IPV4_ADDR_REGEX, IPV6_ADDR_REGEX, ASN_REGEX), line)
             if r2:
