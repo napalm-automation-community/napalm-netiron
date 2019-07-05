@@ -868,13 +868,13 @@ class NetIronDriver(NetworkDriver):
 
         facts = {
             'uptime': uptime,
-            'vendor': unicode(vendor),
-            'model': unicode(model),
-            'hostname': unicode(hostname),
+            'vendor': py23_compat.text_type(vendor),
+            'model': py23_compat.text_type(model),
+            'hostname': py23_compat.text_type(hostname),
             # FIXME: fqdn
-            'fqdn': unicode("Unknown"),
-            'os_version': unicode(version),
-            'serial_number': unicode(serial),
+            'fqdn': py23_compat.text_type("Unknown"),
+            'os_version': py23_compat.text_type(version),
+            'serial_number': py23_compat.text_type(serial),
             'interface_list': []
         }
 
@@ -997,10 +997,10 @@ class NetIronDriver(NetworkDriver):
             interface_list[port] = {
                 'is_up': is_up,
                 'is_enabled': is_enabled,
-                'description': unicode(port_detail[1]),
+                'description': py23_compat.text_type(port_detail[1]),
                 'last_flapped': float(port_detail[0]),
                 'speed': int(port_detail[2]),
-                'mac_address': unicode(port_detail[3]),
+                'mac_address': py23_compat.text_type(port_detail[3]),
             }
         return interface_list
 
@@ -1473,7 +1473,7 @@ class NetIronDriver(NetworkDriver):
             # 2607:f4e8::26             22822       ESTAB   349d16h40m    1466        1191838648268     0
             # in this case just grab the 1st (4) fields and add the remote_addr to the _stats_error dict
             r2 = re.match(
-                r'^\s+(?P<remote_addr>({}|{})\s+(?P<remote_as>({}))\s+(?P<state>\S+)\s+'
+                r'^\s+(?P<remote_addr>({}|{}))\s+(?P<remote_as>({}))\s+(?P<state>\S+)\s+'
                 r'(?P<uptime>.+)\s'.format(
                     IPV4_ADDR_REGEX, IPV6_ADDR_REGEX, ASN_REGEX), line)
             if r2:
@@ -2222,7 +2222,7 @@ class NetIronDriver(NetworkDriver):
 
                 entry = {
                     'mac': mac_address,
-                    'interface': unicode(port),
+                    'interface': py23_compat.text_type(port),
                     'vlan': int(vlan),
                     'active': bool(1),
                     'static': is_static,
