@@ -43,13 +43,13 @@ from itertools import islice
 from napalm_netiron.netiron_file_transfer import NetironFileTransfer
 
 from netmiko import ConnectHandler, redispatch
-from napalm_base import NetworkDriver
-from napalm_base.exceptions import ReplaceConfigException, MergeConfigException, \
+from napalm.base.base import NetworkDriver
+from napalm.base.exceptions import ReplaceConfigException, MergeConfigException, \
             ConnectionClosedException, CommandErrorException
 
 from netaddr import IPAddress, IPNetwork
-from napalm_base.utils import py23_compat
-import napalm_base.helpers
+from napalm.base.utils import py23_compat
+import napalm.base.helpers
 
 import time
 
@@ -868,13 +868,13 @@ class NetIronDriver(NetworkDriver):
 
         facts = {
             'uptime': uptime,
-            'vendor': unicode(vendor),
-            'model': unicode(model),
-            'hostname': unicode(hostname),
+            'vendor': str(vendor),
+            'model': str(model),
+            'hostname': str(hostname),
             # FIXME: fqdn
-            'fqdn': unicode("Unknown"),
-            'os_version': unicode(version),
-            'serial_number': unicode(serial),
+            'fqdn': str("Unknown"),
+            'os_version': str(version),
+            'serial_number': str(serial),
             'interface_list': []
         }
 
@@ -997,10 +997,10 @@ class NetIronDriver(NetworkDriver):
             interface_list[port] = {
                 'is_up': is_up,
                 'is_enabled': is_enabled,
-                'description': unicode(port_detail[1]),
+                'description': str(port_detail[1]),
                 'last_flapped': float(port_detail[0]),
                 'speed': int(port_detail[2]),
-                'mac_address': unicode(port_detail[3]),
+                'mac_address': str(port_detail[3]),
             }
         return interface_list
 
@@ -2222,7 +2222,7 @@ class NetIronDriver(NetworkDriver):
 
                 entry = {
                     'mac': mac_address,
-                    'interface': unicode(port),
+                    'interface': str(port),
                     'vlan': int(vlan),
                     'active': bool(1),
                     'static': is_static,
