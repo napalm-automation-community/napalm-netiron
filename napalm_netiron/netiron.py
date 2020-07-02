@@ -43,13 +43,13 @@ from itertools import islice
 from napalm_netiron.netiron_file_transfer import NetironFileTransfer
 
 from netmiko import ConnectHandler, redispatch
-from napalm_base import NetworkDriver
-from napalm_base.exceptions import ReplaceConfigException, MergeConfigException, \
+from napalm.base.base import NetworkDriver
+from napalm.base.exceptions import ReplaceConfigException, MergeConfigException, \
             ConnectionClosedException, CommandErrorException
 
 from netaddr import IPAddress, IPNetwork
-from napalm_base.utils import py23_compat
-import napalm_base.helpers
+from napalm.base.utils import py23_compat
+import napalm.base.helpers
 
 import time
 
@@ -868,13 +868,13 @@ class NetIronDriver(NetworkDriver):
 
         facts = {
             'uptime': uptime,
-            'vendor': unicode(vendor),
-            'model': unicode(model),
-            'hostname': unicode(hostname),
+            'vendor': str(vendor),
+            'model': str(model),
+            'hostname': str(hostname),
             # FIXME: fqdn
-            'fqdn': unicode("Unknown"),
-            'os_version': unicode(version),
-            'serial_number': unicode(serial),
+            'fqdn': str("Unknown"),
+            'os_version': str(version),
+            'serial_number': str(serial),
             'interface_list': []
         }
 
@@ -952,7 +952,7 @@ class NetIronDriver(NetworkDriver):
                 if 'auto' in speed:
                     speed = -1
                 else:
-                    r = re.match(r'(\d+)[M|G]bit', speed)
+                    r = re.match(r'(\d+)([M|G])bit', speed)
                     if r:
                         speed = r.group(1)
                         if r.group(2) == 'M':
@@ -968,57 +968,49 @@ class NetIronDriver(NetworkDriver):
 
         iface_cmd = 'show interface brief wide'
         output = self.device.send_command(iface_cmd)
-        output = output.split('\n')
+        output = output.splitlines()
         output = output[2:]
-
+        IFACE_REG = r'^(?P<port>(ve\d+|\d+/\d+|mgmt\d+|lb\d+))\s+(?P<state>(Up|Down|Disabled))\s+(?P<forwardstate>\S+)\s+(?P<speed>\S+)\s+(?P<tag>\S+)\s+(?P<mac>\S+)\s+(?P<description>.*)$'
+        SPEED_REG = r'^(?P<number>\d+)(?P<unit>\S)$'
         for line in output:
-            fields = line.split()
+            
+            m = re.match(IFACE_REG, line)
+            if m:
+                speed = m.group('speed')
+                speed_m = re.match(SPEED_REG, speed)
+                if speed_m:
+                    if speed_m.group('unit') == 'M':
+                        speed = int(int(speed_m.group('number')))
+                    elif speed_m.group('unit') == 'G':
+                        speed = int(int(speed_m.group('number')) * 10E3)
 
-            if len(line) == 0:
-                continue
-            elif len(fields) >= 6:
-                port, link, state, speed, tag, mac = fields[:6]
-            else:
-                raise ValueError(u"Unexpected Response from the device")
+                # Convert lbX to loopbackX
+                port = re.sub('^lb(\d+)$', 'loopback\\1', m.group('port'))
 
-            # Physical interfaces only
-            if re.match("\d+/\d+|mgmt1", port):
-                # FIXME: quite slow...
-                port_detail = self._get_interface_detail(port)
-
-                state = state.lower()
-                is_up = bool('forward' in state)
-
-                link = link.lower()
-                is_enabled = not bool('disabled' in link)
-            else:
-                continue
-
-            interface_list[port] = {
-                'is_up': is_up,
-                'is_enabled': is_enabled,
-                'description': unicode(port_detail[1]),
-                'last_flapped': float(port_detail[0]),
-                'speed': int(port_detail[2]),
-                'mac_address': unicode(port_detail[3]),
-            }
+                
+                interface_list[port] = {
+                    'is_up': m.group('state') == 'Up',
+                    'is_enabled': m.group('state') != 'Disabled',
+                    'description': m.group('description'),
+                    'last_flapped': -1,
+                    'speed': speed,
+                    'mac_address': m.group('mac'),
+                }
         return interface_list
 
     def get_interfaces_ip(self):
         """get_interfaces_ip method."""
-
-        '''
         interfaces = {}
 
         command = 'show ip interface'
         output = self.device.send_command(command)
-        output = output.split('\n')
-        output = output[2:]
+        output = output.splitlines()
+        output = output[1:]
 
         for line in output:
             fields = line.split()
-            if len(fields) == 8:
-                iface, ifaceid, address, ok, nvram, status, protocol, vrf = fields
+            if len(fields) >= 8:
+                iface, ifaceid, address, ok, nvram, status, protocol, vrf = fields[0:8]
                 port = iface + ifaceid
                 if port not in interfaces:
                     interfaces[port] = dict()
@@ -1031,7 +1023,7 @@ class NetIronDriver(NetworkDriver):
         show_command = "show running-config interface"
         interface_output = self.device.send_command(show_command)
         for line in interface_output.splitlines():
-                r1 = re.match(r'^interface\s+(ethernet|ve|management|loopback)\s+(\S+)\s*$', line)
+                r1 = re.match(r'^interface\s+(ethernet|ve|mgmt|management|loopback)\s+(\S+)\s*$', line)
                 if r1:
                     port = r1.group(1)
                     if port == "ethernet":
@@ -1040,7 +1032,7 @@ class NetIronDriver(NetworkDriver):
                         port = "mgmt"
                     iface = port + r1.group(2)
 
-                if 'ip address ' in line:
+                if 'ip address ' in line and iface in interfaces.keys():
                     fields = line.split()
                     # ip address a.b.c.d/x ospf-ignore|ospf-passive|secondary
                     if len(fields) in [3, 4]:
@@ -1049,8 +1041,8 @@ class NetIronDriver(NetworkDriver):
 
         command = 'show ipv6 interface'
         output = self.device.send_command(command)
-        output = output.split('\n')
-        output = output[2:]
+        output = output.splitlines()
+        output = output[1:]
 
         port = ""
         for line in output:
@@ -1074,8 +1066,6 @@ class NetIronDriver(NetworkDriver):
                 interfaces[port]['ipv6'][address] = {'prefix_length': subnet}
 
         return interfaces
-        '''
-        raise NotImplementedError
 
     @staticmethod
     def bgp_time_conversion(bgp_uptime):
@@ -2222,7 +2212,7 @@ class NetIronDriver(NetworkDriver):
 
                 entry = {
                     'mac': mac_address,
-                    'interface': unicode(port),
+                    'interface': str(port),
                     'vlan': int(vlan),
                     'active': bool(1),
                     'static': is_static,
