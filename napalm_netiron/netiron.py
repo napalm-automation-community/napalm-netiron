@@ -51,6 +51,8 @@ from netaddr import IPAddress, IPNetwork
 from napalm.base.utils import py23_compat
 import napalm.base.helpers
 
+from napalm.base.helpers import textfsm_extractor
+
 import time
 
 # Easier to store these as constants
@@ -1066,6 +1068,18 @@ class NetIronDriver(NetworkDriver):
                 interfaces[port]['ipv6'][address] = {'prefix_length': subnet}
 
         return interfaces
+
+    def get_interfaces_mode(self):
+        info = textfsm_extractor(
+            self, "show_interface_brief_wide", self._send_command('show interface brief wide')
+        )
+
+        print(info)
+
+        return {
+            'tagged': [i['port'] for i in info if i['tag'] == 'Yes'],
+            'untagged': [i['port'] for i in info if i['tag'] == 'No' and i['pvid'] != 'N/A'],
+        }
 
     @staticmethod
     def bgp_time_conversion(bgp_uptime):
