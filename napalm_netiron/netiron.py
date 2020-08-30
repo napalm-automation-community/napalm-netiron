@@ -983,7 +983,7 @@ class NetIronDriver(NetworkDriver):
                     if speed_m.group('unit') == 'M':
                         speed = int(int(speed_m.group('number')))
                     elif speed_m.group('unit') == 'G':
-                        speed = int(int(speed_m.group('number')) * 10E3)
+                        speed = int(int(speed_m.group('number')) * 10E2)
 
                 # Convert lbX to loopbackX
                 port = re.sub('^lb(\d+)$', 'loopback\\1', m.group('port'))
