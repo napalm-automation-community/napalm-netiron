@@ -124,7 +124,6 @@ class NetIronDriver(NetworkDriver):
     def __init__(self, hostname, username, password, timeout=60, optional_args=None):
         """NAPALM Brocade/Foundry netiron Handler."""
 
-        logger.info('NetIronDriver init')
         if optional_args is None:
             optional_args = {}
 
