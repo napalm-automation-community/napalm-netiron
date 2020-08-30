@@ -1074,8 +1074,6 @@ class NetIronDriver(NetworkDriver):
             self, "show_interface_brief_wide", self._send_command('show interface brief wide')
         )
 
-        print(info)
-
         return {
             'tagged': [i['port'] for i in info if i['tag'] == 'Yes'],
             'untagged': [i['port'] for i in info if i['tag'] == 'No' and i['pvid'] != 'N/A'],
