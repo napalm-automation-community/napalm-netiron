@@ -1058,7 +1058,7 @@ class NetIronDriver(NetworkDriver):
 
                 interfaces[port]['ipv6'] = dict()
                 interfaces[port]['ipv6'][address] = dict()
-                interfaces[port]['ipv6'][address] = {'prefix_length': 'N/A'}
+                interfaces[port]['ipv6'][address] = {'prefix_length': '64'}
 
             # Avoid matching: fd01:1458:300:2d::/64[Anycast]
             r2 = re.match(r'\s+(\S+)\/(\d+)\s*$', line)
