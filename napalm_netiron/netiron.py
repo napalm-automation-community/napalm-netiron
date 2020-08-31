@@ -102,7 +102,7 @@ Per netiron 5.9 docs:
 - timeout msec parameter specifies how many milliseconds the device waits for a reply from the pinged device.
     1 - 4294967296 milliseconds. The default is 5000 (5 seconds).
 - ttl num parameter specifies the maximum number of hops. You can specify a TTL from 1 - 255. The default is 64.
-- size byte parameter specifies the size of the ICMP data portion of the packet. This is the payload and does not 
+- size byte parameter specifies the size of the ICMP data portion of the packet. This is the payload and does not
     include the header. 0 - 9170. The default is 16.
 '''
 PING_SOURCE = ''
@@ -210,7 +210,7 @@ class NetIronDriver(NetworkDriver):
         # merge candidate variables used when performing line-by-line merging
         self._current_merge_candidate = None
         self._current_merge_candidate_tmp_file = False
-        
+
         # used to indicate is device has a slot or not
         self._has_slot = None
 
@@ -283,7 +283,7 @@ class NetIronDriver(NetworkDriver):
         """Returns a flag with the state of the connection."""
         null = chr(0)
         _status = False
-        
+
         if self.device:
             # SSH
             try:
@@ -299,9 +299,9 @@ class NetIronDriver(NetworkDriver):
     def has_slot(self):
         if not self._has_slot:
             if self._line_by_line_config:
-                # override if line_by_line is specified 
+                # override if line_by_line is specified
                 self._has_slot = False
-            else:   
+            else:
                 # check if slot1 exists
                 _result = self.device.send_command('dir /slot1')
                 if 'File not found' in _result:
@@ -311,7 +311,7 @@ class NetIronDriver(NetworkDriver):
                 else:
                     self._has_slot = True
 
-        return self._has_slot    
+        return self._has_slot
 
     @staticmethod
     def _create_tmp_file(config):
@@ -407,7 +407,7 @@ class NetIronDriver(NetworkDriver):
                                                           file_system=self.dest_file_system)
         if not return_status:
             raise MergeConfigException(msg)
-        
+
     def _normalize_compare_config(self, diff):
         """Filter out strings that should not show up in the diff."""
         ignore_strings = ['Contextual Config Diffs', 'No changes were found',
@@ -544,7 +544,7 @@ class NetIronDriver(NetworkDriver):
         # Always generate a rollback config on commit
         # *** disabled rollback config generation, it will be up to the caller to gen a back-up
         # self._gen_rollback_cfg()
-        
+
         if self._line_by_line_config:
             if not self._check_file_exists(self.dest_file_system, self.merge_cfg):
                 raise MergeConfigException("Merge source config file does not exist")
@@ -626,7 +626,7 @@ class NetIronDriver(NetworkDriver):
         """Set candidate_cfg to current running-config. Erase the merge_cfg file."""
         self._current_merge_candidate = None
         self._current_merge_candidate_tmp_file = False
-        
+
         if self.has_slot:
             discard_candidate = 'copy running-config slot1 {}'.format(self.candidate_cfg)
             discard_merge = 'delete slot1 {}'.format(self.merge_cfg)
@@ -974,7 +974,7 @@ class NetIronDriver(NetworkDriver):
         IFACE_REG = r'^(?P<port>(ve\d+|\d+/\d+|mgmt\d+|lb\d+))\s+(?P<state>(Up|Down|Disabled))\s+(?P<forwardstate>\S+)\s+(?P<speed>\S+)\s+(?P<tag>\S+)\s+(?P<mac>\S+)\s+(?P<description>.*)$'
         SPEED_REG = r'^(?P<number>\d+)(?P<unit>\S)$'
         for line in output:
-            
+
             m = re.match(IFACE_REG, line)
             if m:
                 speed = m.group('speed')
@@ -988,7 +988,7 @@ class NetIronDriver(NetworkDriver):
                 # Convert lbX to loopbackX
                 port = re.sub('^lb(\d+)$', 'loopback\\1', m.group('port'))
 
-                
+
                 interface_list[port] = {
                     'is_up': m.group('state') == 'Up',
                     'is_enabled': m.group('state') != 'Disabled',
@@ -1069,8 +1069,9 @@ class NetIronDriver(NetworkDriver):
         return interfaces
 
     def get_interfaces_mode(self):
+        interface_output = self.device.send_command('show int brief wide')
         info = textfsm_extractor(
-            self, "show_interface_brief_wide", self._send_command('show interface brief wide')
+            self, "show_interface_brief_wide", interface_output
         )
 
         return {
@@ -1424,7 +1425,7 @@ class NetIronDriver(NetworkDriver):
             command = 'show ip{0} bgp neighbors'.format('' if v == 4 else 'v6')
             _lines = self.device.send_command(command)
             lines_neighbors += _lines + '\n' if _lines else ''
-             
+
         local_as = 0
         for line in lines_summary.splitlines():
             r1 = re.match(r'^\s+Router ID:\s+(?P<router_id>({}))\s+'
@@ -1528,7 +1529,7 @@ class NetIronDriver(NetworkDriver):
                 state = r3.group(1)
 
                 bgp_data['global']['peers'][current]['state'] = state
-                bgp_data['global']['peers'][current]['is_up'] = True if 'ESTABLISHED' in state else False 
+                bgp_data['global']['peers'][current]['is_up'] = True if 'ESTABLISHED' in state else False
                 bgp_data['global']['peers'][current]['is_enabled'] = False if 'ADMIN_SHUTDOWN' in state else True
                 bgp_data['global']['peers'][current]['uptime'] = r3.group(2)
 
@@ -1997,7 +1998,7 @@ class NetIronDriver(NetworkDriver):
                 environment['power'][psu] = {'status': True, 'capacity': r3.group(2), 'output': 'N/A'}
 
             # Back Fan A-1: Status = OK, Speed = MED (60%)
-            
+
             r3 = re.match(r'^(.*):\s+Status = (\S+),\s+Speed\s+=\s+(\S+)\s+\((\d+)%\)', line)
             if r3:
                 fan = r3.group(1)
@@ -2364,7 +2365,7 @@ class NetIronDriver(NetworkDriver):
         _ip = napalm_base.helpers.IPAddress(destination)
         if not _ip:
             raise ValueError('destination must be a valid IP Address')
-        
+
         # vrf needs to be right after the ping command
         # ipv6 addresses require an additional parameter
         command = 'ping {vrf} {family} {destination} timeout {timeout} size {size} count {count} '.format(
