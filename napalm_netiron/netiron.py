@@ -832,7 +832,7 @@ class NetIronDriver(NetworkDriver):
         serial = None
 
         command = 'show version'
-        lines = self.device.send_command(command)
+        lines = self.device.send_command_timing(command, delay_factor=self._show_command_delay_factor)
         for line in lines.splitlines():
             r1 = re.match(r'^(System|Chassis):\s+(.*)\s+\(Serial #:\s+(\S+),(.*)', line)
             if r1:
@@ -845,7 +845,7 @@ class NetIronDriver(NetworkDriver):
                 vendor = r2.group(2)
 
         command = 'show uptime'
-        lines = self.device.send_command(command)
+        lines = self.device.send_command_timing(command, delay_factor=self._show_command_delay_factor)
         for line in lines.splitlines():
             # Get the uptime from the Active MP module
             r1 = re.match(r'\s+Active MP(.*)Uptime\s+(\d+)\s+days'
@@ -861,7 +861,7 @@ class NetIronDriver(NetworkDriver):
 
         # the following is expensive -- should use SNMP GET instead
         command = 'show running-config | include ^hostname'
-        lines = self.device.send_command(command)
+        lines = self.device.send_command_timing(command, delay_factor=self._show_command_delay_factor)
         for line in lines.splitlines():
             r1 = re.match(r'^hostname (\S+)', line)
             if r1:
@@ -880,7 +880,7 @@ class NetIronDriver(NetworkDriver):
         }
 
         iface = 'show interface brief wide'
-        output = self.device.send_command(iface)
+        output = self.device.send_command_timing(iface, delay_factor=self._show_command_delay_factor)
         output = output.split('\n')
         output = output[2:]
 
@@ -925,7 +925,7 @@ class NetIronDriver(NetworkDriver):
             command = "show interface management1"
         else:
             command = "show interface ethernet {}".format(port)
-        output = self.device.send_command(command)
+        output = self.device.send_command(command, delay_factor=self._show_command_delay_factor)
         output = output.split('\n')
 
         last_flap = "0.0"
@@ -968,7 +968,7 @@ class NetIronDriver(NetworkDriver):
         interface_list = {}
 
         iface_cmd = 'show interface brief wide'
-        output = self.device.send_command(iface_cmd)
+        output = self.device.send_command_timing(iface_cmd, delay_factor=self._show_command_delay_factor)
         output = output.splitlines()
         output = output[2:]
         IFACE_REG = r'^(?P<port>(ve\d+|\d+/\d+|mgmt\d+|lb\d+))\s+(?P<state>(Up|Down|Disabled))\s+(?P<forwardstate>\S+)\s+(?P<speed>\S+)\s+(?P<tag>\S+)\s+(?P<mac>\S+)\s+(?P<description>.*)$'
@@ -1004,7 +1004,7 @@ class NetIronDriver(NetworkDriver):
         interfaces = {}
 
         command = 'show ip interface'
-        output = self.device.send_command(command)
+        output = self.device.send_command_timing(command, delay_factor=self._show_command_delay_factor)
         output = output.splitlines()
         output = output[1:]
 
@@ -1022,7 +1022,7 @@ class NetIronDriver(NetworkDriver):
         # Get the prefix from the running-config interface in a single call
         iface = ""
         show_command = "show running-config interface"
-        interface_output = self.device.send_command(show_command)
+        interface_output = self.device.send_command_timing(show_command, delay_factor=self._show_command_delay_factor)
         for line in interface_output.splitlines():
                 r1 = re.match(r'^interface\s+(ethernet|ve|mgmt|management|loopback)\s+(\S+)\s*$', line)
                 if r1:
@@ -1041,7 +1041,7 @@ class NetIronDriver(NetworkDriver):
                         interfaces[iface]['ipv4'][address] = {'prefix_length': subnet}
 
         command = 'show ipv6 interface'
-        output = self.device.send_command(command)
+        output = self.device.send_command_timing(command)
         output = output.splitlines()
         output = output[1:]
 
@@ -1069,7 +1069,7 @@ class NetIronDriver(NetworkDriver):
         return interfaces
 
     def get_interfaces_mode(self):
-        interface_output = self.device.send_command('show int brief wide')
+        interface_output = self.device.send_command_timing('show int brief wide', delay_factor=self._show_command_delay_factor)
         info = textfsm_extractor(
             self, "show_interface_brief_wide", interface_output
         )
