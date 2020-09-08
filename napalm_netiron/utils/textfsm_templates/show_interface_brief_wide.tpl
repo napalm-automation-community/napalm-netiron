@@ -1,6 +1,10 @@
-Value Port ([\d/]+)
-Value Tag (Yes|No)
-Value Pvid (N/A|\d+)
+Value Port (\S+)
+Value Link (Up|Down)
+Value PortState (\S+)
+Value Speed (\S+)
+Value Tag (Yes|No|N/A)
+Value Mac (\S+)
+Value Name (.*)
 
 Start
-  ^${Port} .+ ${Tag}\s+${Pvid} -> Record
+  ^${Port}\s+${Link}\s+${PortState}\s+${Speed}\s+${Tag}\s+${Mac}\s+${Name} -> Record

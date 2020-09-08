@@ -1076,7 +1076,7 @@ class NetIronDriver(NetworkDriver):
 
         return {
             'tagged': [i['port'] for i in info if i['tag'] == 'Yes'],
-            'untagged': [i['port'] for i in info if i['tag'] == 'No' and i['pvid'] != 'N/A'],
+            'untagged': [i['port'] for i in info if i['tag'] == 'No' or re.match(r'^ve', i['port'])],
         }
 
     @staticmethod
