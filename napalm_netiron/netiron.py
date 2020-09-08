@@ -48,7 +48,6 @@ from napalm.base.exceptions import ReplaceConfigException, MergeConfigException,
             ConnectionClosedException, CommandErrorException
 
 from netaddr import IPAddress, IPNetwork
-from napalm.base.utils import py23_compat
 import napalm.base.helpers
 
 from napalm.base.helpers import textfsm_extractor
@@ -252,6 +251,7 @@ class NetIronDriver(NetworkDriver):
                 username=self.username,
                 password=self.password,
                 timeout=self.timeout,
+                conn_timeout=10,
                 **self.netmiko_optional_args)
 
         # ensure in enable mode
@@ -1073,11 +1073,71 @@ class NetIronDriver(NetworkDriver):
         info = textfsm_extractor(
             self, "show_interface_brief_wide", interface_output
         )
-
         return {
             'tagged': [i['port'] for i in info if i['tag'] == 'Yes'],
             'untagged': [i['port'] for i in info if i['tag'] == 'No' or re.match(r'^ve', i['port'])],
         }
+
+    def get_vlans(self):
+        vlans_output = self.device.send_command('show running-config vlan')
+        info = textfsm_extractor(
+            self, "show_running_config_vlan", vlans_output
+        )
+
+        result = {}
+        for vlan in info:
+            if vlan['vlan'] == '':
+                print(vlan)
+            result[vlan['vlan']] = {
+                'name': vlan['name'],
+                'interfaces': self.interface_list_conversation(
+                    vlan['ve'],
+                    vlan['taggedports'],
+                    vlan['untaggedports']
+                )
+            }
+        return result
+
+    def interface_list_conversation(self, ve, taggedports, untaggedports):
+        interfaces = []
+        if ve:
+            interfaces.append('ve{}'.format(ve))
+        if taggedports:
+            interfaces.extend(self.interfaces_to_list(taggedports))
+        if untaggedports:
+            interfaces.extend(self.interfaces_to_list(untaggedports))
+        return interfaces
+
+    def interfaces_to_list(self, interfaces_string):
+        ''' Convert string like 'ethe 2/1 ethe 2/4 to 2/5' to list of interfaces '''
+        interfaces = []
+
+        sections = interfaces_string.split('ethe')
+        if '' in sections:
+            sections.remove('') # Remove empty list items
+        for section in sections:
+            section = section.strip() # Remove leading/trailing spaces
+
+            # Process sections like 2/4 to 2/6
+            if 'to' in section:
+                start_intf, end_intf = section.split(' to ')
+                slot, num = start_intf.split('/')
+                slot, end_num = end_intf.split('/')
+                num = int(num)
+                end_num = int(end_num)
+
+                while num <= end_num:
+                    intf_name = '{}/{}'.format(slot, num)
+                    interfaces.append(intf_name)
+                    num += 1
+
+            # Individual ports like '2/1'
+            else:
+                interfaces.append(section)
+
+        return interfaces
+
+
 
     @staticmethod
     def bgp_time_conversion(bgp_uptime):
