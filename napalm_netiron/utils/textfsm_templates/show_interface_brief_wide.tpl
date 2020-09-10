@@ -1,5 +1,5 @@
 Value Port (\S+)
-Value Link (Up|Down|Disabled)
+Value Link (Up|Down|Disabled|Empty)
 Value PortState (\S+)
 Value Speed (\S+)
 Value Tag (Yes|No|N/A)
