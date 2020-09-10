@@ -23,6 +23,16 @@ Carles Kishimoto carles.kishimoto@gmail.com contributed the following which have
  - get_environment
  - get_mac_address_table
 
+ A note on interface names
+
+ NetIron is inconsistent in how it names interfaces in command output. For consistency the handler should use the interface names reported by ifName, i.e.:
+
+ ethernet1/1
+ ve16
+ tunnel1
+ management1
+ loopback1
+
 """
 
 
@@ -894,12 +904,14 @@ class NetIronDriver(NetworkDriver):
 
                 r1 = re.match(r'^(\d+)/(\d+)', port)
                 if r1:
+                    port = 'ethernet{}'.format(port)
                     facts['interface_list'].append(port)
                 elif re.match(r'^mgmt1', port):
-                    facts['interface_list'].append(port)
+                    facts['interface_list'].append('management1')
                 elif re.match(r'^ve(\d+)', port):
                     facts['interface_list'].append(port)
                 elif re.match(r'^lb(\d+)', port):
+                    port = re.sub('^lb(\d+)$', 'loopback\\1', port)
                     facts['interface_list'].append(port)
 
         return facts
@@ -962,6 +974,20 @@ class NetIronDriver(NetworkDriver):
 
         return [last_flap, description, speed, mac]
 
+    def standardize_interface_name(self, port):
+        # Convert lbX to loopbackX
+        port = re.sub('^lb(\d+)$', 'loopback\\1', port)
+        # Convert tnX to tunnelX
+        port = re.sub('^tn(\d+)$', 'tunnel\\1', port)
+        # Convert mgmt1 to management1
+        if port == 'mgmt1':
+            port = 'management1'
+        # Convert 1/1 to ethernet1/1
+        if re.match(r'\d+/\d+', port):
+            port = re.sub('^(.*)$', 'ethernet\\1', port)
+
+        return port
+
     def get_interfaces(self):
         """get_interfaces method."""
         output = self.device.send_command_timing('show interface brief wide', delay_factor=self._show_command_delay_factor)
@@ -971,10 +997,7 @@ class NetIronDriver(NetworkDriver):
 
         result = {}
         for interface in info:
-            port = interface['port']
-
-            # Convert lbX to loopbackX
-            port = re.sub('^lb(\d+)$', 'loopback\\1', port)
+            port = self.standardize_interface_name(interface['port'])
 
             # Convert speeds to MB/s
             speed = interface['speed']
@@ -1007,12 +1030,7 @@ class NetIronDriver(NetworkDriver):
         )
 
         for intf in info:
-            if intf['interface'] == 'ethernet':
-                port = intf['interfacenum']
-            elif intf['interface'] == 'management':
-                port = 'mgmt{}'.format(intf['interfacenum'])
-            else:
-                port = intf['interface'] + intf['interfacenum']
+            port = intf['interface'] + intf['interfacenum']
 
             if port not in interfaces:
                 interfaces[port] = {
@@ -1029,16 +1047,17 @@ class NetIronDriver(NetworkDriver):
 
         return interfaces
 
-
     def get_interfaces_mode(self):
+        ''' return dict containing a list of tagged and untagged interfaces '''
+
         interface_output = self.device.send_command_timing('show int brief wide', delay_factor=self._show_command_delay_factor)
         info = textfsm_extractor(
             self, "show_interface_brief_wide", interface_output
         )
 
         return {
-            'tagged': [i['port'] for i in info if i['tag'] == 'Yes'],
-            'untagged': [i['port'] for i in info if i['tag'] == 'No' or re.match(r'^ve', i['port'])],
+            'tagged': [self.standardize_interface_name(i['port']) for i in info if i['tag'] == 'Yes'],
+            'untagged': [self.standardize_interface_name(i['port']) for i in info if i['tag'] == 'No' or re.match(r'^ve', i['port'])],
         }
 
     def get_vlans(self):
@@ -1091,12 +1110,12 @@ class NetIronDriver(NetworkDriver):
 
                 while num <= end_num:
                     intf_name = '{}/{}'.format(slot, num)
-                    interfaces.append(intf_name)
+                    interfaces.append(self.standardize_interface_name(intf_name))
                     num += 1
 
             # Individual ports like '2/1'
             else:
-                interfaces.append(section)
+                interfaces.append(self.standardize_interface_name(section))
 
         return interfaces
 
