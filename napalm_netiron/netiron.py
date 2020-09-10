@@ -1001,70 +1001,34 @@ class NetIronDriver(NetworkDriver):
         """get_interfaces_ip method."""
         interfaces = {}
 
-        command = 'show ip interface'
-        output = self.device.send_command_timing(command, delay_factor=self._show_command_delay_factor)
-        output = output.splitlines()
-        output = output[1:]
+        output = self.device.send_command_timing('show running-config interface', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_running_config_interface", output
+        )
 
-        for line in output:
-            fields = line.split()
-            if len(fields) >= 8:
-                iface, ifaceid, address, ok, nvram, status, protocol, vrf = fields[0:8]
-                port = iface + ifaceid
-                if port not in interfaces:
-                    interfaces[port] = dict()
+        for intf in info:
+            if intf['interface'] == 'ethernet':
+                port = intf['interfacenum']
+            elif intf['interface'] == 'management':
+                port = 'mgmt{}'.format(intf['interfacenum'])
+            else:
+                port = intf['interface'] + intf['interfacenum']
 
-                interfaces[port]['ipv4'] = dict()
-                interfaces[port]['ipv4'][address] = dict()
+            if port not in interfaces:
+                interfaces[port] = {
+                    'ipv4': {},
+                    'ipv6': {},
+                }
 
-        # Get the prefix from the running-config interface in a single call
-        iface = ""
-        show_command = "show running-config interface"
-        interface_output = self.device.send_command_timing(show_command, delay_factor=self._show_command_delay_factor)
-        for line in interface_output.splitlines():
-                r1 = re.match(r'^interface\s+(ethernet|ve|mgmt|management|loopback)\s+(\S+)\s*$', line)
-                if r1:
-                    port = r1.group(1)
-                    if port == "ethernet":
-                        port = "eth"
-                    elif port == "management":
-                        port = "mgmt"
-                    iface = port + r1.group(2)
-
-                if 'ip address ' in line and iface in interfaces.keys():
-                    fields = line.split()
-                    # ip address a.b.c.d/x ospf-ignore|ospf-passive|secondary
-                    if len(fields) in [3, 4]:
-                        address, subnet = fields[2].split(r'/')
-                        interfaces[iface]['ipv4'][address] = {'prefix_length': subnet}
-
-        command = 'show ipv6 interface'
-        output = self.device.send_command_timing(command)
-        output = output.splitlines()
-        output = output[1:]
-
-        port = ""
-        for line in output:
-            r1 = re.match(r'^(\S+)\s+(\S+).*fe80::(\S+).*', line)
-            if r1:
-                port = r1.group(1) + r1.group(2)
-                address = "fe80::" + r1.group(3)
-                if port not in interfaces:
-                    # Interface with ipv6 only configuration
-                    interfaces[port] = dict()
-
-                interfaces[port]['ipv6'] = dict()
-                interfaces[port]['ipv6'][address] = dict()
-                interfaces[port]['ipv6'][address] = {'prefix_length': '64'}
-
-            # Avoid matching: fd01:1458:300:2d::/64[Anycast]
-            r2 = re.match(r'\s+(\S+)\/(\d+)\s*$', line)
-            if r2:
-                address = r2.group(1)
-                subnet = r2.group(2)
-                interfaces[port]['ipv6'][address] = {'prefix_length': subnet}
+            if intf['ipv4address']:
+                ipaddress, prefix = intf['ipv4address'].split('/')
+                interfaces[port]['ipv4'][ipaddress] = { 'prefix_length': prefix }
+            if intf['ipv6address']:
+                ipaddress, prefix = intf['ipv6address'].split('/')
+                interfaces[port]['ipv6'][ipaddress] = { 'prefix_length': prefix }
 
         return interfaces
+
 
     def get_interfaces_mode(self):
         interface_output = self.device.send_command_timing('show int brief wide', delay_factor=self._show_command_delay_factor)
