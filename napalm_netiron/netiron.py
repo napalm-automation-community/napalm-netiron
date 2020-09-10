@@ -1091,10 +1091,15 @@ class NetIronDriver(NetworkDriver):
         return interfaces
 
     def interfaces_to_list(self, interfaces_string):
-        ''' Convert string like 'ethe 2/1 ethe 2/4 to 2/5' to list of interfaces '''
+        ''' Convert string like 'ethe 2/1 ethe 2/4 to 2/5' or 'e 2/1 to 2/4' to list of interfaces '''
         interfaces = []
 
-        sections = interfaces_string.split('ethe')
+        if 'ethe' in interfaces_string:
+            split_string = 'ethe'
+        else:
+            split_string = 'e'
+
+        sections = interfaces_string.split(split_string)
         if '' in sections:
             sections.remove('') # Remove empty list items
         for section in sections:
