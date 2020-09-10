@@ -861,7 +861,7 @@ class NetIronDriver(NetworkDriver):
 
         # the following is expensive -- should use SNMP GET instead
         command = 'show running-config | include ^hostname'
-        lines = self.device.send_command_timing(command, delay_factor=self._show_command_delay_factor)
+        lines = self.device.send_command(command, delay_factor=self._show_command_delay_factor)
         for line in lines.splitlines():
             r1 = re.match(r'^hostname (\S+)', line)
             if r1:
@@ -894,7 +894,6 @@ class NetIronDriver(NetworkDriver):
 
                 r1 = re.match(r'^(\d+)/(\d+)', port)
                 if r1:
-                    port = 'e' + port
                     facts['interface_list'].append(port)
                 elif re.match(r'^mgmt1', port):
                     facts['interface_list'].append(port)
@@ -965,39 +964,38 @@ class NetIronDriver(NetworkDriver):
 
     def get_interfaces(self):
         """get_interfaces method."""
-        interface_list = {}
+        output = self.device.send_command_timing('show interface brief wide', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_interface_brief_wide", output
+        )
 
-        iface_cmd = 'show interface brief wide'
-        output = self.device.send_command_timing(iface_cmd, delay_factor=self._show_command_delay_factor)
-        output = output.splitlines()
-        output = output[2:]
-        IFACE_REG = r'^(?P<port>(ve\d+|\d+/\d+|mgmt\d+|lb\d+))\s+(?P<state>(Up|Down|Disabled))\s+(?P<forwardstate>\S+)\s+(?P<speed>\S+)\s+(?P<tag>\S+)\s+(?P<mac>\S+)\s+(?P<description>.*)$'
-        SPEED_REG = r'^(?P<number>\d+)(?P<unit>\S)$'
-        for line in output:
+        result = {}
+        for interface in info:
+            port = interface['port']
 
-            m = re.match(IFACE_REG, line)
-            if m:
-                speed = m.group('speed')
-                speed_m = re.match(SPEED_REG, speed)
-                if speed_m:
-                    if speed_m.group('unit') == 'M':
-                        speed = int(int(speed_m.group('number')))
-                    elif speed_m.group('unit') == 'G':
-                        speed = int(int(speed_m.group('number')) * 10E2)
+            # Convert lbX to loopbackX
+            port = re.sub('^lb(\d+)$', 'loopback\\1', port)
 
-                # Convert lbX to loopbackX
-                port = re.sub('^lb(\d+)$', 'loopback\\1', m.group('port'))
+            # Convert speeds to MB/s
+            speed = interface['speed']
+            SPEED_REG = r'^(?P<number>\d+)(?P<unit>\S)$'
+            speed_m = re.match(SPEED_REG, speed)
+            if speed_m:
+                if speed_m.group('unit') == 'M':
+                    speed = int(int(speed_m.group('number')))
+                elif speed_m.group('unit') == 'G':
+                    speed = int(int(speed_m.group('number')) * 10E2)
 
+            result[port] = {
+                'is_up': interface['link'] == 'Up',
+                'is_enabled': interface['link'] != 'Disabled',
+                'description': interface['name'],
+                'last_flapped': -1,
+                'speed': speed,
+                'mac_address': interface['mac'],
+            }
 
-                interface_list[port] = {
-                    'is_up': m.group('state') == 'Up',
-                    'is_enabled': m.group('state') != 'Disabled',
-                    'description': m.group('description'),
-                    'last_flapped': -1,
-                    'speed': speed,
-                    'mac_address': m.group('mac'),
-                }
-        return interface_list
+        return result
 
     def get_interfaces_ip(self):
         """get_interfaces_ip method."""
@@ -1073,6 +1071,7 @@ class NetIronDriver(NetworkDriver):
         info = textfsm_extractor(
             self, "show_interface_brief_wide", interface_output
         )
+
         return {
             'tagged': [i['port'] for i in info if i['tag'] == 'Yes'],
             'untagged': [i['port'] for i in info if i['tag'] == 'No' or re.match(r'^ve', i['port'])],
