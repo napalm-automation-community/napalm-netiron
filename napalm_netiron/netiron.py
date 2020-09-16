@@ -889,30 +889,18 @@ class NetIronDriver(NetworkDriver):
             'interface_list': []
         }
 
-        iface = 'show interface brief wide'
-        output = self.device.send_command_timing(iface, delay_factor=self._show_command_delay_factor)
-        output = output.split('\n')
-        output = output[2:]
+        # Get interfaces
+        output = self.device.send_command_timing('show interface brief wide', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_interface_brief_wide", output
+        )
+        for interface in info:
+            port = self.standardize_interface_name(interface['port'])
+            facts['interface_list'].append(port)
 
-        for line in output:
-            fields = line.split()
-
-            if len(line) == 0:
-                continue
-            elif len(fields) >= 6:
-                port, link, state, speed, tag, mac = fields[:6]
-
-                r1 = re.match(r'^(\d+)/(\d+)', port)
-                if r1:
-                    port = 'ethernet{}'.format(port)
-                    facts['interface_list'].append(port)
-                elif re.match(r'^mgmt1', port):
-                    facts['interface_list'].append('management1')
-                elif re.match(r'^ve(\d+)', port):
-                    facts['interface_list'].append(port)
-                elif re.match(r'^lb(\d+)', port):
-                    port = re.sub('^lb(\d+)$', 'loopback\\1', port)
-                    facts['interface_list'].append(port)
+        # Add lags to interfaces
+        lags = self.get_lags()
+        facts['interface_list'] += list(lags.keys())
 
         return facts
 
@@ -988,6 +976,27 @@ class NetIronDriver(NetworkDriver):
 
         return port
 
+    def get_lags(self):
+        result = {}
+
+        output = self.device.send_command_timing('show running-config lag', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_running_config_lag", output
+        )
+        for lag in info:
+            port = 'lag{}'.format(lag['id'])
+            result[port] = {
+                'is_up': True,
+                'is_enabled': True,
+                'description': lag['name'],
+                'last_flapped': -1,
+                'speed': 0,
+                'mac_address': '',
+                'children': self.interfaces_to_list(lag['ports'])
+            }
+
+        return result
+
     def get_interfaces(self):
         """get_interfaces method."""
         output = self.device.send_command_timing('show interface brief wide', delay_factor=self._show_command_delay_factor)
@@ -1017,6 +1026,10 @@ class NetIronDriver(NetworkDriver):
                 'speed': speed,
                 'mac_address': interface['mac'],
             }
+
+        # Get lags
+        lags = self.get_lags()
+        result.update(lags)
 
         return result
 
@@ -1094,7 +1107,9 @@ class NetIronDriver(NetworkDriver):
         ''' Convert string like 'ethe 2/1 ethe 2/4 to 2/5' or 'e 2/1 to 2/4' to list of interfaces '''
         interfaces = []
 
-        if 'ethe' in interfaces_string:
+        if 'ethernet' in interfaces_string:
+            split_string = 'ethernet'
+        elif 'ethe' in interfaces_string:
             split_string = 'ethe'
         else:
             split_string = 'e'
