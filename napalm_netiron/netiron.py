@@ -1091,6 +1091,21 @@ class NetIronDriver(NetworkDriver):
                     vlan['untaggedports']
                 )
             }
+
+        # Add ports with VLANs from VLLs
+        mpls_output = self.device.send_command('show mpls config')
+        info = textfsm_extractor(
+            self, "show_mpls_config", mpls_output
+        )
+        for vll in info:
+            if vll['vlan'] not in result:
+                result[vll['vlan']] = {
+                    'name': '',
+                    'interfaces': [],
+                }
+
+            result[vll['vlan']]['interfaces'].append(self.standardize_interface_name(vll['interface']))
+
         return result
 
     def interface_list_conversation(self, ve, taggedports, untaggedports):
