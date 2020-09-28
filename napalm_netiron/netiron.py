@@ -223,6 +223,12 @@ class NetIronDriver(NetworkDriver):
         # used to indicate is device has a slot or not
         self._has_slot = None
 
+        # Cached command output
+        self.show_int_brief_wide = None
+        self.show_running_config_vlans = None
+        self.show_running_config_lag = None
+        self.show_mpls_config = None
+
     def open(self):
         """Open a connection to the device."""
         device_type = 'brocade_netiron'
@@ -890,9 +896,10 @@ class NetIronDriver(NetworkDriver):
         }
 
         # Get interfaces
-        output = self.device.send_command_timing('show interface brief wide', delay_factor=self._show_command_delay_factor)
+        if not self.show_int_brief_wide:
+            self.show_int_brief_wide = self.device.send_command_timing('show int brief wide', delay_factor=self._show_command_delay_factor)
         info = textfsm_extractor(
-            self, "show_interface_brief_wide", output
+            self, "show_interface_brief_wide", self.show_int_brief_wide
         )
         for interface in info:
             port = self.standardize_interface_name(interface['port'])
@@ -979,9 +986,10 @@ class NetIronDriver(NetworkDriver):
     def get_lags(self):
         result = {}
 
-        output = self.device.send_command_timing('show running-config lag', delay_factor=self._show_command_delay_factor)
+        if not self.show_running_config_lag:
+            self.show_running_config_lag = self.device.send_command_timing('show running-config lag', delay_factor=self._show_command_delay_factor)
         info = textfsm_extractor(
-            self, "show_running_config_lag", output
+            self, "show_running_config_lag", self.show_running_config_lag
         )
         for lag in info:
             port = 'lag{}'.format(lag['id'])
@@ -999,9 +1007,10 @@ class NetIronDriver(NetworkDriver):
 
     def get_interfaces(self):
         """get_interfaces method."""
-        output = self.device.send_command_timing('show interface brief wide', delay_factor=self._show_command_delay_factor)
+        if not self.show_int_brief_wide:
+            self.show_int_brief_wide = self.device.send_command_timing('show interface brief wide', delay_factor=self._show_command_delay_factor)
         info = textfsm_extractor(
-            self, "show_interface_brief_wide", output
+            self, "show_interface_brief_wide", self.show_int_brief_wide
         )
 
         result = {}
@@ -1074,15 +1083,14 @@ class NetIronDriver(NetworkDriver):
         }
 
     def get_vlans(self):
-        vlans_output = self.device.send_command('show running-config vlan')
+        if not self.show_running_config_vlans:
+            self.show_running_config_vlans = self.device.send_command('show running-config vlan')
         info = textfsm_extractor(
-            self, "show_running_config_vlan", vlans_output
+            self, "show_running_config_vlan", self.show_running_config_vlans
         )
 
         result = {}
         for vlan in info:
-            if vlan['vlan'] == '':
-                print(vlan)
             result[vlan['vlan']] = {
                 'name': vlan['name'],
                 'interfaces': self.interface_list_conversation(
@@ -1093,9 +1101,10 @@ class NetIronDriver(NetworkDriver):
             }
 
         # Add ports with VLANs from VLLs
-        mpls_output = self.device.send_command('show mpls config')
+        if not self.show_mpls_config:
+            self.show_mpls_config = self.device.send_command('show mpls config')
         info = textfsm_extractor(
-            self, "show_mpls_config", mpls_output
+            self, "show_mpls_config", self.show_mpls_config
         )
         for vll in info:
             if vll['vlan'] not in result:
