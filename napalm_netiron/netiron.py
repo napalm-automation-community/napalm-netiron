@@ -1069,18 +1069,82 @@ class NetIronDriver(NetworkDriver):
 
         return interfaces
 
-    def get_interfaces_mode(self):
-        ''' return dict containing a list of tagged and untagged interfaces '''
+    def get_interfaces_vlans(self):
+        ''' return dict as documented at https://github.com/napalm-automation/napalm/issues/919#issuecomment-485905491 '''
 
-        interface_output = self.device.send_command_timing('show int brief wide', delay_factor=self._show_command_delay_factor)
+        if not self.show_int_brief_wide:
+            self.show_int_brief_wide = self.device.send_command_timing('show int brief wide', delay_factor=self._show_command_delay_factor)
         info = textfsm_extractor(
-            self, "show_interface_brief_wide", interface_output
+            self, "show_interface_brief_wide", self.show_int_brief_wide
         )
 
-        return {
-            'tagged': [self.standardize_interface_name(i['port']) for i in info if i['tag'] == 'Yes'],
-            'untagged': [self.standardize_interface_name(i['port']) for i in info if i['tag'] == 'No' or re.match(r'^ve', i['port'])],
-        }
+        result = {}
+
+        # Create interfaces structure and correct mode
+        for interface in info:
+            intf = self.standardize_interface_name(interface['port'])
+            if interface['tag'] == 'No' or re.match(r'^ve', interface['port']):
+                mode = "access"
+            else:
+                mode = "trunk"
+            result[intf] = {
+                'mode': mode,
+                'access-vlan': -1,
+                'trunk-vlans': [],
+                'native-vlan': -1,
+                'tagged-native-vlan': False
+            }
+
+        # Add lags
+        for lag in self.get_lags().keys():
+            result[lag] = {
+                'mode': 'trunk',
+                'access-vlan': -1,
+                'trunk-vlans': [],
+                'native-vlan': -1,
+                'tagged-native-vlan': False
+            }
+
+        if not self.show_running_config_vlans:
+            self.show_running_config_vlans = self.device.send_command('show running-config vlan')
+        info = textfsm_extractor(
+            self, "show_running_config_vlan", self.show_running_config_vlans
+        )
+
+        # Assign VLANs to interfaces
+        for vlan in info:
+            access_ports = self.interface_list_conversation(
+                vlan['ve'],
+                '',
+                vlan['untaggedports']
+            )
+            trunk_ports = self.interface_list_conversation(
+                '',
+                vlan['taggedports'],
+                ''
+            )
+
+            for port in access_ports:
+                result[port]['access-vlan'] = vlan['vlan']
+
+            for port in trunk_ports:
+                result[port].update({
+                    'tagged-native-vlan': True,
+                    'native-vlan': 1
+                })
+                result[port]['trunk-vlans'].append(vlan['vlan'])
+
+        # Add ports with VLANs from VLLs
+        if not self.show_mpls_config:
+            self.show_mpls_config = self.device.send_command('show mpls config')
+        info = textfsm_extractor(
+            self, "show_mpls_config", self.show_mpls_config
+        )
+        for vll in info:
+            interface = self.standardize_interface_name(vll['interface'])
+            result[interface]['access-vlan'] = vll['vlan']
+
+        return result
 
     def get_vlans(self):
         if not self.show_running_config_vlans:
