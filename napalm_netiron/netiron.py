@@ -267,7 +267,6 @@ class NetIronDriver(NetworkDriver):
                 username=self.username,
                 password=self.password,
                 timeout=self.timeout,
-                conn_timeout=10,
                 **self.netmiko_optional_args)
 
         # ensure in enable mode
