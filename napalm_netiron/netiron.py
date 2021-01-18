@@ -1142,7 +1142,9 @@ class NetIronDriver(NetworkDriver):
         )
         for vll in info:
             interface = self.standardize_interface_name(vll['interface'])
-            result[interface]['access-vlan'] = vll['vlan']
+            # Ignore VLLs with no interface
+            if interface:
+                result[interface]['access-vlan'] = vll['vlan']
 
         return result
 
