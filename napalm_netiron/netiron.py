@@ -225,7 +225,7 @@ class NetIronDriver(NetworkDriver):
 
         # Cached command output
         self.show_int_brief_wide = None
-        self.show_running_config_vlans = None
+        self.show_vlan = None
         self.show_running_config_lag = None
         self.show_mpls_config = None
 
@@ -1105,10 +1105,10 @@ class NetIronDriver(NetworkDriver):
                 'tagged-native-vlan': False
             }
 
-        if not self.show_running_config_vlans:
-            self.show_running_config_vlans = self.device.send_command('show running-config vlan')
+        if not self.show_vlan:
+            self.show_vlan = self.device.send_command('show vlan')
         info = textfsm_extractor(
-            self, "show_running_config_vlan", self.show_running_config_vlans
+            self, "show_vlan", self.show_vlan
         )
 
         # Assign VLANs to interfaces
@@ -1149,10 +1149,10 @@ class NetIronDriver(NetworkDriver):
         return result
 
     def get_vlans(self):
-        if not self.show_running_config_vlans:
-            self.show_running_config_vlans = self.device.send_command('show running-config vlan')
+        if not self.show_vlan:
+            self.show_vlan = self.device.send_command('show vlan')
         info = textfsm_extractor(
-            self, "show_running_config_vlan", self.show_running_config_vlans
+            self, "show_vlan", self.show_vlan
         )
 
         result = {}
@@ -1185,7 +1185,7 @@ class NetIronDriver(NetworkDriver):
 
     def interface_list_conversation(self, ve, taggedports, untaggedports):
         interfaces = []
-        if ve:
+        if ve and ve != 'NONE':
             interfaces.append('ve{}'.format(ve))
         if taggedports:
             interfaces.extend(self.interfaces_to_list(taggedports))
