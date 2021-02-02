@@ -6,4 +6,4 @@ Value Interface (\S+)
 Start
   ^\s+vll ${Name} ${Vcid}
   ^\s+vlan ${Vlan}
-  ^\s+tagged e ${Interface} -> Record
+  ^\s+tagged e(the)? ${Interface} -> Record
