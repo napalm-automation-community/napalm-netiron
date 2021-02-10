@@ -25,13 +25,13 @@ Carles Kishimoto carles.kishimoto@gmail.com contributed the following which have
 
  A note on interface names
 
- NetIron is inconsistent in how it names interfaces in command output. For consistency the handler should use the interface names reported by ifName, i.e.:
+ NetIron is inconsistent in how it names interfaces in command output. For consistency the handler should use the interface names reported by ifDescription, i.e.:
 
- ethernet1/1
- ve16
- tunnel1
- management1
- loopback1
+ GigabitEthernet1/1
+ Ve16
+ Tunnel1
+ Ethernetmgmt1
+ Loopback1
 
 """
 
@@ -224,10 +224,14 @@ class NetIronDriver(NetworkDriver):
         self._has_slot = None
 
         # Cached command output
+        self.show_int = None
         self.show_int_brief_wide = None
         self.show_vlan = None
         self.show_running_config_lag = None
         self.show_mpls_config = None
+
+        # Cached interface number to name dict
+        self.interface_map = None
 
     def open(self):
         """Open a connection to the device."""
@@ -969,17 +973,51 @@ class NetIronDriver(NetworkDriver):
 
         return [last_flap, description, speed, mac]
 
+    def _get_interface_map(self):
+        ''' Return dict mapping ethernet port numbers to full interface name, ie
+
+        {
+            "1/1": "GigabitEthernet1/1",
+            ...
+        }
+        '''
+
+        if not self.show_int:
+            self.show_int = self.device.send_command_timing('show interface', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_interface", self.show_int
+        )
+
+        result = {}
+        for interface in info:
+            if 'ethernet' in interface['port'].lower() and 'mgmt' not in interface['port'].lower():
+                ifnum = re.sub(r'.*(\d+/\d+)', '\\1', interface['port'])
+                result[ifnum] = interface['port']
+
+        return result
+
+
     def standardize_interface_name(self, port):
-        # Convert lbX to loopbackX
-        port = re.sub('^lb(\d+)$', 'loopback\\1', port)
+        if not self.interface_map:
+            self.interface_map = self._get_interface_map()
+
+        port = str(port).strip()
+
+        # Convert lbX to LoopbackX
+        port = re.sub('^lb(\d+)$', 'Loopback\\1', port)
+        # Convert loopbackX to LoopbackX
+        port = re.sub('^loopback(\d+)$', 'Loopback\\1', port)
         # Convert tnX to tunnelX
-        port = re.sub('^tn(\d+)$', 'tunnel\\1', port)
-        # Convert mgmt1 to management1
-        if port == 'mgmt1':
-            port = 'management1'
-        # Convert 1/1 to ethernet1/1
-        if re.match(r'\d+/\d+', port):
-            port = re.sub('^(.*)$', 'ethernet\\1', port)
+        port = re.sub('^tn(\d+)$', 'Tunnel\\1', port)
+        # Convert veX to VeX
+        port = re.sub('^ve(\d+)$', 'Ve\\1', port)
+        # Convert mgmt1 to Ethernetmgmt1
+        if port in ['mgmt1', 'management1']:
+            port = 'Ethernetmgmt1'
+        # Convert 1/1 or ethernet1/1 to ethernet1/1
+        if re.match(r'.*\d+/\d+', port):
+            ifnum = re.sub(r'.*(\d+/\d+)', '\\1', port)
+            port = self.interface_map[ifnum]
 
         return port
 
@@ -1007,10 +1045,10 @@ class NetIronDriver(NetworkDriver):
 
     def get_interfaces(self):
         """get_interfaces method."""
-        if not self.show_int_brief_wide:
-            self.show_int_brief_wide = self.device.send_command_timing('show interface brief wide', delay_factor=self._show_command_delay_factor)
+        if not self.show_int:
+            self.show_int = self.device.send_command_timing('show interface', delay_factor=self._show_command_delay_factor)
         info = textfsm_extractor(
-            self, "show_interface_brief_wide", self.show_int_brief_wide
+            self, "show_interface", self.show_int
         )
 
         result = {}
@@ -1019,21 +1057,22 @@ class NetIronDriver(NetworkDriver):
 
             # Convert speeds to MB/s
             speed = interface['speed']
-            SPEED_REG = r'^(?P<number>\d+)(?P<unit>\S)$'
+            SPEED_REG = r'^(?P<number>\d+)(?P<unit>\S+)$'
             speed_m = re.match(SPEED_REG, speed)
             if speed_m:
-                if speed_m.group('unit') == 'M':
+                if speed_m.group('unit') in ['M', 'Mbit']:
                     speed = int(int(speed_m.group('number')))
-                elif speed_m.group('unit') == 'G':
+                elif speed_m.group('unit') in ['G', 'Gbit']:
                     speed = int(int(speed_m.group('number')) * 10E2)
 
             result[port] = {
-                'is_up': interface['link'] == 'Up',
-                'is_enabled': interface['link'] != 'Disabled',
+                'is_up': interface['link'].lower() == 'up',
+                'is_enabled': interface['link'].lower() != 'disabled',
                 'description': interface['name'],
                 'last_flapped': -1,
                 'speed': speed,
                 'mac_address': interface['mac'],
+                'mtu': interface['mtu'],
             }
 
         # Get lags
@@ -1052,7 +1091,7 @@ class NetIronDriver(NetworkDriver):
         )
 
         for intf in info:
-            port = intf['interface'] + intf['interfacenum']
+            port = self.standardize_interface_name(intf['interface'] + intf['interfacenum'])
 
             if port not in interfaces:
                 interfaces[port] = {
@@ -1072,10 +1111,10 @@ class NetIronDriver(NetworkDriver):
     def get_interfaces_vlans(self):
         ''' return dict as documented at https://github.com/napalm-automation/napalm/issues/919#issuecomment-485905491 '''
 
-        if not self.show_int_brief_wide:
-            self.show_int_brief_wide = self.device.send_command_timing('show int brief wide', delay_factor=self._show_command_delay_factor)
+        if not self.show_int:
+            self.show_int = self.device.send_command_timing('show interface', delay_factor=self._show_command_delay_factor)
         info = textfsm_extractor(
-            self, "show_interface_brief_wide", self.show_int_brief_wide
+            self, "show_interface", self.show_int
         )
 
         result = {}
@@ -1083,7 +1122,7 @@ class NetIronDriver(NetworkDriver):
         # Create interfaces structure and correct mode
         for interface in info:
             intf = self.standardize_interface_name(interface['port'])
-            if interface['tag'] == 'No' or re.match(r'^ve', interface['port']):
+            if interface['tag'] == 'untagged' or re.match(r'^ve', interface['port'].lower()):
                 mode = "access"
             else:
                 mode = "trunk"
@@ -1186,7 +1225,7 @@ class NetIronDriver(NetworkDriver):
     def interface_list_conversation(self, ve, taggedports, untaggedports):
         interfaces = []
         if ve and ve != 'NONE':
-            interfaces.append('ve{}'.format(ve))
+            interfaces.append('Ve{}'.format(ve))
         if taggedports:
             interfaces.extend(self.interfaces_to_list(taggedports))
         if untaggedports:
