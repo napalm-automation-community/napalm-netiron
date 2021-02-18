@@ -1268,7 +1268,31 @@ class NetIronDriver(NetworkDriver):
 
         return interfaces
 
+    def get_lldp_neighbors(self):
+        """
+        Returns a dictionary where the keys are local ports and the value is a list of \
+        dictionaries with the following information:
+            * hostname
+            * port
+        """
+        my_dict = {}
+        shw_int_neg = self.device.send_command('show lldp neighbors detail')
+        info = textfsm_extractor(
+            self, "show_lldp_neighbors_detail", shw_int_neg
+        )
 
+        for result in info:
+            if result['remoteportid']:
+                port = result['remoteportid']
+            else:
+                port = result['remoteportdescription']
+            local_port = self.standardize_interface_name(result['port'])
+            my_dict[local_port] = {
+                'hostname': re.sub('"', '', result['remotesystemname']),
+                'port': re.sub('"', '', port)
+            }
+
+        return my_dict
 
     @staticmethod
     def bgp_time_conversion(bgp_uptime):
