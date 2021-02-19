@@ -1287,10 +1287,13 @@ class NetIronDriver(NetworkDriver):
             else:
                 port = result['remoteportdescription']
             local_port = self.standardize_interface_name(result['port'])
-            my_dict[local_port] = {
+
+            if local_port not in my_dict.keys():
+                my_dict[local_port] = []
+            my_dict[local_port].append({
                 'hostname': re.sub('"', '', result['remotesystemname']),
                 'port': re.sub('"', '', port)
-            }
+            })
 
         return my_dict
 
