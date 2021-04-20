@@ -23,6 +23,16 @@ Carles Kishimoto carles.kishimoto@gmail.com contributed the following which have
  - get_environment
  - get_mac_address_table
 
+ A note on interface names
+
+ NetIron is inconsistent in how it names interfaces in command output. For consistency the handler should use the interface names reported by ifDescription, i.e.:
+
+ GigabitEthernet1/1
+ Ve16
+ Tunnel1
+ Ethernetmgmt1
+ Loopback1
+
 """
 
 
@@ -43,13 +53,14 @@ from itertools import islice
 from napalm_netiron.netiron_file_transfer import NetironFileTransfer
 
 from netmiko import ConnectHandler, redispatch
-from napalm_base import NetworkDriver
-from napalm_base.exceptions import ReplaceConfigException, MergeConfigException, \
+from napalm.base.base import NetworkDriver
+from napalm.base.exceptions import ReplaceConfigException, MergeConfigException, \
             ConnectionClosedException, CommandErrorException
 
 from netaddr import IPAddress, IPNetwork
-from napalm_base.utils import py23_compat
-import napalm_base.helpers
+import napalm.base.helpers
+
+from napalm.base.helpers import textfsm_extractor
 
 import time
 
@@ -100,7 +111,7 @@ Per netiron 5.9 docs:
 - timeout msec parameter specifies how many milliseconds the device waits for a reply from the pinged device.
     1 - 4294967296 milliseconds. The default is 5000 (5 seconds).
 - ttl num parameter specifies the maximum number of hops. You can specify a TTL from 1 - 255. The default is 64.
-- size byte parameter specifies the size of the ICMP data portion of the packet. This is the payload and does not 
+- size byte parameter specifies the size of the ICMP data portion of the packet. This is the payload and does not
     include the header. 0 - 9170. The default is 16.
 '''
 PING_SOURCE = ''
@@ -122,7 +133,6 @@ class NetIronDriver(NetworkDriver):
     def __init__(self, hostname, username, password, timeout=60, optional_args=None):
         """NAPALM Brocade/Foundry netiron Handler."""
 
-        logger.info('NetIronDriver init')
         if optional_args is None:
             optional_args = {}
 
@@ -209,9 +219,19 @@ class NetIronDriver(NetworkDriver):
         # merge candidate variables used when performing line-by-line merging
         self._current_merge_candidate = None
         self._current_merge_candidate_tmp_file = False
-        
+
         # used to indicate is device has a slot or not
         self._has_slot = None
+
+        # Cached command output
+        self.show_int = None
+        self.show_int_brief_wide = None
+        self.show_vlan = None
+        self.show_running_config_lag = None
+        self.show_mpls_config = None
+
+        # Cached interface number to name dict
+        self.interface_map = None
 
     def open(self):
         """Open a connection to the device."""
@@ -251,6 +271,7 @@ class NetIronDriver(NetworkDriver):
                 username=self.username,
                 password=self.password,
                 timeout=self.timeout,
+                conn_timeout=self.timeout,
                 **self.netmiko_optional_args)
 
         # ensure in enable mode
@@ -282,7 +303,7 @@ class NetIronDriver(NetworkDriver):
         """Returns a flag with the state of the connection."""
         null = chr(0)
         _status = False
-        
+
         if self.device:
             # SSH
             try:
@@ -298,9 +319,9 @@ class NetIronDriver(NetworkDriver):
     def has_slot(self):
         if not self._has_slot:
             if self._line_by_line_config:
-                # override if line_by_line is specified 
+                # override if line_by_line is specified
                 self._has_slot = False
-            else:   
+            else:
                 # check if slot1 exists
                 _result = self.device.send_command('dir /slot1')
                 if 'File not found' in _result:
@@ -310,7 +331,7 @@ class NetIronDriver(NetworkDriver):
                 else:
                     self._has_slot = True
 
-        return self._has_slot    
+        return self._has_slot
 
     @staticmethod
     def _create_tmp_file(config):
@@ -406,7 +427,7 @@ class NetIronDriver(NetworkDriver):
                                                           file_system=self.dest_file_system)
         if not return_status:
             raise MergeConfigException(msg)
-        
+
     def _normalize_compare_config(self, diff):
         """Filter out strings that should not show up in the diff."""
         ignore_strings = ['Contextual Config Diffs', 'No changes were found',
@@ -543,7 +564,7 @@ class NetIronDriver(NetworkDriver):
         # Always generate a rollback config on commit
         # *** disabled rollback config generation, it will be up to the caller to gen a back-up
         # self._gen_rollback_cfg()
-        
+
         if self._line_by_line_config:
             if not self._check_file_exists(self.dest_file_system, self.merge_cfg):
                 raise MergeConfigException("Merge source config file does not exist")
@@ -625,7 +646,7 @@ class NetIronDriver(NetworkDriver):
         """Set candidate_cfg to current running-config. Erase the merge_cfg file."""
         self._current_merge_candidate = None
         self._current_merge_candidate_tmp_file = False
-        
+
         if self.has_slot:
             discard_candidate = 'copy running-config slot1 {}'.format(self.candidate_cfg)
             discard_merge = 'delete slot1 {}'.format(self.merge_cfg)
@@ -831,7 +852,7 @@ class NetIronDriver(NetworkDriver):
         serial = None
 
         command = 'show version'
-        lines = self.device.send_command(command)
+        lines = self.device.send_command_timing(command, delay_factor=self._show_command_delay_factor)
         for line in lines.splitlines():
             r1 = re.match(r'^(System|Chassis):\s+(.*)\s+\(Serial #:\s+(\S+),(.*)', line)
             if r1:
@@ -844,7 +865,7 @@ class NetIronDriver(NetworkDriver):
                 vendor = r2.group(2)
 
         command = 'show uptime'
-        lines = self.device.send_command(command)
+        lines = self.device.send_command_timing(command, delay_factor=self._show_command_delay_factor)
         for line in lines.splitlines():
             # Get the uptime from the Active MP module
             r1 = re.match(r'\s+Active MP(.*)Uptime\s+(\d+)\s+days'
@@ -860,7 +881,7 @@ class NetIronDriver(NetworkDriver):
 
         # the following is expensive -- should use SNMP GET instead
         command = 'show running-config | include ^hostname'
-        lines = self.device.send_command(command)
+        lines = self.device.send_command(command, delay_factor=self._show_command_delay_factor)
         for line in lines.splitlines():
             r1 = re.match(r'^hostname (\S+)', line)
             if r1:
@@ -868,39 +889,29 @@ class NetIronDriver(NetworkDriver):
 
         facts = {
             'uptime': uptime,
-            'vendor': unicode(vendor),
-            'model': unicode(model),
-            'hostname': unicode(hostname),
+            'vendor': str(vendor),
+            'model': str(model),
+            'hostname': str(hostname),
             # FIXME: fqdn
-            'fqdn': unicode("Unknown"),
-            'os_version': unicode(version),
-            'serial_number': unicode(serial),
+            'fqdn': str("Unknown"),
+            'os_version': str(version),
+            'serial_number': str(serial),
             'interface_list': []
         }
 
-        iface = 'show interface brief wide'
-        output = self.device.send_command(iface)
-        output = output.split('\n')
-        output = output[2:]
+        # Get interfaces
+        if not self.show_int_brief_wide:
+            self.show_int_brief_wide = self.device.send_command_timing('show int brief wide', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_interface_brief_wide", self.show_int_brief_wide
+        )
+        for interface in info:
+            port = self.standardize_interface_name(interface['port'])
+            facts['interface_list'].append(port)
 
-        for line in output:
-            fields = line.split()
-
-            if len(line) == 0:
-                continue
-            elif len(fields) >= 6:
-                port, link, state, speed, tag, mac = fields[:6]
-
-                r1 = re.match(r'^(\d+)/(\d+)', port)
-                if r1:
-                    port = 'e' + port
-                    facts['interface_list'].append(port)
-                elif re.match(r'^mgmt1', port):
-                    facts['interface_list'].append(port)
-                elif re.match(r'^ve(\d+)', port):
-                    facts['interface_list'].append(port)
-                elif re.match(r'^lb(\d+)', port):
-                    facts['interface_list'].append(port)
+        # Add lags to interfaces
+        lags = self.get_lags()
+        facts['interface_list'] += list(lags.keys())
 
         return facts
 
@@ -924,7 +935,7 @@ class NetIronDriver(NetworkDriver):
             command = "show interface management1"
         else:
             command = "show interface ethernet {}".format(port)
-        output = self.device.send_command(command)
+        output = self.device.send_command(command, delay_factor=self._show_command_delay_factor)
         output = output.split('\n')
 
         last_flap = "0.0"
@@ -952,7 +963,7 @@ class NetIronDriver(NetworkDriver):
                 if 'auto' in speed:
                     speed = -1
                 else:
-                    r = re.match(r'(\d+)[M|G]bit', speed)
+                    r = re.match(r'(\d+)([M|G])bit', speed)
                     if r:
                         speed = r.group(1)
                         if r.group(2) == 'M':
@@ -962,120 +973,329 @@ class NetIronDriver(NetworkDriver):
 
         return [last_flap, description, speed, mac]
 
+    def _get_interface_map(self):
+        ''' Return dict mapping ethernet port numbers to full interface name, ie
+
+        {
+            "1/1": "GigabitEthernet1/1",
+            ...
+        }
+        '''
+
+        if not self.show_int:
+            self.show_int = self.device.send_command_timing('show interface', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_interface", self.show_int
+        )
+
+        result = {}
+        for interface in info:
+            if 'ethernet' in interface['port'].lower() and 'mgmt' not in interface['port'].lower():
+                ifnum = re.sub(r'.*(\d+/\d+)', '\\1', interface['port'])
+                result[ifnum] = interface['port']
+
+        return result
+
+
+    def standardize_interface_name(self, port):
+        if not self.interface_map:
+            self.interface_map = self._get_interface_map()
+
+        port = str(port).strip()
+
+        # Convert lbX to LoopbackX
+        port = re.sub('^lb(\d+)$', 'Loopback\\1', port)
+        # Convert loopbackX to LoopbackX
+        port = re.sub('^loopback(\d+)$', 'Loopback\\1', port)
+        # Convert tnX to tunnelX
+        port = re.sub('^tn(\d+)$', 'Tunnel\\1', port)
+        # Convert veX to VeX
+        port = re.sub('^ve(\d+)$', 'Ve\\1', port)
+        # Convert mgmt1 to Ethernetmgmt1
+        if port in ['mgmt1', 'management1']:
+            port = 'Ethernetmgmt1'
+        # Convert 1/1 or ethernet1/1 to ethernet1/1
+        if re.match(r'.*\d+/\d+', port):
+            ifnum = re.sub(r'.*(\d+/\d+)', '\\1', port)
+            port = self.interface_map[ifnum]
+
+        return port
+
+    def get_lags(self):
+        result = {}
+
+        if not self.show_running_config_lag:
+            self.show_running_config_lag = self.device.send_command_timing('show running-config lag', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_running_config_lag", self.show_running_config_lag
+        )
+        for lag in info:
+            port = 'lag{}'.format(lag['id'])
+            result[port] = {
+                'is_up': True,
+                'is_enabled': True,
+                'description': lag['name'],
+                'last_flapped': -1,
+                'speed': 0,
+                'mac_address': '',
+                'children': self.interfaces_to_list(lag['ports'])
+            }
+
+        return result
+
     def get_interfaces(self):
         """get_interfaces method."""
-        interface_list = {}
+        if not self.show_int:
+            self.show_int = self.device.send_command_timing('show interface', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_interface", self.show_int
+        )
 
-        iface_cmd = 'show interface brief wide'
-        output = self.device.send_command(iface_cmd)
-        output = output.split('\n')
-        output = output[2:]
+        result = {}
+        for interface in info:
+            port = self.standardize_interface_name(interface['port'])
 
-        for line in output:
-            fields = line.split()
+            # Convert speeds to MB/s
+            speed = interface['speed']
+            SPEED_REG = r'^(?P<number>\d+)(?P<unit>\S+)$'
+            speed_m = re.match(SPEED_REG, speed)
+            if speed_m:
+                if speed_m.group('unit') in ['M', 'Mbit']:
+                    speed = int(int(speed_m.group('number')))
+                elif speed_m.group('unit') in ['G', 'Gbit']:
+                    speed = int(int(speed_m.group('number')) * 10E2)
 
-            if len(line) == 0:
-                continue
-            elif len(fields) >= 6:
-                port, link, state, speed, tag, mac = fields[:6]
-            else:
-                raise ValueError(u"Unexpected Response from the device")
-
-            # Physical interfaces only
-            if re.match("\d+/\d+|mgmt1", port):
-                # FIXME: quite slow...
-                port_detail = self._get_interface_detail(port)
-
-                state = state.lower()
-                is_up = bool('forward' in state)
-
-                link = link.lower()
-                is_enabled = not bool('disabled' in link)
-            else:
-                continue
-
-            interface_list[port] = {
-                'is_up': is_up,
-                'is_enabled': is_enabled,
-                'description': unicode(port_detail[1]),
-                'last_flapped': float(port_detail[0]),
-                'speed': int(port_detail[2]),
-                'mac_address': unicode(port_detail[3]),
+            result[port] = {
+                'is_up': interface['link'].lower() == 'up',
+                'is_enabled': interface['link'].lower() != 'disabled',
+                'description': interface['name'],
+                'last_flapped': -1,
+                'speed': speed,
+                'mac_address': interface['mac'],
+                'mtu': interface['mtu'],
             }
-        return interface_list
+
+        # Get lags
+        lags = self.get_lags()
+        result.update(lags)
+
+        return result
 
     def get_interfaces_ip(self):
         """get_interfaces_ip method."""
-
-        '''
         interfaces = {}
 
-        command = 'show ip interface'
-        output = self.device.send_command(command)
-        output = output.split('\n')
-        output = output[2:]
+        output = self.device.send_command_timing('show running-config interface', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_running_config_interface", output
+        )
 
-        for line in output:
-            fields = line.split()
-            if len(fields) == 8:
-                iface, ifaceid, address, ok, nvram, status, protocol, vrf = fields
-                port = iface + ifaceid
-                if port not in interfaces:
-                    interfaces[port] = dict()
+        for intf in info:
+            port = self.standardize_interface_name(intf['interface'] + intf['interfacenum'])
 
-                interfaces[port]['ipv4'] = dict()
-                interfaces[port]['ipv4'][address] = dict()
+            if port not in interfaces:
+                interfaces[port] = {
+                    'ipv4': {},
+                    'ipv6': {},
+                }
 
-        # Get the prefix from the running-config interface in a single call
-        iface = ""
-        show_command = "show running-config interface"
-        interface_output = self.device.send_command(show_command)
-        for line in interface_output.splitlines():
-                r1 = re.match(r'^interface\s+(ethernet|ve|management|loopback)\s+(\S+)\s*$', line)
-                if r1:
-                    port = r1.group(1)
-                    if port == "ethernet":
-                        port = "eth"
-                    elif port == "management":
-                        port = "mgmt"
-                    iface = port + r1.group(2)
-
-                if 'ip address ' in line:
-                    fields = line.split()
-                    # ip address a.b.c.d/x ospf-ignore|ospf-passive|secondary
-                    if len(fields) in [3, 4]:
-                        address, subnet = fields[2].split(r'/')
-                        interfaces[iface]['ipv4'][address] = {'prefix_length': subnet}
-
-        command = 'show ipv6 interface'
-        output = self.device.send_command(command)
-        output = output.split('\n')
-        output = output[2:]
-
-        port = ""
-        for line in output:
-            r1 = re.match(r'^(\S+)\s+(\S+).*fe80::(\S+).*', line)
-            if r1:
-                port = r1.group(1) + r1.group(2)
-                address = "fe80::" + r1.group(3)
-                if port not in interfaces:
-                    # Interface with ipv6 only configuration
-                    interfaces[port] = dict()
-
-                interfaces[port]['ipv6'] = dict()
-                interfaces[port]['ipv6'][address] = dict()
-                interfaces[port]['ipv6'][address] = {'prefix_length': 'N/A'}
-
-            # Avoid matching: fd01:1458:300:2d::/64[Anycast]
-            r2 = re.match(r'\s+(\S+)\/(\d+)\s*$', line)
-            if r2:
-                address = r2.group(1)
-                subnet = r2.group(2)
-                interfaces[port]['ipv6'][address] = {'prefix_length': subnet}
+            if intf['ipv4address']:
+                ipaddress, prefix = intf['ipv4address'].split('/')
+                interfaces[port]['ipv4'][ipaddress] = { 'prefix_length': prefix }
+            if intf['ipv6address']:
+                ipaddress, prefix = intf['ipv6address'].split('/')
+                interfaces[port]['ipv6'][ipaddress] = { 'prefix_length': prefix }
 
         return interfaces
-        '''
-        raise NotImplementedError
+
+    def get_interfaces_vlans(self):
+        ''' return dict as documented at https://github.com/napalm-automation/napalm/issues/919#issuecomment-485905491 '''
+
+        if not self.show_int:
+            self.show_int = self.device.send_command_timing('show interface', delay_factor=self._show_command_delay_factor)
+        info = textfsm_extractor(
+            self, "show_interface", self.show_int
+        )
+
+        result = {}
+
+        # Create interfaces structure and correct mode
+        for interface in info:
+            intf = self.standardize_interface_name(interface['port'])
+            if interface['tag'] == 'untagged' or re.match(r'^ve', interface['port'].lower()):
+                mode = "access"
+            else:
+                mode = "trunk"
+            result[intf] = {
+                'mode': mode,
+                'access-vlan': -1,
+                'trunk-vlans': [],
+                'native-vlan': -1,
+                'tagged-native-vlan': False
+            }
+
+        # Add lags
+        for lag in self.get_lags().keys():
+            result[lag] = {
+                'mode': 'trunk',
+                'access-vlan': -1,
+                'trunk-vlans': [],
+                'native-vlan': -1,
+                'tagged-native-vlan': False
+            }
+
+        if not self.show_vlan:
+            self.show_vlan = self.device.send_command('show vlan')
+        info = textfsm_extractor(
+            self, "show_vlan", self.show_vlan
+        )
+
+        # Assign VLANs to interfaces
+        for vlan in info:
+            access_ports = self.interface_list_conversation(
+                vlan['ve'],
+                '',
+                vlan['untaggedports']
+            )
+            trunk_ports = self.interface_list_conversation(
+                '',
+                vlan['taggedports'],
+                ''
+            )
+
+            for port in access_ports:
+                result[port]['access-vlan'] = vlan['vlan']
+
+            for port in trunk_ports:
+                result[port].update({
+                    'tagged-native-vlan': True,
+                    'native-vlan': 1
+                })
+                result[port]['trunk-vlans'].append(vlan['vlan'])
+
+        # Add ports with VLANs from VLLs
+        if not self.show_mpls_config:
+            self.show_mpls_config = self.device.send_command('show mpls config')
+        info = textfsm_extractor(
+            self, "show_mpls_config", self.show_mpls_config
+        )
+        for vll in info:
+            interface = self.standardize_interface_name(vll['interface'])
+            # Ignore VLLs with no interface
+            if interface:
+                result[interface]['access-vlan'] = vll['vlan']
+
+        return result
+
+    def get_vlans(self):
+        if not self.show_vlan:
+            self.show_vlan = self.device.send_command('show vlan')
+        info = textfsm_extractor(
+            self, "show_vlan", self.show_vlan
+        )
+
+        result = {}
+        for vlan in info:
+            result[vlan['vlan']] = {
+                'name': vlan['name'],
+                'interfaces': self.interface_list_conversation(
+                    vlan['ve'],
+                    vlan['taggedports'],
+                    vlan['untaggedports']
+                )
+            }
+
+        # Add ports with VLANs from VLLs
+        if not self.show_mpls_config:
+            self.show_mpls_config = self.device.send_command('show mpls config')
+        info = textfsm_extractor(
+            self, "show_mpls_config", self.show_mpls_config
+        )
+        for vll in info:
+            if vll['vlan'] not in result:
+                result[vll['vlan']] = {
+                    'name': vll['name'],
+                    'interfaces': [],
+                }
+
+            result[vll['vlan']]['interfaces'].append(self.standardize_interface_name(vll['interface']))
+
+        return result
+
+    def interface_list_conversation(self, ve, taggedports, untaggedports):
+        interfaces = []
+        if ve and ve != 'NONE':
+            interfaces.append('Ve{}'.format(ve))
+        if taggedports:
+            interfaces.extend(self.interfaces_to_list(taggedports))
+        if untaggedports:
+            interfaces.extend(self.interfaces_to_list(untaggedports))
+        return interfaces
+
+    def interfaces_to_list(self, interfaces_string):
+        ''' Convert string like 'ethe 2/1 ethe 2/4 to 2/5' or 'e 2/1 to 2/4' to list of interfaces '''
+        interfaces = []
+
+        if 'ethernet' in interfaces_string:
+            split_string = 'ethernet'
+        elif 'ethe' in interfaces_string:
+            split_string = 'ethe'
+        else:
+            split_string = 'e'
+
+        sections = interfaces_string.split(split_string)
+        if '' in sections:
+            sections.remove('') # Remove empty list items
+        for section in sections:
+            section = section.strip() # Remove leading/trailing spaces
+
+            # Process sections like 2/4 to 2/6
+            if 'to' in section:
+                start_intf, end_intf = section.split(' to ')
+                slot, num = start_intf.split('/')
+                slot, end_num = end_intf.split('/')
+                num = int(num)
+                end_num = int(end_num)
+
+                while num <= end_num:
+                    intf_name = '{}/{}'.format(slot, num)
+                    interfaces.append(self.standardize_interface_name(intf_name))
+                    num += 1
+
+            # Individual ports like '2/1'
+            else:
+                interfaces.append(self.standardize_interface_name(section))
+
+        return interfaces
+
+    def get_lldp_neighbors(self):
+        """
+        Returns a dictionary where the keys are local ports and the value is a list of \
+        dictionaries with the following information:
+            * hostname
+            * port
+        """
+        my_dict = {}
+        shw_int_neg = self.device.send_command('show lldp neighbors detail')
+        info = textfsm_extractor(
+            self, "show_lldp_neighbors_detail", shw_int_neg
+        )
+
+        for result in info:
+            if result['remoteportid']:
+                port = result['remoteportid']
+            else:
+                port = result['remoteportdescription']
+            local_port = self.standardize_interface_name(result['port'])
+
+            if local_port not in my_dict.keys():
+                my_dict[local_port] = []
+            my_dict[local_port].append({
+                'hostname': re.sub('"', '', result['remotesystemname']),
+                'port': re.sub('"', '', port)
+            })
+
+        return my_dict
 
     @staticmethod
     def bgp_time_conversion(bgp_uptime):
@@ -1423,7 +1643,7 @@ class NetIronDriver(NetworkDriver):
             command = 'show ip{0} bgp neighbors'.format('' if v == 4 else 'v6')
             _lines = self.device.send_command(command)
             lines_neighbors += _lines + '\n' if _lines else ''
-             
+
         local_as = 0
         for line in lines_summary.splitlines():
             r1 = re.match(r'^\s+Router ID:\s+(?P<router_id>({}))\s+'
@@ -1527,7 +1747,7 @@ class NetIronDriver(NetworkDriver):
                 state = r3.group(1)
 
                 bgp_data['global']['peers'][current]['state'] = state
-                bgp_data['global']['peers'][current]['is_up'] = True if 'ESTABLISHED' in state else False 
+                bgp_data['global']['peers'][current]['is_up'] = True if 'ESTABLISHED' in state else False
                 bgp_data['global']['peers'][current]['is_enabled'] = False if 'ADMIN_SHUTDOWN' in state else True
                 bgp_data['global']['peers'][current]['uptime'] = r3.group(2)
 
@@ -1996,7 +2216,7 @@ class NetIronDriver(NetworkDriver):
                 environment['power'][psu] = {'status': True, 'capacity': r3.group(2), 'output': 'N/A'}
 
             # Back Fan A-1: Status = OK, Speed = MED (60%)
-            
+
             r3 = re.match(r'^(.*):\s+Status = (\S+),\s+Speed\s+=\s+(\S+)\s+\((\d+)%\)', line)
             if r3:
                 fan = r3.group(1)
@@ -2222,7 +2442,7 @@ class NetIronDriver(NetworkDriver):
 
                 entry = {
                     'mac': mac_address,
-                    'interface': unicode(port),
+                    'interface': str(port),
                     'vlan': int(vlan),
                     'active': bool(1),
                     'static': is_static,
@@ -2363,7 +2583,7 @@ class NetIronDriver(NetworkDriver):
         _ip = napalm_base.helpers.IPAddress(destination)
         if not _ip:
             raise ValueError('destination must be a valid IP Address')
-        
+
         # vrf needs to be right after the ping command
         # ipv6 addresses require an additional parameter
         command = 'ping {vrf} {family} {destination} timeout {timeout} size {size} count {count} '.format(
