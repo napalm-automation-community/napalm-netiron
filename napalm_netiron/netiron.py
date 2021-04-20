@@ -1214,7 +1214,7 @@ class NetIronDriver(NetworkDriver):
         for vll in info:
             if vll['vlan'] not in result:
                 result[vll['vlan']] = {
-                    'name': '',
+                    'name': vll['name'],
                     'interfaces': [],
                 }
 
