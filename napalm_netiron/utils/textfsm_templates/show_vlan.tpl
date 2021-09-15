@@ -1,5 +1,5 @@
 Value Vlan (\d+)
-Value Name (\S+)
+Value Name (.*?)
 Value Ve (\S+)
 Value TaggedPorts (.*)
 Value UntaggedPorts (.*)
