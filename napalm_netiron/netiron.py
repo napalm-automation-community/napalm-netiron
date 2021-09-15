@@ -1181,7 +1181,7 @@ class NetIronDriver(NetworkDriver):
             interface = self.standardize_interface_name(vll['interface'])
             # Ignore VLLs with no interface
             if interface:
-                result[interface]['access-vlan'] = vll['vlan']
+                result[interface]['trunk-vlans'].append(vll['vlan'])
 
         # Set native vlan for tagged ports
         for port, data in result.items():
