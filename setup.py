@@ -11,7 +11,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="napalm-netiron",
-    version="0.1.4",
+    version="0.1.5",
     packages=find_packages(),
     author="Bryan Lynn",
     author_email="blynn@llnw.com",
