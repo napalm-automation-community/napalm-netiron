@@ -2766,51 +2766,47 @@ class NetIronDriver(NetworkDriver):
         traceroute_dict['success'] = results
         return traceroute_dict
 
+
     def get_network_instances(self, name=''):
 
         instances = {}
-        sh_vrf_detail = self._send_command('show vrf detail')
-        show_ip_int_br = self._send_command('show ip interface brief')
 
-        # retrieve all interfaces for the default VRF
-        interface_dict = {}
-        show_ip_int_br = show_ip_int_br.strip()
-        for line in show_ip_int_br.splitlines():
-            if 'Interface ' in line:
-                continue
-            interface = line.split()[0]
-            interface_dict[interface] = {}
+        show_vrf_detail = self.device.send_command('show vrf detail')
+        vrf_detail = textfsm_extractor(
+            self, "show_vrf_detail", show_vrf_detail
+        )
+
+        show_ip_interface = self.device.send_command('show ip interface')
+        ip_interface = textfsm_extractor(
+            self, "show_ip_interface", show_ip_interface
+        )
 
         instances['default'] = {
-                                'name': 'default',
-                                'type': 'DEFAULT_INSTANCE',
-                                'state': {'route_distinguisher': ''},
-                                'interfaces': {'interface': interface_dict}
-                                }
+            'name': 'default',
+            'type': 'DEFAULT_INSTANCE',
+            'state': {'route_distinguisher': ''},
+            'interfaces': {'interface': {}}
+        }
 
-        for vrf in sh_vrf_detail.split('\n\n'):
+        for vrf in vrf_detail:
+            instances[vrf['name']] = {
+                'name': vrf['name'],
+                'type': 'L3VRF',
+                'state': {'route_distinguisher': vrf['rd']},
+                'interfaces': {'interface': {}}
+            }
 
-            first_part = vrf.split('Address family')[0]
+        for interface in ip_interface:
+            intf = self.standardize_interface_name(interface['interfacetype'] + interface['interfacenum'])
 
-            # retrieve the name of the VRF and the Route Distinguisher
-            vrf_name, RD = re.match(r'^VRF (\S+).*RD (.*);', first_part).groups()
-            if RD == '<not set>':
-                RD = ''
+            vrf = interface['vrf']
+            if vrf == 'default-vrf':
+                vrf = 'default'
 
-            # retrieve the interfaces of the VRF
-            if_regex = re.match(r'.*Interfaces:(.*)', first_part, re.DOTALL)
-            if 'No interfaces' in first_part:
-                interfaces = {}
-            else:
-                interfaces = {itf: {} for itf in if_regex.group(1).split()}
+            instances[vrf]['interfaces']['interface'][intf] = {}
 
-            instances[vrf_name] = {
-                                   'name': vrf_name,
-                                   'type': 'L3VRF',
-                                   'state': {'route_distinguisher': RD},
-                                   'interfaces': {'interface': interfaces}
-                                   }
         return instances if not name else instances[name]
+
 
     def get_config(self, retrieve='all'):
         """Implementation of get_config for netiron.
