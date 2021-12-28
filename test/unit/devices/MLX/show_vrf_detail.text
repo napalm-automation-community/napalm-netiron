@@ -1,0 +1,38 @@
+Total number of VRFs configured: 2
+
+
+VRF INTERNET, default RD 1234:10, Table ID 1
+Label: 500064IPv6 Label: 500065,  Label-Switched Mode: OFF
+IP Router-Id: 9.1.8.129
+  Interfaces:
+     Use "show vrf INTERNET" to see the list of interfaces
+  No Export VPN route-target communities
+  No Import VPN route-target communities
+
+  Address Family IPv4
+  No import route-map
+  No export route-map
+    Max Routes: 5120
+    Number of Unicast Routes: 102
+    Export VPN route-target communities:
+    RT:1234:1
+    Import VPN route-target communities:
+    RT:1234:1
+VRF SERVER-BACKEND, default RD 1234:3580, Table ID 40
+Label: 500074IPv6 Label: 500075,  Label-Switched Mode: OFF
+IP Router-Id: 10.3.1.14
+  Interfaces:
+     Use "show vrf SERVER-BACKEND" to see the list of interfaces
+  No Export VPN route-target communities
+  No Import VPN route-target communities
+
+  Address Family IPv4
+  No import route-map
+  No export route-map
+    Max Routes: 5120
+    Number of Unicast Routes: 19
+    Export VPN route-target communities:
+    RT:1234:8085
+    Import VPN route-target communities:
+    RT:1234:8085
+

@@ -1,0 +1,16 @@
+router mpls
+
+  mpls-interface ve53
+  ldp-enable
+
+  mpls-interface ve55
+  ldp-enable
+
+
+ vll ONE-OF-US-P2P-PARIS 1296
+  vll-peer 93.20.8.11
+  vlan 1102
+   tagged e 1/10
+
+
+end of MPLS configuration

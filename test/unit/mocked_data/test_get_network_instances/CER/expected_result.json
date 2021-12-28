@@ -1,0 +1,45 @@
+{
+  "default": {
+    "name": "default",
+    "type": "DEFAULT_INSTANCE",
+    "state": {
+      "route_distinguisher": ""
+    },
+    "interfaces": {
+      "interface": {
+        "Ethernetmgmt1": {},
+        "Ve53": {},
+        "Ve55": {},
+        "Ve1902": {},
+        "Ve1916": {},
+        "Loopback1": {}
+      }
+    }
+  },
+  "STREAM": {
+    "name": "STREAM",
+    "type": "L3VRF",
+    "state": {
+      "route_distinguisher": "1234:1160"
+    },
+    "interfaces": {
+      "interface": {
+        "Ve1913": {},
+        "Ve1915": {}
+      }
+    }
+  },
+  "MPLS": {
+    "name": "MPLS",
+    "type": "L3VRF",
+    "state": {
+      "route_distinguisher": "1234:1960"
+    },
+    "interfaces": {
+      "interface": {
+        "Ve1631": {},
+        "Ve1754": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+Total number of LLDP neighbors on all ports: 27
+Local port: 1/15
+  Neighbor: f8b1.567b.cb04, TTL 115 seconds
+    + Chassis ID (MAC address): f8b1.567b.cb02
+    + Port ID (interface name): "Gi2/0/8"
+    + Time to live: 120 seconds
+    + Port description    : "COLT_Skydance_MPLS"
+    + System name         : "SAMSWDEC003"
+
+  Neighbor: f8b1.567b.cb04, TTL 115 seconds
+    + Chassis ID (MAC address): f8b1.567b.cb02
+    + Port ID (interface name): "Gi2/0/12"
+    + Time to live: 120 seconds
+    + Port description    : "Network"
+    + System name         : "SAMSWDEC003"
+
+Local port: 1/17
+  Neighbor: 009c.0262.9fce, TTL 106 seconds
+    + Chassis ID (MAC address): 009c.0262.9fc0
+    + Port ID (locally assigned): "50"
+    + Time to live: 120 seconds
+    + Port description    : "50"
+    + System name         : "HP-262048-Z-1"
+    + System description  : "HP J9626A 2620-48 Switch, revision RA.15.15\
+                                   .0006, ROM RA.15.11 (/ws/swbuildm/rel_nashv\
+                                   ille_qaoff/code/build/xform(swbuildm_rel_na\
+                                   shville_qaoff_rel_nashville))"
+    + System capabilities : bridge, router
+      Enabled capabilities: bridge
+    + Management address (IPv4): 10.182.24.80
+    + Port VLAN ID: 1
+    + 802.3 Power via MDI: PSE port, power not supported
+
+Local port: 1/22
+  Neighbor: 001f.fe5a.4826, TTL 105 seconds
+    + Chassis ID (MAC address): 001f.fe5a.4800
+    + Port ID (locally assigned): "26"
+    + Time to live: 120 seconds
+    + Port description    : "26"
+    + System name         : "HP-261024-Z-1"
+    + System description  : "ProCurve J9085A Switch 2610-24, revision R.\
+                                   11.107, ROM R.10.06 (/sw/code/build/nemo)"
+    + System capabilities : bridge, router
+      Enabled capabilities: bridge
+    + Management address (IPv4): 10.32.24.16
+    + 802.3 MAC/PHY          : auto-negotiation enabled
+      Advertised capabilities: 10BaseT-HD, 10BaseT-FD, 100BaseTX-HD,
+                                     100BaseTX-FD, 1000BaseT-FD
+      Operational MAU type   : 1000BaseT-FD
+
+Local port: 1/7
+  Neighbor: e055.3d84.cebf, TTL 107 seconds
+    + Chassis ID (MAC address): e055.3d84.cebe
+    + Port ID (interface alias): "0"
+    + Time to live: 120 seconds
+    + System capabilities : router
+      Enabled capabilities: router
+    + System name         : "London"
+    + System description  : "Meraki MX100 Cloud Managed Router"
+    + Port description    : "internet port 0"

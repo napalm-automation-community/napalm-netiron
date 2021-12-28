@@ -1,0 +1,23 @@
+Total number of ARP entries: 54
+(In all VRFs)
+
+Entries in default routing instance:
+       IP Address          MAC Address         Type       Age      Port/
+                                                                   Port (Vpls-Id, Vlan)/
+                                                                   Vpls-Id:Peer
+1      17.103.233.2         f4a7.392b.2202      Dynamic     0        1/14
+2      17.103.233.5         None                Pending     0        v280
+3      17.103.233.10        c0ea.e401.e6cc      Dynamic     0        1/5
+4      17.103.233.18        001d.aa6e.6509      Dynamic     0        1/5
+5      17.103.225.106       5aa5.70d3.cde4      Dynamic     5        2/24
+6      17.103.227.138       1ea2.dc20.d3a0      Dynamic     1        2/24
+7      17.103.227.139       d203.980b.4b70      Dynamic     2        2/24
+8      17.103.227.159       609c.9fc7.dad0      Dynamic     1        2/24
+9      17.103.228.93        cc4e.249e.dd00      Dynamic     1        2/14
+10     17.103.228.121       748e.f8a9.6581      Dynamic     0        1/6
+11     246.48.226.122       ec13.db7d.8053      Dynamic     1        2/22
+12     17.103.228.158       d4c1.9e2b.4b80      Dynamic     0        1/1
+13     17.103.228.210       ec13.db7d.8053      Dynamic     1        2/22
+14     10.32.21.1           f4a7.392b.2200      Dynamic     0        mgmt1
+15     4.3.248.85           fcbd.670a.f069      Dynamic     1        2/1
+16     4.3.248.205          fcbd.670a.f069      Dynamic     2        2/1

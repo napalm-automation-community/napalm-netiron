@@ -1,0 +1,48 @@
+{
+  "default": {
+    "name": "default",
+    "type": "DEFAULT_INSTANCE",
+    "state": {
+      "route_distinguisher": ""
+    },
+    "interfaces": {
+      "interface": {
+        "Ethernetmgmt1": {},
+        "Ve16": {},
+        "Ve32": {},
+        "Ve51": {},
+        "Ve54": {},
+        "Ve115": {},
+        "Ve117": {},
+        "Ve121": {},
+        "Ve146": {},
+        "Ve280": {},
+        "Loopback1": {}
+      }
+    }
+  },
+  "INTERNET": {
+    "name": "INTERNET",
+    "type": "L3VRF",
+    "state": {
+      "route_distinguisher": "1234:10"
+    },
+    "interfaces": {
+      "interface": {
+        "Ve80": {}
+      }
+    }
+  },
+  "SERVER-BACKEND": {
+    "name": "SERVER-BACKEND",
+    "type": "L3VRF",
+    "state": {
+      "route_distinguisher": "1234:3580"
+    },
+    "interfaces": {
+      "interface": {
+        "Ve506": {}
+      }
+    }
+  }
+}

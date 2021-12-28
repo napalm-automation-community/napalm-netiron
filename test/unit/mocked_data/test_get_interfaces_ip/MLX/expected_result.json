@@ -1,0 +1,144 @@
+{
+  "Ethernetmgmt1": {
+    "ipv4": {
+      "10.3.21.67": {
+        "prefix_length": 24
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve16": {
+    "ipv4": {
+      "8.1.2.94": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {
+      "2001:4d30:606:fff::ae9b": {
+        "prefix_length": 126
+      }
+    }
+  },
+  "Ve32": {
+    "ipv4": {
+      "8.1.2.122": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {
+      "2001:4d30:606:11b::4eea": {
+        "prefix_length": 126
+      }
+    }
+  },
+  "Ve51": {
+    "ipv4": {
+      "8.1.80.142": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {
+      "2001:4d30:606:116::b5b6": {
+        "prefix_length": 126
+      }
+    }
+  },
+  "Ve54": {
+    "ipv4": {
+      "8.1.80.129": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve76": {
+    "ipv4": {},
+    "ipv6": {
+      "2a02:23a8:606:16::2": {
+        "prefix_length": 64
+      }
+    }
+  },
+  "Ve80": {
+    "ipv4": {
+      "194.3.248.129": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {},
+    "vrf": "NIBBLE"
+  },
+  "Ve115": {
+    "ipv4": {
+      "8.1.80.97": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve117": {
+    "ipv4": {
+      "8.1.80.101": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve121": {
+    "ipv4": {
+      "8.1.80.109": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve146": {
+    "ipv4": {
+      "194.3.248.86": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve280": {
+    "ipv4": {
+      "8.1.233.1": {
+        "prefix_length": 29
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve506": {
+    "ipv4": {
+      "10.3.1.14": {
+        "prefix_length": 31
+      }
+    },
+    "ipv6": {},
+    "vrf": "SERVER-BACKEND"
+  },
+  "Loopback1": {
+    "ipv4": {
+      "8.1.80.27": {
+        "prefix_length": 32
+      }
+    },
+    "ipv6": {}
+  },
+  "Loopback2": {
+    "ipv4": {},
+    "ipv6": {
+      "2001:4d30:9924::10": {
+        "prefix_length": 128
+      }
+    }
+  },
+  "tunnel1": {
+    "ipv4": {
+      "8.1.2.173": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  }
+}

@@ -16,4 +16,4 @@
 from napalm_netiron.netiron import NetIronDriver
 
 
-__all__ = ['NetIronDriver']
+__all__ = ["NetIronDriver"]

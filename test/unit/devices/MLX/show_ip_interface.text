@@ -1,0 +1,20 @@
+Flags : U - Unnumbered, S - Secondary, US - Unnumbered Secondary, V - VE over VPLS, VS - VE over VPLS Secondary
+Interface       IP-Address      OK?  Method Status     Protocol VRF                                        FLAG
+mgmt 1          10.3.21.67     YES  NVRAM  up         up       default-vrf
+ve 10           8.1.22.201     YES  manual admin/down down     default-vrf
+ve 16           8.1.22.94      YES  NVRAM  up         up       default-vrf
+ve 32           8.1.22.122     YES  NVRAM  up         up       default-vrf
+ve 50           8.1.22.17      YES  NVRAM  admin/down down     default-vrf
+ve 51           8.1.80.142     YES  NVRAM  up         up       default-vrf
+ve 54           8.1.80.129     YES  NVRAM  up         up       default-vrf
+ve 80           194.3.248.129  YES  NVRAM  up         up       INTERNET
+ve 100          8.1.71.149     YES  manual admin/down down     default-vrf
+ve 100          8.1.84.17      YES  NVRAM  admin/down down     default-vrf
+ve 115          8.1.80.97      YES  NVRAM  up         up       default-vrf
+ve 117          8.1.80.101     YES  NVRAM  up         up       default-vrf
+ve 121          8.1.80.109     YES  NVRAM  up         up       default-vrf
+ve 146          194.3.248.86   YES  NVRAM  up         up       default-vrf
+ve 280          8.1.233.1      YES  NVRAM  up         up       default-vrf
+ve 506          10.3.1.14      YES  NVRAM  up         up       SERVER-BACKEND
+loopback 1      8.1.80.27      YES  NVRAM  up         up       default-vrf
+Tunnel 1        8.1.22.173     YES  NVRAM  admin/down down     default-vrf

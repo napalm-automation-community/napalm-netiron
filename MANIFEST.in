@@ -1,1 +1,2 @@
 include napalm_netiron/utils/textfsm_templates/*.tpl
+include requirements.txt

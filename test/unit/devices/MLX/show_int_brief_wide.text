@@ -1,0 +1,47 @@
+Port   Link     Port-State   Speed Tag MAC            Name
+1/1    Up       Forward      1G    Yes 609c.9f85.4a00 MR-OSV8-I-4::E3
+1/2    Up       Forward      1G    Yes 609c.9f85.4a00 AWS-EU-WEST--1G-NNI-A
+1/3    Up       Forward      1G    Yes 609c.9f85.4a02 CO::HP-253024G-Z-2-::E28::SECONDARY
+1/4    Up       Forward      1G    Yes 609c.9f85.4a03 CO::HP-253024G-Z-1-::E28::PRIMARY
+1/5    Up       Forward      1G    Yes 609c.9f85.4a00 R3
+1/6    Up       Forward      1G    Yes 609c.9f85.4a00 MANCHESTER-EU-1G
+1/7    Up       Forward      1G    Yes 609c.9f85.4a00 LONDON-DC
+1/8    Down     None         None  No  609c.9f85.4a07 AVAILABLE-IF
+1/9    Disabled None         None  No  609c.9f85.4a08 AVAILABLE-IF
+1/10   Disabled None         None  No  609c.9f85.4a09 AVAILABLE-IF
+1/11   Up       Forward      1G    Yes 609c.9f85.4a00 HONEY
+1/12   Disabled None         None  Yes 609c.9f85.4a0b AVAILABLE-IF
+1/13   Disabled None         None  Yes 609c.9f85.4a0c AVAILABLE-IF
+1/14   Up       Forward      1G    Yes 609c.9f85.4a00 CC::HP-281024G-Z-1::24
+1/15   Up       Forward      1G    Yes 609c.9f85.4a00 MR-OS904-Z-2::ETH4
+1/16   Down     None         None  Yes 609c.9f85.4a0f ACO-HOUSE-P2P-IF
+1/17   Up       Forward      1G    Yes 609c.9f85.4a00 ROME-SECONDARY
+1/18   Disabled None         None  No  609c.9f85.4a11 AVAILABLE-IF
+1/19   Disabled None         None  No  609c.9f85.4a12 AVAILABLE-IF
+1/20   Disabled None         None  No  609c.9f85.4a13 AVAILABLE-IF
+1/21   Disabled None         None  No  609c.9f85.4a14
+1/22   Disabled None         None  No  609c.9f85.4a15
+1/23   Disabled None         None  No  609c.9f85.4a16
+1/24   Down     None         None  Yes 609c.9f85.4a00 OFFICE
+mgmt1  Up       Forward      1G    Yes 609c.9f85.4a00
+
+Port   Link     Port-State   Speed Tag MAC            Name
+ve16   Up       N/A          N/A   N/A 609c.9f85.4a00 MLXE8--MLXE4-IF
+ve32   Up       N/A          N/A   N/A 609c.9f85.4a00 TO-MAN
+ve51   Up       N/A          N/A   N/A 609c.9f85.4a00 MLXE4-MLXE4
+ve54   Up       N/A          N/A   N/A 609c.9f85.4a00 MLX4--CERRT-2-IF
+ve76   Up       N/A          N/A   N/A 609c.9f85.4a00 IPV6-MLX--CER-IF
+ve80   Up       N/A          N/A   N/A 609c.9f85.4a00 TRANSIT--VRF
+ve115  Up       N/A          N/A   N/A 609c.9f85.4a00 10G--INT
+ve117  Up       N/A          N/A   N/A 609c.9f85.4a00 LON11-INT
+ve121  Up       N/A          N/A   N/A 609c.9f85.4a00 LON13-INT-IF
+ve146  Up       N/A          N/A   N/A 609c.9f85.4a00 MASTER-BYPASS
+ve280  Up       N/A          N/A   N/A 609c.9f85.4a00 UNTRUST
+ve506  Up       N/A          N/A   N/A 609c.9f85.4a00 SERVER-BACKEND
+
+Port   Link     Port-State   Speed Tag MAC            Name
+lb1    Up       N/A          N/A   N/A N/A
+lb2    Up       N/A          N/A   N/A N/A            IPV6-LOOPBACK
+
+Port   Link     Port-State   Speed Tag MAC            Name
+tn1    Down     N/A          N/A   N/A N/A            TUNNEL-NY

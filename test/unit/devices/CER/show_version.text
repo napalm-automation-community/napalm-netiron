@@ -1,0 +1,19 @@
+System: NetIron CER (Serial #: CKM1234A99F,  Part #: 40-1000859-12)
+License: RT_SCALE, ADV_SVCS_PREM (LID: tieHKhKlDDb)
+Boot     : Version 5.6.0cT185 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Feb 12 2014 at 11:47:22 labeled as ceb05600c
+ (459335 bytes) from boot flash
+Monitor  : Version 6.0.0T185 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Jun  7 2016 at 16:10:10 labeled as ceb06000
+ (465568 bytes) from code flash
+IronWare : Version 6.0.0jT183 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Apr 24 2019 at 01:53:26 labeled as ce06000ja
+ (18456815 bytes) from Primary
+CPLD Version: 0x00000001
+Micro-Controller Version: 0x0000000d
+Extended route scalability
+PBIF Version: 0x0162
+800 MHz Power PC processor 8544 (version 8021/0023) 400 MHz bus
+512 KB Boot Flash (MX29LV040C), 64 MB Code Flash (MT28F256J3)
+2048 MB DRAM
+System uptime is 871 days 10 hours 25 minutes 30 seconds

@@ -1,0 +1,67 @@
+System Mode: MLX
+Chassis: MLXe 4-slot (Serial #: BAG4321M007,  Part #: 40-1001086-01)
+NI-X-HSF Switch Fabric Module 1 (Serial #: BAG4321M007,  Part #: 60-1003267-01)
+FE 1: Type fe600,  Version 1
+Switch Fabric Module 1 Up Time is 496 days 20 hours 17 minutes 4 seconds
+NI-X-HSF Switch Fabric Module 2 (Serial #: BAG4321M007,  Part #: 60-1003267-01)
+FE 1: Type fe600,  Version 1
+Switch Fabric Module 2 Up Time is 496 days 20 hours 17 minutes 4 seconds
+==========================================================================
+SL M1: BR-MLX-MR2-M Management Module Active (Serial #: BAG4321M007, Part #: 60-1003268-01):
+Boot     : Version 5.6.0T165 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Sep 20 2013 at 16:42:38 labeled as xmprm05600
+ (516258 bytes) from boot flash
+Monitor  : Version 6.0.0T165 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Jun  7 2016 at 16:09:32 labeled as xmb06000
+ (546489 bytes) from code flash
+IronWare : Version 6.0.0jT163 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Apr 24 2019 at 01:01:20 labeled as xmr06000ja
+ (10642101 bytes) from Primary
+Board ID : 00 MBRIDGE Revision : 37
+1666 MHz Power PC processor 7448 (version 8004/0202) 166 MHz bus
+512 KB Boot Flash (MX29LV040C), 128 MB Code Flash (MT28F256J3)
+4096 MB DRAM INSTALLED
+4096 MB DRAM ADDRESSABLE
+Active Management uptime is 496 days 20 hours 17 minutes 4 seconds
+==========================================================================
+SL 1: BR-MLX-1GFx24-X 24-port 1GbE SFP Module (Serial #: BAG4321M007, Part #: 60-1001892-12)
+License:  (LID: dpfUYHGFGmFFe)
+Boot     : Version 5.6.0T175 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Sep 20 2013 at 16:43:00 labeled as xmlprm05600
+ (423373 bytes) from boot flash
+Monitor  : Version 6.0.0T175 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Jun  7 2016 at 16:09:50 labeled as xmlb06000
+ (571513 bytes) from code flash
+IronWare : Version 6.0.0jT177 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Apr 24 2019 at 01:17:20 labeled as xmlp06000ja
+ (9556770 bytes) from Primary
+FPGA versions:
+Valid PBIF Version = 4.04, Build Time = 11/10/2014 22:10:00
+
+Valid XPP Version = 1.03, Build Time = 6/30/2016 10:37:00
+
+Valid STATS Version = 0.09, Build Time = 11/21/2010 14:52:00
+
+BCM56512GMAC 0
+BCM56512GMAC 1
+666 MHz MPC MPC8541E (version 8020/0020) 333 MHz bus
+512 KB Boot Flash (MX29LV040C), 16 MB Code Flash (MT28F128J3)
+1024 MB DRAM, 8 KB SRAM
+LP Slot 1 uptime is 496 days 20 hours 16 minutes 15 seconds
+==========================================================================
+SL 2: BR-MLX-10Gx24-DM 24-port 10GbE Module (Serial #: BAG4321M007, Part #: 60-1002203-09)
+Boot     : Version 5.6.0T175 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Sep 20 2013 at 16:43:00 labeled as xmlprm05600
+ (423373 bytes) from boot flash
+Monitor  : Version 6.0.0T175 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Jun  7 2016 at 16:09:50 labeled as xmlb06000
+ (571513 bytes) from code flash
+IronWare : Version 6.0.0jT177 Copyright (c) 2017-2018 Extreme Networks, INC.
+Compiled on Apr 24 2019 at 01:17:20 labeled as xmlp06000ja
+ (9556770 bytes) from Primary
+1333 MHz MPC MPC8548 (version 8021/0022) 533 MHz bus
+512 KB Boot Flash (MX29LV040C), 64 MB Code Flash (MT28F256J3)
+2048 MB DRAM, 8 KB SRAM
+LP Slot 2 uptime is 496 days 20 hours 16 minutes 11 seconds
+==========================================================================
+All show version done

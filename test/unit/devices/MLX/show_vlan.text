@@ -1,0 +1,152 @@
+
+Configured PORT-VLAN entries: 77
+Maximum PORT-VLAN entries: 4095
+Default PORT-VLAN id: 1
+
+
+PORT-VLAN 1, Name DEFAULT-VLAN, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Untagged Ports : ethe 1/8 to 1/10 ethe 1/18 to 1/23 ethe 1/18 to 1/21
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 16, Name MLXE8--MLXE4-IF, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/14 to 1/16
+Associated Virtual Interface Id: 16
+
+PORT-VLAN 32, Name TO-MAN, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/6
+Associated Virtual Interface Id: 32
+
+PORT-VLAN 51, Name MLXE4-MLXE4, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/11 to 1/13
+Associated Virtual Interface Id: 51
+
+PORT-VLAN 54, Name MLX4--CERRT-2-VL, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/2
+Associated Virtual Interface Id: 54
+
+PORT-VLAN 76, Name IPV6-MLX--CER, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 1/4 to 1/5
+Associated Virtual Interface Id: 76
+
+PORT-VLAN 80, Name TRANSIT-VRF, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 1/4 to 1/5
+Associated Virtual Interface Id: 80
+
+PORT-VLAN 111, Name TEST1, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/14 to 1/16
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 115, Name 10G, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Untagged Ports : ethe 1/7
+Associated Virtual Interface Id: 115
+
+PORT-VLAN 117, Name LON11-INT, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Untagged Ports : ethe 1/8
+Associated Virtual Interface Id: 117
+
+PORT-VLAN 121, Name LON13, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Untagged Ports : ethe 1/9
+Associated Virtual Interface Id: 121
+
+PORT-VLAN 129, Name LON15-EXT, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 1/4 to 1/5
+Untagged Ports : ethe 1/6
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 146, Name MASTER-BYPASS, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 1/4 to 1/5
+Associated Virtual Interface Id: 146
+
+PORT-VLAN 200, Name [None], Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/24 ethe 1/22
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 280, Name UT, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/14
+Associated Virtual Interface Id: 280
+
+PORT-VLAN 434, Name UNIFI-MGMT, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/2 ethe 1/11 to 1/13
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 459, Name UK-STACK, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/14 ethe 1/24
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 470, Name INT, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/3 to 1/4 ethe 1/14 ethe 1/24
+Untagged Ports : ethe 1/1
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 471, Name IPMI, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/14
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 486, Name SERVER-MGMT1, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 1/14 to 1/16
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 488, Name SERVER-MGMT2, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/14
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 490, Name CUST, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/5 to 1/7 ethe 1/12 to 1/15 ethe 1/17 ethe 1/1 ethe 1/3 to 1/5 ethe 1/11 to 1/13 ethe 1/17 ethe 1/22
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 506, Name SERVER-BACKEND, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/24
+Associated Virtual Interface Id: 506
+
+PORT-VLAN 4095, Name CONTROL-VLAN, Priority Level 0, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 65535    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 1/7 to 1/10 ethe 1/18 to 1/23 ethe 1/6 to 1/9 ethe 1/18 to 1/21
+Untagged Ports : ethe 1/2 to 1/6 ethe 1/11 to 1/17 ethe 1/24 ethe 1/1 to 1/5 ethe 1/10 to 1/17 ethe 1/22 to 1/24
+Associated Virtual Interface Id: NONE

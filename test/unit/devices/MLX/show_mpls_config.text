@@ -1,0 +1,42 @@
+router mpls
+
+  mpls-interface ve16
+  ldp-enable
+
+  mpls-interface ve32
+  ldp-enable
+
+  mpls-interface ve51
+  ldp-enable
+
+  mpls-interface ve54
+  ldp-enable
+
+  mpls-interface gre-tnl1
+  ldp-enable
+
+ vpls-cpu-protection
+
+
+ vll VLL-CER--CER 1016 raw-mode
+  vll-peer 19.23.8.7
+  vlan 92
+   tagged e 1/5
+
+ vll VLL-LON17 1224
+  vll-peer 19.23.8.29
+  vlan 142
+   tagged e 1/5
+
+ vll VLL-TERADICI-TRUST 1284
+  vll-peer 19.23.8.23
+  vlan 101
+   tagged e 1/17
+
+ vll VLL-TRANSIT 1021
+  vll-peer 15.16.6.10
+  vlan 124
+   tagged e 1/5
+
+
+end of MPLS configuration

@@ -1,0 +1,44 @@
+
+Port   Link     Port-State   Speed Tag MAC            Name
+1/1    Up       Forward      1G    Yes 748e.f8a4.1301 TO:MR-OS904-Z-1:2
+1/2    Up       Forward      100M  Yes 748e.f8a4.1301 INTEROUTE-CIRCUIT-X
+1/3    Up       Forward      100M  Yes 748e.f8a4.1301 CO:HP-2626-Z-1:24
+1/4    Up       Forward      1G    Yes 748e.f8a4.1304 "MR-OS904-Z-2::2"
+1/5    Up       Forward      1G    Yes 748e.f8a4.1301 NRJ-IF
+1/6    Up       Forward      1G    Yes 748e.f8a4.1301 METROPOLE6-IF
+1/7    Up       Forward      1G    Yes 748e.f8a4.1307 AVAILABLE-IF-TO-MR-OS940-Z-1::12
+1/8    Down     None         None  No  748e.f8a4.1308 OFFICE-IF
+1/9    Disabled None         None  Yes 748e.f8a4.1309 AVAILABLE-IF
+1/10   Disabled None         None  Yes 748e.f8a4.130a ONE-IF
+1/11   Up       Forward      1G    Yes 748e.f8a4.1301 SIPERTECH-CROSS-CONNECT
+1/12   Down     None         None  Yes 748e.f8a4.130c THV
+1/13   Down     None         None  Yes 748e.f8a4.130d AVAILABLE-IF
+1/14   Down     None         None  Yes 748e.f8a4.130e AVAILABLE-IF
+1/15   Up       Forward      1G    Yes 748e.f8a4.1301 MR-OS940-Z-1::QinQ:port1
+1/16   Down     None         None  No  748e.f8a4.1310
+1/17   Disabled None         None  No  748e.f8a4.1311 AVAILABLE-IF
+1/18   Disabled None         None  No  748e.f8a4.1312 AVAILABLE-IF
+1/19   Disabled None         None  No  748e.f8a4.1313 AVAILABLE-IF
+1/20   Disabled None         None  No  748e.f8a4.1314 AVAILABLE-IF
+1/21   Disabled None         None  No  748e.f8a4.1315 AVAILABLE-IF
+1/22   Disabled None         None  No  748e.f8a4.1316 AVAILABLE-IF
+1/23   Disabled None         None  No  748e.f8a4.1317 AVAILABLE-IF
+1/24   Down     None         None  No  748e.f8a4.1318 AVAILABLE-IF
+2/1    Up       Forward      10G   Yes 748e.f8a4.1301 EU-NETWORKS
+2/2    Disabled None         None  Yes 748e.f8a4.1332 AVAILABLE-IF
+2/3    Down     None         None  Yes 748e.f8a4.1333 AVAILABLE-IF
+2/4    Up       Forward      10G   Yes 748e.f8a4.1301 FO-CER2024FRT-Z-2_ETH2/4
+mgmt1  Up       Forward      100M  Yes 748e.f8a4.1300
+
+Port   Link     Port-State   Speed Tag MAC            Name
+ve53   Up       N/A          N/A   N/A 748e.f8a4.1301 MLX4--PAR
+ve55   Up       N/A          N/A   N/A 748e.f8a4.1301 CERRT--CERRT-2
+ve1631 Up       N/A          N/A   N/A 748e.f8a4.1301 WARSAW-IF
+ve1754 Up       N/A          N/A   N/A 748e.f8a4.1301 AUBERVILLIERS-VL
+ve1902 Up       N/A          N/A   N/A 748e.f8a4.1301 EXT-IF
+ve1913 Up       N/A          N/A   N/A 748e.f8a4.1301 METROPOLE6-L3VPN-IF
+ve1915 Up       N/A          N/A   N/A 748e.f8a4.1301 L3VPN-IF
+ve1916 Up       N/A          N/A   N/A 748e.f8a4.1301 PARIS-IF
+
+Port   Link     Port-State   Speed Tag MAC            Name
+lb1    Up       N/A          N/A   N/A N/A

@@ -1,0 +1,344 @@
+{
+  "GigabitEthernet1/1": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "TO:MR-OS904-Z-1:2",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/2": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "INTEROUTE-CIRCUIT-X",
+    "last_flapped": -1,
+    "speed": 100,
+    "mac_address": "748e.f8a4.1302",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/3": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "CO:HP-2626-Z-1:24",
+    "last_flapped": -1,
+    "speed": 100,
+    "mac_address": "748e.f8a4.1303",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/4": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "\"MR-OS904-Z-2::2\"",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "748e.f8a4.1304",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/5": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "NRJ-IF",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "748e.f8a4.1305",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/6": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "METROPOLE6-IF",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "748e.f8a4.1306",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/7": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "AVAILABLE-IF-TO-MR-OS940-Z-1::12",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "748e.f8a4.1307",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/8": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "OFFICE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1308",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/9": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1309",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/10": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "ONE-OF-US-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.130a",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/11": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "SIPERTECH-CROSS-CONNECT",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "748e.f8a4.130b",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/12": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "THV",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.130c",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/13": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.130d",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/14": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.130e",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/15": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MR-OS940-Z-1::QinQ:port1",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "748e.f8a4.130f",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/16": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1310",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/17": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1311",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/18": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1312",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/19": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1313",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/20": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1314",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/21": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1315",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/22": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1316",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/23": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1317",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/24": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1318",
+    "mtu": 9216
+  },
+  "10GigabitEthernet2/1": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "EU-NETWORKS",
+    "last_flapped": -1,
+    "speed": 10000,
+    "mac_address": "748e.f8a4.1331",
+    "mtu": 9216
+  },
+  "10GigabitEthernet2/2": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1332",
+    "mtu": 9216
+  },
+  "10GigabitEthernet2/3": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1333",
+    "mtu": 9216
+  },
+  "10GigabitEthernet2/4": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "FO-CER2024FRT-Z-2_ETH2/4",
+    "last_flapped": -1,
+    "speed": 10000,
+    "mac_address": "748e.f8a4.1334",
+    "mtu": 9216
+  },
+  "Ethernetmgmt1": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "",
+    "last_flapped": -1,
+    "speed": 100,
+    "mac_address": "748e.f8a4.1300",
+    "mtu": 1548
+  },
+  "Ve53": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MLX4--CERRT",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 1500
+  },
+  "Ve55": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "CERRT--CERRT-2-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 1500
+  },
+  "Ve1631": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "WARSAW-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 1500
+  },
+  "Ve1754": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "AUBERVILLIERS-VL",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 1500
+  },
+  "Ve1902": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "EXT-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 1500
+  },
+  "Ve1913": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "METROPOLE6-L3VPN-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 1500
+  },
+  "Ve1915": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "NRJ-L3VPN-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 1500
+  },
+  "Ve1916": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "PARIS-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "748e.f8a4.1301",
+    "mtu": 1500
+  },
+  "Loopback1": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "",
+    "mtu": 1500
+  }
+}
