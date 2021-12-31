@@ -1,0 +1,371 @@
+{
+  "GigabitEthernet1/1": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MR-OSV8-Z-4::E3",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/2": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "AWS-EU-WEST--1G-NNI-A",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a01",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/3": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "CO::HP-253024G-Z-2::E28::SECONDARY",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a02",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/4": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "CO::HP-253024G-Z-1::E28::PRIMARY",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a03",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/5": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "R3",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a04",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/6": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MANCHESTER-EU-1G",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a05",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/7": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "LONDON-DC",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a06",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/8": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a07",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/9": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a08",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/10": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a09",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/11": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "HONEY",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a0a",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/12": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a0b",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/13": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a0c",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/14": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "CC::HP-281024G-Z-1::24",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a0d",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/15": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MR-OS904-Z-2::ETH4",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a0e",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/16": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "ACO-HOUSE-P2P-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a0f",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/17": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "ROME-SECONDARY",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a10",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/18": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a11",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/19": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a12",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/20": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "AVAILABLE-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a13",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/21": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a14",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/22": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a15",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/23": {
+    "is_up": false,
+    "is_enabled": false,
+    "description": "",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a16",
+    "mtu": 9216
+  },
+  "GigabitEthernet1/24": {
+    "is_up": false,
+    "is_enabled": true,
+    "description": "OFFICE",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a17",
+    "mtu": 9216
+  },
+  "Ethernetmgmt1": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "",
+    "last_flapped": -1,
+    "speed": 1000,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1548
+  },
+  "Ve16": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MLXE8--MLXE4-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve32": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "TO-MAN",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve51": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MLXE4-MLXE4",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve54": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MLX4--CERRT-2-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve76": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "IPV6-MLX--CER-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve80": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "TRANSIT--VRF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve115": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "10G--INT",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve117": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "LON11-INT",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve121": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "LON-13-INT-IF",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve146": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MASTER-BYPASS",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve280": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "UNTRUST",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Ve506": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "SERVER-BACKEND",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "609c.9f85.4a00",
+    "mtu": 1500
+  },
+  "Loopback1": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "",
+    "mtu": 1500
+  },
+  "Loopback2": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "IPV6-LOOPBACK",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "",
+    "mtu": 1500
+  },
+  "lag10": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "AR-7280SR248YC6-Z-1:Po10-L3NNI-LAG01",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "",
+    "mtu": 0
+  },
+  "lag3": {
+    "is_up": true,
+    "is_enabled": true,
+    "description": "MLXE4--MLXE4",
+    "last_flapped": -1,
+    "speed": 0,
+    "mac_address": "",
+    "mtu": 0
+  }
+}

@@ -1,0 +1,191 @@
+interface management 1
+ ip address 10.34.16.65/24
+ enable
+!
+interface ethernet 1/1
+ port-name TO:MR-OS904-Z-1:2
+ enable
+ sflow forwarding
+!
+interface ethernet 1/2
+ port-name INTEROUTE-CIRCUIT-X-CONNECT
+ enable
+ speed-duplex 100-full
+ sflow forwarding
+!
+interface ethernet 1/3
+ port-name CO:HP-2626-Z-1:24
+ enable
+ speed-duplex 100-full
+ sflow forwarding
+!
+interface ethernet 1/4
+ port-name "MR-OS904-Z-2::2"
+ enable
+ sflow forwarding
+!
+interface ethernet 1/5
+ port-name NRJ-IF
+ enable
+ sflow forwarding
+!
+interface ethernet 1/6
+ port-name METROPOLE6-IF
+ enable
+ sflow forwarding
+!
+interface ethernet 1/7
+ port-name AVAILABLE-IF-TO-MR-OS940-Z-1::12
+ enable
+ sflow forwarding
+!
+interface ethernet 1/8
+ port-name OFFICE-IF
+ enable
+ sflow forwarding
+!
+interface ethernet 1/9
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 1/10
+ port-name ONE-IF
+ sflow forwarding
+!
+interface ethernet 1/11
+ port-name SIPERTECH-CROSS-CONNECT
+ enable
+ sflow forwarding
+!
+interface ethernet 1/12
+ port-name THV
+ enable
+ sflow forwarding
+!
+interface ethernet 1/13
+ port-name AVAILABLE-IF
+ enable
+ sflow forwarding
+!
+interface ethernet 1/14
+ port-name AVAILABLE-IF
+ enable
+ sflow forwarding
+!
+interface ethernet 1/15
+ port-name MR-OS940-Z-1::QinQ:port1
+ enable
+ sflow forwarding
+!
+interface ethernet 1/16
+ enable
+ sflow forwarding
+!
+interface ethernet 1/17
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 1/18
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 1/19
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 1/20
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 1/21
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 1/22
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 1/23
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 1/24
+ port-name AVAILABLE-IF
+ enable
+ sflow forwarding
+!
+interface ethernet 2/1
+ port-name EU-NETWORKS
+ enable
+ sflow forwarding
+!
+interface ethernet 2/2
+ port-name AVAILABLE-IF
+ sflow forwarding
+!
+interface ethernet 2/3
+ port-name AVAILABLE-IF
+ enable
+ sflow forwarding
+!
+interface ethernet 2/4
+ port-name FO-CER2024FRT-Z-2_ETH2/4
+ enable
+ phy disable-equalization
+ sflow forwarding
+!
+interface ve 53
+ port-name MLX4--CERRT
+ bfd interval 100 min-rx 100 multiplier 6
+ ip router isis
+ ip address 189.116.28.4/30
+ ip access-group STANDARD-IN-ACL in
+ isis bfd
+ isis metric 610
+ isis point-to-point
+!
+interface ve 55
+ port-name CERRT--CERRT-2-IF
+ bfd interval 100 min-rx 100 multiplier 6
+ ip router isis
+ ip address 93.213.8.133/30
+ ip access-group STANDARD-IN-ACL in
+ isis bfd
+ isis metric 100
+ isis point-to-point
+!
+interface ve 1631
+ port-name WARSAW-IF
+ vrf forwarding MPLS
+ ip address 172.20.0.65/30
+!
+interface ve 1754
+ port-name AUBERVILLIERS-VL
+ vrf forwarding MPLS
+ ip address 172.20.1.41/30
+!
+interface ve 1902
+ port-name EXT-IF
+ ip address 189.116.28.9/30
+ ip access-group STANDARD-IN-ACL in
+!
+interface ve 1913
+ port-name L3VPN-IF
+ vrf forwarding STREAM
+ ip address 10.220.218.85/30
+!
+interface ve 1915
+ port-name NRJ-L3VPN-IF
+ vrf forwarding STREAM
+ ip address 10.220.218.49/30
+!
+interface ve 1916
+ port-name PARIS-IF
+ ip address 189.116.24.241/30
+ ip access-group STANDARD-IN-ACL in
+!
+interface loopback 1
+ ip router isis
+ ip address 93.20.8.3/32
+ isis point-to-point
+!

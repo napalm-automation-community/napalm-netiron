@@ -1,0 +1,96 @@
+
+Configured PORT-VLAN entries: 15
+Maximum PORT-VLAN entries: 4095
+Default PORT-VLAN id: 1
+
+
+PORT-VLAN 1, Name DEFAULT-VLAN, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Untagged Ports : ethe 1/8 ethe 1/16 to 1/24
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 53, Name MLX4--CERRT, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 2/1
+Associated Virtual Interface Id: 53
+
+PORT-VLAN 55, Name CERRT--CERRT-2, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 2/4
+Associated Virtual Interface Id: 55
+
+PORT-VLAN 434, Name UNIFI-MGMT, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 2/1
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 436, Name CUSTOMER, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 to 1/7 ethe 1/9 ethe 1/11 to 1/15 ethe 2/2 to 2/4
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 1629, Name [None], Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 2/4
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 1631, Name WARSAW-VL, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/2
+Associated Virtual Interface Id: 1631
+
+PORT-VLAN 1754, Name AUBERVILLIERS-VL, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 1/11
+Associated Virtual Interface Id: 1754
+
+PORT-VLAN 1899, Name PAR-INTEROUTE-CIR-XCONN, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 2/4
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 1900, Name TEMP-SMART, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/1 ethe 2/4
+Associated Virtual Interface Id: NONE
+
+PORT-VLAN 1902, Name EXT-VLAN, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Untagged Ports : ethe 1/3
+Associated Virtual Interface Id: 1902
+
+PORT-VLAN 1913, Name METROPOLE6-L3VPN-VL, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Untagged Ports : ethe 1/6
+Associated Virtual Interface Id: 1913
+
+PORT-VLAN 1915, Name NRJ-L3VPN-VL, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Untagged Ports : ethe 1/5
+Associated Virtual Interface Id: 1915
+
+PORT-VLAN 1916, Name PARIS-VL, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 0    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/15
+Associated Virtual Interface Id: 1916
+
+PORT-VLAN 4095, Name CONTROL-VLAN, Priority Level -, Priority Force 0, Creation Type STATIC
+Topo HW idx    : 1    Topo SW idx: 257    Topo next vlan: 0
+L2 protocols   : NONE
+Statically tagged Ports    : ethe 1/3 ethe 1/5 to 1/6 ethe 1/8 ethe 1/16 to 1/24
+Untagged Ports : ethe 1/1 to 1/2 ethe 1/4 ethe 1/7 ethe 1/9 to 1/15 ethe 2/1 to 2/4
+Associated Virtual Interface Id: NONE

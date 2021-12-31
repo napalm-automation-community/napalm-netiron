@@ -1,0 +1,30 @@
+{
+  "GigabitEthernet1/15": [
+    {
+      "hostname": "SAMSWDEC003",
+      "port": "Gi2/0/8"
+    },
+    {
+      "hostname": "SAMSWDEC003",
+      "port": "Gi2/0/12"
+    }
+  ],
+  "GigabitEthernet1/17": [
+    {
+      "hostname": "HP-262048-Z-1",
+      "port": "50"
+    }
+  ],
+  "GigabitEthernet1/22": [
+    {
+      "hostname": "HP-261024-Z-1",
+      "port": "26"
+    }
+  ],
+  "GigabitEthernet1/7": [
+    {
+      "hostname": "London",
+      "port": "internet"
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+Total number of LLDP neighbors on all ports: 7
+Local port: 1/1
+  Neighbor: 3ca7.2b00.1130, TTL 90 seconds
+    + Chassis ID (MAC address): 3ca7.2b00.1130
+    + Port ID (interface name): "2"
+    + Time to live: 120 seconds
+    + Port description    : "Port 2 - ETH10/100/1000"
+    + System name         : "MR-OS904-Z-1"
+    + System description  : "armv5tejl/Linux 2.6.22.7/4_2_1"
+    + System capabilities : bridge, router
+      Enabled capabilities: bridge, router
+    + Management address (IPv4): 10.3.16.19
+
+Local port: 1/3
+  Neighbor: 0014.c28f.91a8, TTL 108 seconds
+    + Chassis ID (MAC address): 0014.c28f.9180
+    + Port ID (locally assigned): "24"
+    + Time to live: 120 seconds
+    + Port description    : "24"
+    + System name         : "HP-2626-Z-1"
+    + System description  : "ProCurve J4900B Switch 2626, revision H.10.\
+                                   83, ROM H.08.02 (/sw/code/build/fish(mkfs))"
+    + System capabilities : bridge, router
+      Enabled capabilities: bridge
+    + Management address (MAC address): 0014.c28f.9180
+    + 802.3 MAC/PHY          : auto-negotiation enabled
+      Advertised capabilities: 10BaseT-HD, 10BaseT-FD, 100BaseTX-HD,
+                                     100BaseTX-FD
+      Operational MAU type   : 100BaseTX-HD
+
+Local port: 1/4
+  Neighbor: 3ca7.2b00.6f86, TTL 112 seconds
+    + Chassis ID (MAC address): 3ca7.2b00.6f86
+    + Port ID (interface name): "2"
+    + Time to live: 120 seconds
+    + Port description    : "Port 2 - ETH10/100/1000"
+    + System name         : "MR-OS904-Z-2"
+    + System description  : "armv5tejl/Linux 2.6.22.7/2_2_2"
+    + System capabilities : bridge, router
+      Enabled capabilities: bridge, router
+    + Management address (IPv4): 10.34.16.20
+
+Local port: 1/7
+  Neighbor: a460.3200.408d, TTL 114 seconds
+    + Chassis ID (MAC address): a460.3200.408d
+    + Port ID (interface name): "12"
+    + Time to live: 120 seconds
+    + Port description    : "AVAILABLE:TO:fo-cer2024frt-i-2-pap01-fr::1/\
+                                   7"
+    + System name         : "MR-OS940-Z-1"
+    + System description  : "armv5tel/Linux 3.4.0/4_5_3 (18748)"
+    + System capabilities : bridge, router
+      Enabled capabilities: bridge, router
+    + Management address (IPv4): 10.3.16.45
+
+Local port: 1/15
+  Neighbor: a460.3200.408d, TTL 113 seconds
+    + Chassis ID (MAC address): a460.3200.408d
+    + Port ID (interface name): "1"
+    + Time to live: 120 seconds
+    + Port description    : "ZAYO::ETH1/15"
+    + System name         : "MR-OS940-Z-1"
+    + System description  : "armv5tel/Linux 3.4.0/4_5_3 (18748)"
+    + System capabilities : bridge, router
+      Enabled capabilities: bridge, router
+    + Management address (IPv4): 10.3.16.45
+
+Local port: 2/1
+  Neighbor: cc4e.2497.e06c, TTL 119 seconds
+    + Chassis ID (MAC address): cc4e.2497.e000
+    + Port ID (MAC address): cc4e.2497.e06c
+    + Time to live: 120 seconds
+    + System name         : "FO-MLXE4-Z-1"
+    + Port description    : "10GigabitEthernet3/13"
+    + Management address (IPv4): 20.0.3.1
+
+Local port: 2/4
+  Neighbor: 748e.f8a8.42b4, TTL 117 seconds
+    + Chassis ID (MAC address): 748e.f8a8.4280
+    + Port ID (MAC address): 748e.f8a8.42b4
+    + Time to live: 120 seconds
+    + System name         : "FO-CER2024FRT-Z-2"
+    + Port description    : "10GigabitEthernet2/4"
+    + Management address (IPv4): 20.0.3.1
+

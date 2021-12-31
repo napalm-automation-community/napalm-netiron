@@ -1,0 +1,86 @@
+{
+  "Ethernetmgmt1": {
+    "ipv4": {
+      "10.34.16.65": {
+        "prefix_length": 24
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve53": {
+    "ipv4": {
+      "189.116.28.4": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve55": {
+    "ipv4": {
+      "93.213.8.133": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve1631": {
+    "ipv4": {
+      "172.20.0.65": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {},
+    "vrf": "MPLS"
+  },
+  "Ve1754": {
+    "ipv4": {
+      "172.20.1.41": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {},
+    "vrf": "MPLS"
+  },
+  "Ve1902": {
+    "ipv4": {
+      "189.116.28.9": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Ve1913": {
+    "ipv4": {
+      "10.220.218.85": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {},
+    "vrf": "STREAM"
+  },
+  "Ve1915": {
+    "ipv4": {
+      "10.220.218.49": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {},
+    "vrf": "STREAM"
+  },
+  "Ve1916": {
+    "ipv4": {
+      "189.116.24.241": {
+        "prefix_length": 30
+      }
+    },
+    "ipv6": {}
+  },
+  "Loopback1": {
+    "ipv4": {
+      "93.20.8.3": {
+        "prefix_length": 32
+      }
+    },
+    "ipv6": {}
+  }
+}

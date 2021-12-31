@@ -1,0 +1,161 @@
+{
+  "1": {
+    "name": "DEFAULT-VLAN",
+    "interfaces": [
+      "GigabitEthernet1/8",
+      "GigabitEthernet1/16",
+      "GigabitEthernet1/17",
+      "GigabitEthernet1/18",
+      "GigabitEthernet1/19",
+      "GigabitEthernet1/20",
+      "GigabitEthernet1/21",
+      "GigabitEthernet1/22",
+      "GigabitEthernet1/23",
+      "GigabitEthernet1/24"
+    ]
+  },
+  "53": {
+    "name": "MLX4--CERRT",
+    "interfaces": [
+      "Ve53",
+      "10GigabitEthernet2/1"
+    ]
+  },
+  "55": {
+    "name": "CERRT--CERRT-2",
+    "interfaces": [
+      "Ve55",
+      "10GigabitEthernet2/4"
+    ]
+  },
+  "434": {
+    "name": "UNIFI-MGMT",
+    "interfaces": [
+      "10GigabitEthernet2/1"
+    ]
+  },
+  "436": {
+    "name": "CUSTOMER",
+    "interfaces": [
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/2",
+      "GigabitEthernet1/3",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/5",
+      "GigabitEthernet1/6",
+      "GigabitEthernet1/7",
+      "GigabitEthernet1/9",
+      "GigabitEthernet1/11",
+      "GigabitEthernet1/12",
+      "GigabitEthernet1/13",
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/15",
+      "10GigabitEthernet2/2",
+      "10GigabitEthernet2/3",
+      "10GigabitEthernet2/4"
+    ]
+  },
+  "1629": {
+    "name": "[None]",
+    "interfaces": [
+      "GigabitEthernet1/1",
+      "10GigabitEthernet2/4"
+    ]
+  },
+  "1631": {
+    "name": "WARSAW-VL",
+    "interfaces": [
+      "Ve1631",
+      "GigabitEthernet1/2"
+    ]
+  },
+  "1754": {
+    "name": "AUBERVILLIERS-VL",
+    "interfaces": [
+      "Ve1754",
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/11"
+    ]
+  },
+  "1899": {
+    "name": "PAR-INTEROUTE-CIR-XCONN",
+    "interfaces": [
+      "GigabitEthernet1/1",
+      "10GigabitEthernet2/4"
+    ]
+  },
+  "1900": {
+    "name": "TEMP-SMART",
+    "interfaces": [
+      "GigabitEthernet1/1",
+      "10GigabitEthernet2/4"
+    ]
+  },
+  "1902": {
+    "name": "EXT-VLAN",
+    "interfaces": [
+      "Ve1902",
+      "GigabitEthernet1/3"
+    ]
+  },
+  "1913": {
+    "name": "METROPOLE6-L3VPN-VL",
+    "interfaces": [
+      "Ve1913",
+      "GigabitEthernet1/6"
+    ]
+  },
+  "1915": {
+    "name": "NRJ-L3VPN-VL",
+    "interfaces": [
+      "Ve1915",
+      "GigabitEthernet1/5"
+    ]
+  },
+  "1916": {
+    "name": "PARIS-VL",
+    "interfaces": [
+      "Ve1916",
+      "GigabitEthernet1/15"
+    ]
+  },
+  "4095": {
+    "name": "CONTROL-VLAN",
+    "interfaces": [
+      "GigabitEthernet1/3",
+      "GigabitEthernet1/5",
+      "GigabitEthernet1/6",
+      "GigabitEthernet1/8",
+      "GigabitEthernet1/16",
+      "GigabitEthernet1/17",
+      "GigabitEthernet1/18",
+      "GigabitEthernet1/19",
+      "GigabitEthernet1/20",
+      "GigabitEthernet1/21",
+      "GigabitEthernet1/22",
+      "GigabitEthernet1/23",
+      "GigabitEthernet1/24",
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/2",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/7",
+      "GigabitEthernet1/9",
+      "GigabitEthernet1/10",
+      "GigabitEthernet1/11",
+      "GigabitEthernet1/12",
+      "GigabitEthernet1/13",
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/15",
+      "10GigabitEthernet2/1",
+      "10GigabitEthernet2/2",
+      "10GigabitEthernet2/3",
+      "10GigabitEthernet2/4"
+    ]
+  },
+  "1102": {
+    "name": "ONE-OF-US-P2P-PARIS",
+    "interfaces": [
+      "GigabitEthernet1/10"
+    ]
+  }
+}

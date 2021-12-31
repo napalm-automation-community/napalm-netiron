@@ -1,0 +1,284 @@
+{
+  "1": {
+    "name": "DEFAULT-VLAN",
+    "interfaces": [
+      "GigabitEthernet1/8",
+      "GigabitEthernet1/9",
+      "GigabitEthernet1/10",
+      "GigabitEthernet1/18",
+      "GigabitEthernet1/19",
+      "GigabitEthernet1/20",
+      "GigabitEthernet1/21",
+      "GigabitEthernet1/22",
+      "GigabitEthernet1/23",
+      "GigabitEthernet1/18",
+      "GigabitEthernet1/19",
+      "GigabitEthernet1/20",
+      "GigabitEthernet1/21"
+    ]
+  },
+  "16": {
+    "name": "MLXE8--MLXE4-IF",
+    "interfaces": [
+      "Ve16",
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/15",
+      "GigabitEthernet1/16"
+    ]
+  },
+  "32": {
+    "name": "TO-MAN",
+    "interfaces": [
+      "Ve32",
+      "GigabitEthernet1/6"
+    ]
+  },
+  "51": {
+    "name": "MLXE4-MLXE4",
+    "interfaces": [
+      "Ve51",
+      "GigabitEthernet1/11",
+      "GigabitEthernet1/12",
+      "GigabitEthernet1/13"
+    ]
+  },
+  "54": {
+    "name": "MLX4--CERRT-2-VL",
+    "interfaces": [
+      "Ve54",
+      "GigabitEthernet1/2"
+    ]
+  },
+  "76": {
+    "name": "IPV6-MLX--CER",
+    "interfaces": [
+      "Ve76",
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/5"
+    ]
+  },
+  "80": {
+    "name": "TRANSIT-VRF",
+    "interfaces": [
+      "Ve80",
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/5"
+    ]
+  },
+  "111": {
+    "name": "TEST1",
+    "interfaces": [
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/15",
+      "GigabitEthernet1/16"
+    ]
+  },
+  "115": {
+    "name": "10G",
+    "interfaces": [
+      "Ve115",
+      "GigabitEthernet1/7"
+    ]
+  },
+  "117": {
+    "name": "LON11-INT",
+    "interfaces": [
+      "Ve117",
+      "GigabitEthernet1/8"
+    ]
+  },
+  "121": {
+    "name": "LON13",
+    "interfaces": [
+      "Ve121",
+      "GigabitEthernet1/9"
+    ]
+  },
+  "129": {
+    "name": "LON15-EXT",
+    "interfaces": [
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/5",
+      "GigabitEthernet1/6"
+    ]
+  },
+  "146": {
+    "name": "MASTER-BYPASS",
+    "interfaces": [
+      "Ve146",
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/5"
+    ]
+  },
+  "200": {
+    "name": "[None]",
+    "interfaces": [
+      "GigabitEthernet1/24",
+      "GigabitEthernet1/22"
+    ]
+  },
+  "280": {
+    "name": "UT",
+    "interfaces": [
+      "Ve280",
+      "GigabitEthernet1/14"
+    ]
+  },
+  "434": {
+    "name": "UNIFI-MGMT",
+    "interfaces": [
+      "GigabitEthernet1/2",
+      "GigabitEthernet1/11",
+      "GigabitEthernet1/12",
+      "GigabitEthernet1/13"
+    ]
+  },
+  "459": {
+    "name": "UK-STACK",
+    "interfaces": [
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/24"
+    ]
+  },
+  "470": {
+    "name": "INT",
+    "interfaces": [
+      "GigabitEthernet1/3",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/24",
+      "GigabitEthernet1/1"
+    ]
+  },
+  "471": {
+    "name": "IPMI",
+    "interfaces": [
+      "GigabitEthernet1/14"
+    ]
+  },
+  "486": {
+    "name": "SERVER-MGMT1",
+    "interfaces": [
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/15",
+      "GigabitEthernet1/16"
+    ]
+  },
+  "488": {
+    "name": "SERVER-MGMT2",
+    "interfaces": [
+      "GigabitEthernet1/14"
+    ]
+  },
+  "490": {
+    "name": "CUST",
+    "interfaces": [
+      "GigabitEthernet1/5",
+      "GigabitEthernet1/6",
+      "GigabitEthernet1/7",
+      "GigabitEthernet1/12",
+      "GigabitEthernet1/13",
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/15",
+      "GigabitEthernet1/17",
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/3",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/5",
+      "GigabitEthernet1/11",
+      "GigabitEthernet1/12",
+      "GigabitEthernet1/13",
+      "GigabitEthernet1/17",
+      "GigabitEthernet1/22"
+    ]
+  },
+  "506": {
+    "name": "SERVER-BACKEND",
+    "interfaces": [
+      "Ve506",
+      "GigabitEthernet1/24"
+    ]
+  },
+  "4095": {
+    "name": "CONTROL-VLAN",
+    "interfaces": [
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/7",
+      "GigabitEthernet1/8",
+      "GigabitEthernet1/9",
+      "GigabitEthernet1/10",
+      "GigabitEthernet1/18",
+      "GigabitEthernet1/19",
+      "GigabitEthernet1/20",
+      "GigabitEthernet1/21",
+      "GigabitEthernet1/22",
+      "GigabitEthernet1/23",
+      "GigabitEthernet1/6",
+      "GigabitEthernet1/7",
+      "GigabitEthernet1/8",
+      "GigabitEthernet1/9",
+      "GigabitEthernet1/18",
+      "GigabitEthernet1/19",
+      "GigabitEthernet1/20",
+      "GigabitEthernet1/21",
+      "GigabitEthernet1/2",
+      "GigabitEthernet1/3",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/5",
+      "GigabitEthernet1/6",
+      "GigabitEthernet1/11",
+      "GigabitEthernet1/12",
+      "GigabitEthernet1/13",
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/15",
+      "GigabitEthernet1/16",
+      "GigabitEthernet1/17",
+      "GigabitEthernet1/24",
+      "GigabitEthernet1/1",
+      "GigabitEthernet1/2",
+      "GigabitEthernet1/3",
+      "GigabitEthernet1/4",
+      "GigabitEthernet1/5",
+      "GigabitEthernet1/10",
+      "GigabitEthernet1/11",
+      "GigabitEthernet1/12",
+      "GigabitEthernet1/13",
+      "GigabitEthernet1/14",
+      "GigabitEthernet1/15",
+      "GigabitEthernet1/16",
+      "GigabitEthernet1/17",
+      "GigabitEthernet1/22",
+      "GigabitEthernet1/23",
+      "GigabitEthernet1/24"
+    ]
+  },
+  "92": {
+    "name": "VLL-CER--CER",
+    "interfaces": [
+      "GigabitEthernet1/5"
+    ]
+  },
+  "142": {
+    "name": "VLL-LON17",
+    "interfaces": [
+      "GigabitEthernet1/5"
+    ]
+  },
+  "101": {
+    "name": "VLL-TERADICI-TRUST",
+    "interfaces": [
+      "GigabitEthernet1/17"
+    ]
+  },
+  "124": {
+    "name": "VLL-TRANSIT",
+    "interfaces": [
+      "GigabitEthernet1/5"
+    ]
+  }
+}

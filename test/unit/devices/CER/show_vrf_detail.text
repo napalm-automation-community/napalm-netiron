@@ -1,0 +1,39 @@
+Total number of VRFs configured: 2
+
+VRF STREAM, default RD 1234:1160, Table ID 1
+Label: 500002IPv6 Label: 500003,  Label-Switched Mode: OFF
+IP Router-Id: 10.22.21.4
+  Interfaces:
+     Use "show vrf STREAM" to see the list of interfaces
+  No Export VPN route-target communities
+  No Import VPN route-target communities
+
+  Address Family IPv4
+  No import route-map
+  No export route-map
+    Max Routes: 1024
+    Number of Unicast Routes: 78
+    Export VPN route-target communities:
+    RT:1234:5090
+    Import VPN route-target communities:
+    RT:1234:5090
+VRF MPLS, default RD 1234:1960, Table ID 2
+Label: 500000IPv6 Label: 500001,  Label-Switched Mode: OFF
+IP Router-Id: 172.20.0.65
+  Interfaces:
+     Use "show vrf VISION-MPLS" to see the list of interfaces
+  No Export VPN route-target communities
+  No Import VPN route-target communities
+
+  Address Family IPv4
+  No import route-map
+  No export route-map
+    Max Routes: 1024
+    Number of Unicast Routes: 184
+    Export VPN route-target communities:
+    RT:1234:5510
+    Import VPN route-target communities:
+    RT:1234:5510
+
+Total number of IPv4 unicast route for all non-default VRF is 262
+Total number of IPv6 unicast route for all non-default VRF is 0

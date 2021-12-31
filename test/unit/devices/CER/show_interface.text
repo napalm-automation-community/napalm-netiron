@@ -1,0 +1,1070 @@
+GigabitEthernet1/1 is up, line protocol is up
+  Port state change time: Sep 19 14:58:39  (830 days 19:46:33 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Configured speed auto, actual 1Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, 5 L2 VLAN(S) (tagged), port is in tagged mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is TO:MR-OS904-Z-1:2
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 1
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 36 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 1134 bits/sec, 2 packets/sec, 0.00% utilization
+  76166290 packets input, 17618104743 bytes, 0 no buffer
+  Received 2374497 broadcasts, 976753 multicasts, 72815040 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  373317149 packets output, 33552350727 bytes, 0 underruns
+  Transmitted 293712280 broadcasts, 12985729 multicasts, 66619140 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/2 is up, line protocol is up
+  Port state change time: Sep 19 13:53:08  (830 days 20:52:04 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1302)
+  Configured speed 100Mbit, actual 100Mbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, 2 L2 VLAN(S) (tagged), port is in tagged mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is INTEROUTE-CIRCUIT-X
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 100000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 2
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 20369 bits/sec, 11 packets/sec, 0.02% utilization
+  300 second output rate: 17758 bits/sec, 11 packets/sec, 0.01% utilization
+  1177788332 packets input, 214568814972 bytes, 0 no buffer
+  Received 2749 broadcasts, 380 multicasts, 1177785203 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  1450647068 packets output, 776299248566 bytes, 0 underruns
+  Transmitted 284228506 broadcasts, 1780654 multicasts, 1164637908 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/3 is up, line protocol is up
+  Port state change time: Sep 23 16:04:16  (95 days 18:40:56 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1303)
+  Configured speed 100Mbit, actual 100Mbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, VLAN 1902 (untagged), 1 L2 VLANS (tagged),
+  port is in dual mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is CO:HP-2626-Z-1:24
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 100000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 3
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 90790 bits/sec, 56 packets/sec, 0.09% utilization
+  300 second output rate: 76757 bits/sec, 56 packets/sec, 0.08% utilization
+  5908176521 packets input, 1025726918133 bytes, 0 no buffer
+  Received 1268216769 broadcasts, 3709763 multicasts, 4636249989 unicasts
+  8158190 input errors, 8158190 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  5023284563 packets output, 862760660445 bytes, 0 underruns
+  Transmitted 14649647 broadcasts, 1176332 multicasts, 5007458584 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/4 is up, line protocol is up
+  Port state change time: Sep 19 14:57:18  (830 days 19:47:54 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1304 (bia 748e.f8a4.1304)
+  Configured speed auto, actual 1Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is "MR-OS904-Z-2::2"
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 4
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 36 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 710 bits/sec, 1 packets/sec, 0.00% utilization
+  66104653 packets input, 8634736662 bytes, 0 no buffer
+  Received 4294 broadcasts, 824561 multicasts, 65275798 unicasts
+  5 input errors, 5 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  349381338 packets output, 26856531120 bytes, 0 underruns
+  Transmitted 281382995 broadcasts, 1776037 multicasts, 66222306 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/5 is up, line protocol is up
+  Port state change time: Nov 22 15:28:23  (35 days 19:16:50 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1305)
+  Configured speed auto, actual 1Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, VLAN 1915 (untagged), 1 L2 VLANS (tagged),
+  port is in dual mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is NRJ-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 5
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 1358 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 1526 bits/sec, 2 packets/sec, 0.00% utilization
+  2132715713 packets input, 154409317125 bytes, 0 no buffer
+  Received 336 broadcasts, 0 multicasts, 2132715377 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  3231341357 packets output, 3804538975060 bytes, 0 underruns
+  Transmitted 282049929 broadcasts, 1777457 multicasts, 2947513971 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/6 is up, line protocol is up
+  Port state change time: Aug 10 00:10:45  (871 days 10:34:28 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1306)
+  Configured speed auto, actual 1Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, VLAN 1913 (untagged), 1 L2 VLANS (tagged),
+  port is in dual mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is METROPOLE6-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 6
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 4407 bits/sec, 4 packets/sec, 0.00% utilization
+  300 second output rate: 4746 bits/sec, 6 packets/sec, 0.00% utilization
+  1270561869 packets input, 100124236986 bytes, 0 no buffer
+  Received 5091 broadcasts, 0 multicasts, 1270556778 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  2485014207 packets output, 2685775910472 bytes, 0 underruns
+  Transmitted 284196744 broadcasts, 1780654 multicasts, 2199036809 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/7 is up, line protocol is up
+  Port state change time: Jun 10 12:15:19  (565 days 22:29:54 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1307 (bia 748e.f8a4.1307)
+  Configured speed auto, actual 1Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF-TO-MR-OS940-Z-1::12
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 7
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 43 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 710 bits/sec, 1 packets/sec, 0.00% utilization
+  116772475 packets input, 32319826514 bytes, 0 no buffer
+  Received 1010692 broadcasts, 1086570 multicasts, 114675213 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  281080454 packets output, 132654925489 bytes, 0 underruns
+  Transmitted 148975465 broadcasts, 1618343 multicasts, 130486646 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/8 is down, line protocol is down
+  Port state change time: Mar  9 17:46:53  (658 days 16:58:20 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1308 (bia 748e.f8a4.1308)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is OFFICE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 8
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  7412890569 packets input, 4208359295488 bytes, 0 no buffer
+  Received 6068773 broadcasts, 19385898 multicasts, 7387435898 unicasts
+  13 input errors, 13 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  8948106021 packets output, 8656390839108 bytes, 0 underruns
+  Transmitted 91761215 broadcasts, 760868 multicasts, 8855583938 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/9 is disabled, line protocol is down
+  Port state change time: Aug 10 00:10:45  (871 days 10:34:28 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1309 (bia 748e.f8a4.1309)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 9
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/10 is disabled, line protocol is down
+  Port state change time: Nov  7 11:10:16  (415 days 23:34:57 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.130a (bia 748e.f8a4.130a)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is ONE-OF-US-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 10
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  668638323 packets input, 49190447475 bytes, 0 no buffer
+  Received 51 broadcasts, 0 multicasts, 668638272 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  1433803844 packets output, 1543406768845 bytes, 0 underruns
+  Transmitted 203975319 broadcasts, 919949 multicasts, 1228908576 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/11 is up, line protocol is up
+  Port state change time: Jun 10 14:38:41  (200 days 20:06:32 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.130b)
+  Configured speed auto, actual 1Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, 2 L2 VLAN(S) (tagged), port is in tagged mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is SIPERTECH-CROSS-CONNECT
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 11
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 765011 bits/sec, 108 packets/sec, 0.07% utilization
+  300 second output rate: 90030 bits/sec, 72 packets/sec, 0.01% utilization
+  13109439739 packets input, 8560283135212 bytes, 0 no buffer
+  Received 2609 broadcasts, 0 multicasts, 13109437130 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  9633094912 packets output, 3306798837868 bytes, 0 underruns
+  Transmitted 284134806 broadcasts, 1780585 multicasts, 9347179521 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/12 is down, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.130c (bia 748e.f8a4.130c)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is THV
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 12
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/13 is down, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.130d (bia 748e.f8a4.130d)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 13
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/14 is down, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.130e (bia 748e.f8a4.130e)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 14
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/15 is up, line protocol is up
+  Port state change time: Feb 26 22:50:08  (670 days 11:55:05 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.130f)
+  Configured speed auto, actual 1Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, 2 L2 VLAN(S) (tagged), port is in tagged mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is MR-OS940-Z-1::QinQ:port1
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 15
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 785809 bits/sec, 625 packets/sec, 0.08% utilization
+  300 second output rate: 13201676 bits/sec, 1203 packets/sec, 1.33% utilization
+  25779278567 packets input, 14958057579637 bytes, 0 no buffer
+  Received 4163967 broadcasts, 31612317 multicasts, 25743502283 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  31252667457 packets output, 27397342674108 bytes, 0 underruns
+  Transmitted 193661617 broadcasts, 2436103 multicasts, 31056569737 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/16 is down, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1310 (bia 748e.f8a4.1310)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  No port name
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 16
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/17 is disabled, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1311 (bia 748e.f8a4.1311)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 17
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/18 is disabled, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1312 (bia 748e.f8a4.1312)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 18
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/19 is disabled, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1313 (bia 748e.f8a4.1313)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 19
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/20 is disabled, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1314 (bia 748e.f8a4.1314)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 20
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/21 is disabled, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1315 (bia 748e.f8a4.1315)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 21
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/22 is disabled, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1316 (bia 748e.f8a4.1316)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 22
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/23 is disabled, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1317 (bia 748e.f8a4.1317)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 23
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+GigabitEthernet1/24 is down, line protocol is down
+  Port state change time: Aug 10 00:10:44  (871 days 10:34:29 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is GigabitEthernet, address is 748e.f8a4.1318 (bia 748e.f8a4.1318)
+  Configured speed auto, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, VLAN 1 (untagged), port is in untagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 1000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 24
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+10GigabitEthernet2/1 is up, line protocol is up
+  Port state change time: Dec 19 02:32:51  (9 days 08:12:23 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is 10GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1331)
+  Configured speed 10Gbit, actual 10Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, 2 L2 VLAN(S) (tagged), port is in tagged mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is EU-NETWORKS
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 10000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 65
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 8366 bits/sec, 12 packets/sec, 0.00% utilization
+  300 second output rate: 11972 bits/sec, 14 packets/sec, 0.00% utilization
+  56014712565 packets input, 69860537246950 bytes, 0 no buffer
+  Received 52109718 broadcasts, 49167664 multicasts, 55913435183 unicasts
+  22961 input errors, 22961 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  83507102618 packets output, 110536848332006 bytes, 0 underruns
+  Transmitted 1211423 broadcasts, 43299970 multicasts, 83462591225 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+10GigabitEthernet2/2 is disabled, line protocol is down
+  Port state change time: Nov 11 11:12:26  (46 days 23:32:48 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is 10GigabitEthernet, address is 748e.f8a4.1332 (bia 748e.f8a4.1332)
+  Configured speed 10Gbit, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 10000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 66
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  143443809567 packets input, 196661206968612 bytes, 0 no buffer
+  Received 1377417 broadcasts, 8031682 multicasts, 143434400468 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  117207166847 packets output, 149191641471795 bytes, 0 underruns
+  Transmitted 307676194 broadcasts, 6851214 multicasts, 116892639439 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+10GigabitEthernet2/3 is down, line protocol is down
+  Port state change time: Aug 10 00:10:49  (871 days 10:34:25 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is 10GigabitEthernet, address is 748e.f8a4.1333 (bia 748e.f8a4.1333)
+  Configured speed 10Gbit, actual unknown, configured duplex fdx, actual unknown
+  Member of Control VLAN 4095, 1 L2 VLAN(S) (tagged), port is in tagged mode, port state is Disabled
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is AVAILABLE-IF
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 10000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 67
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  300 second output rate: 0 bits/sec, 0 packets/sec, 0.00% utilization
+  0 packets input, 0 bytes, 0 no buffer
+  Received 0 broadcasts, 0 multicasts, 0 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  0 packets output, 0 bytes, 0 underruns
+  Transmitted 0 broadcasts, 0 multicasts, 0 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+10GigabitEthernet2/4 is up, line protocol is up
+  Port state change time: Jun 10 20:41:41  (565 days 14:03:33 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is 10GigabitEthernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1334)
+  Configured speed 10Gbit, actual 10Gbit, configured duplex fdx, actual fdx
+  Member of Control VLAN 4095, 5 L2 VLAN(S) (tagged), port is in tagged mode, port state is Forwarding
+  STP configured to ON, Priority is level0, flow control enabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  mirror disabled, monitor disabled
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  Port name is FO-CER2024FRT-Z-2_ETH2/4
+  Port is not enabled to receive all vlan packets for pbr
+  MTU 9216 bytes, encapsulation ethernet
+  Configured BW is 10000000 kbps
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 68
+  Cluster L2 protocol forwarding enabled
+  300 second input rate: 13390412 bits/sec, 1343 packets/sec, 0.13% utilization
+  300 second output rate: 1713453 bits/sec, 807 packets/sec, 0.01% utilization
+  123950337946 packets input, 129445093033139 bytes, 0 no buffer
+  Received 40933752 broadcasts, 44972357 multicasts, 123864431837 unicasts
+  0 input errors, 0 CRC, 0 frame, 0 ignored
+  0 runts, 0 giants
+  NP received 0 packets, Sent to TM 1 packets
+  NP Ingress dropped 2 packets
+  117734860647 packets output, 117277029053967 bytes, 0 underruns
+  Transmitted 283748254 broadcasts, 35700658 multicasts, 117415411735 unicasts
+  0 output errors, 0 collisions
+  NP transmitted 3 packets, Received from TM 4 packets
+Ethernetmgmt1 is up, line protocol is up
+  Port state change time: Aug 10 00:10:04  (871 days 10:35:10 ago)
+  Loopback: None
+  STP Root Guard is disabled, STP BPDU Guard is disabled
+  Hardware is Ethernet, address is 748e.f8a4.1300 (bia 748e.f8a4.1300)
+  Configured speed 100Mbit, actual 100Mbit, configured duplex fdx, actual fdx
+  Member of VLAN 0 (untagged), port is in untagged mode, port state is Forwarding
+  STP configured to OFF, Priority is level0, flow control disabled
+  Priority force disabled, Drop precedence level 0, Drop precedence force disabled
+  dhcp-snooping-trust configured to OFF
+  LACP BPDU Forwarding:Disabled
+  LLDP BPDU Forwarding:Disabled
+  L2L3 protocols Forwarding:Disabled
+  Not member of any active trunks
+  Not member of any configured trunks
+  No port name
+  Port is not enabled to receive all vlan packets for pbr
+  Internet address is 10.3.1.65/24, MTU 1548 bytes, encapsulation ethernet
+  Port-type: default-port
+  Openflow: Disabled, Openflow Index 129
+  Cluster L2 protocol forwarding disabled
+  300 second input rate: 5755 bits/sec, 7 packets/sec, 0.00% utilization
+  300 second output rate: 12367 bits/sec, 7 packets/sec, 0.01% utilization
+  377028416 packets input, 37560022275 bytes, 0 no buffer
+  Received 1323904 broadcasts, 5463446 multicasts, 370241066 unicasts
+  372910176 packets output, 86144721603 bytes, 0 underruns
+  Transmitted 374258 broadcasts, 0 multicasts, 372535918 unicasts
+Ve53 is up, line protocol is up
+  Type is Vlan (Vlan Id: 53)
+  Hardware is Virtual Ethernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Port name is MLX4--CERRT
+  Vlan id: 53
+  Internet address is 189.116.28.4/30, IP MTU 1500 bytes, encapsulation ethernet
+  Configured BW 0 kbps
+Ve55 is up, line protocol is up
+  Type is Vlan (Vlan Id: 55)
+  Hardware is Virtual Ethernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Port name is CERRT--CERRT-2-IF
+  Vlan id: 55
+  Internet address is 93.213.8.133/30, IP MTU 1500 bytes, encapsulation ethernet
+  Configured BW 0 kbps
+Ve1631 is up, line protocol is up
+  Type is Vlan (Vlan Id: 1631)
+  Hardware is Virtual Ethernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Port name is WARSAW-IF
+  Vlan id: 1631
+  Internet address is 172.20.0.65/30, IP MTU 1500 bytes, encapsulation ethernet
+  Configured BW 0 kbps
+Ve1754 is up, line protocol is up
+  Type is Vlan (Vlan Id: 1754)
+  Hardware is Virtual Ethernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Port name is AUBERVILLIERS-VL
+  Vlan id: 1754
+  Internet address is 172.20.1.41/30, IP MTU 1500 bytes, encapsulation ethernet
+  Configured BW 0 kbps
+Ve1902 is up, line protocol is up
+  Type is Vlan (Vlan Id: 1902)
+  Hardware is Virtual Ethernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Port name is EXT-IF
+  Vlan id: 1902
+  Internet address is 189.116.28.9/30, IP MTU 1500 bytes, encapsulation ethernet
+  Configured BW 0 kbps
+Ve1913 is up, line protocol is up
+  Type is Vlan (Vlan Id: 1913)
+  Hardware is Virtual Ethernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Port name is METROPOLE6-L3VPN-IF
+  Vlan id: 1913
+  Internet address is 10.220.218.85/30, IP MTU 1500 bytes, encapsulation ethernet
+  Configured BW 0 kbps
+Ve1915 is up, line protocol is up
+  Type is Vlan (Vlan Id: 1915)
+  Hardware is Virtual Ethernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Port name is NRJ-L3VPN-IF
+  Vlan id: 1915
+  Internet address is 10.220.218.49/30, IP MTU 1500 bytes, encapsulation ethernet
+  Configured BW 0 kbps
+Ve1916 is up, line protocol is up
+  Type is Vlan (Vlan Id: 1916)
+  Hardware is Virtual Ethernet, address is 748e.f8a4.1301 (bia 748e.f8a4.1301)
+  Port name is PARIS-IF
+  Vlan id: 1916
+  Internet address is 189.116.24.241/30, IP MTU 1500 bytes, encapsulation ethernet
+  Configured BW 0 kbps
+Loopback1 is up, line protocol is up
+  Hardware is Loopback
+  No port name
+  Internet address is 93.20.8.3/32, IP MTU 1500 bytes, encapsulation LOOPBACK
