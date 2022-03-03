@@ -17,7 +17,8 @@
       "2001:4d30:606:fff::ae9b": {
         "prefix_length": 126
       }
-    }
+    },
+    "interfaceacl": "STANDARD-IN-ACL"
   },
   "Ve32": {
     "ipv4": {
@@ -41,7 +42,8 @@
       "2001:4d30:606:116::b5b6": {
         "prefix_length": 126
       }
-    }
+    },
+    "interfaceacl": "STANDARD-IN-ACL"
   },
   "Ve54": {
     "ipv4": {
@@ -49,7 +51,8 @@
         "prefix_length": 30
       }
     },
-    "ipv6": {}
+    "ipv6": {},
+    "interfaceacl": "STANDARD-IN-ACL"
   },
   "Ve76": {
     "ipv4": {},
@@ -66,7 +69,8 @@
       }
     },
     "ipv6": {},
-    "vrf": "NIBBLE"
+    "vrf": "NIBBLE",
+    "interfaceacl": "STANDARD-IN-ACL"
   },
   "Ve115": {
     "ipv4": {
@@ -98,7 +102,8 @@
         "prefix_length": 30
       }
     },
-    "ipv6": {}
+    "ipv6": {},
+    "interfaceacl": "STANDARD-IN-ACL"
   },
   "Ve280": {
     "ipv4": {
