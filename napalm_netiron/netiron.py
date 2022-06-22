@@ -1075,7 +1075,7 @@ class NetIronDriver(NetworkDriver):
                 "is_enabled": True,
                 "description": lag["name"],
                 "last_flapped": float(-1),
-                "speed": 0,
+                "speed": float(0),
                 "mac_address": "",
                 "mtu": 0,
                 "children": self.interfaces_to_list(lag["ports"]),
@@ -1112,7 +1112,7 @@ class NetIronDriver(NetworkDriver):
                 "is_enabled": interface["link"].lower() != "disabled",
                 "description": interface["name"],
                 "last_flapped": float(-1),
-                "speed": int(speed),
+                "speed": float(speed),
                 "mac_address": interface["mac"],
                 "mtu": int(interface["mtu"]),
             }
@@ -2628,7 +2628,7 @@ class NetIronDriver(NetworkDriver):
         """
         ping_dict = {}
 
-        _ip = napalm.base.helpers.IPAddress(destination)
+        _ip = IPAddress(destination)
         if not _ip:
             raise ValueError("destination must be a valid IP Address")
 
@@ -2647,7 +2647,7 @@ class NetIronDriver(NetworkDriver):
         if source != "":
             command += " source-ip {}".format(source)
 
-        logger.info(command)
+        # logger.info(command)
 
         output = self._send_command(command)
         if "No reply from remote host" in output:
@@ -2695,7 +2695,7 @@ class NetIronDriver(NetworkDriver):
                     for i in range(probes_received):
                         results_array.append(
                             {
-                                "ip_address": py23_compat.text_type(destination),
+                                "ip_address": str(destination),
                                 "rtt": _probe_results[i] if len(_probe_results) > i else 0.0,
                             }
                         )
@@ -2731,7 +2731,7 @@ class NetIronDriver(NetworkDriver):
             * ip_address (str)
             * host_name (str)
         """
-        _ip = napalm.base.helpers.IPAddress(destination)
+        _ip = IPAddress(destination)
         if not _ip:
             raise ValueError("destination must be a valid IP Address")
 
