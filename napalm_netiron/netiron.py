@@ -2632,6 +2632,9 @@ class NetIronDriver(NetworkDriver):
         if not _ip:
             raise ValueError("destination must be a valid IP Address")
 
+        if timeout < 50:
+            timeout = 50
+
         # vrf needs to be right after the ping command
         # ipv6 addresses require an additional parameter
         command = "ping {vrf} {family} {destination} timeout {timeout} size {size} count {count} ".format(
