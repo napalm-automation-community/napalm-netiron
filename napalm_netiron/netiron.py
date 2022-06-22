@@ -2628,7 +2628,7 @@ class NetIronDriver(NetworkDriver):
         """
         ping_dict = {}
 
-        _ip = napalm.base.helpers.IPAddress(destination)
+        _ip = IPAddress(destination)
         if not _ip:
             raise ValueError("destination must be a valid IP Address")
 
@@ -2647,7 +2647,7 @@ class NetIronDriver(NetworkDriver):
         if source != "":
             command += " source-ip {}".format(source)
 
-        logger.info(command)
+        # logger.info(command)
 
         output = self._send_command(command)
         if "No reply from remote host" in output:
@@ -2695,7 +2695,7 @@ class NetIronDriver(NetworkDriver):
                     for i in range(probes_received):
                         results_array.append(
                             {
-                                "ip_address": py23_compat.text_type(destination),
+                                "ip_address": str(destination),
                                 "rtt": _probe_results[i] if len(_probe_results) > i else 0.0,
                             }
                         )
@@ -2731,7 +2731,7 @@ class NetIronDriver(NetworkDriver):
             * ip_address (str)
             * host_name (str)
         """
-        _ip = napalm.base.helpers.IPAddress(destination)
+        _ip = IPAddress(destination)
         if not _ip:
             raise ValueError("destination must be a valid IP Address")
 
