@@ -1075,7 +1075,7 @@ class NetIronDriver(NetworkDriver):
                 "is_enabled": True,
                 "description": lag["name"],
                 "last_flapped": float(-1),
-                "speed": 0,
+                "speed": float(0),
                 "mac_address": "",
                 "mtu": 0,
                 "children": self.interfaces_to_list(lag["ports"]),
@@ -1112,7 +1112,7 @@ class NetIronDriver(NetworkDriver):
                 "is_enabled": interface["link"].lower() != "disabled",
                 "description": interface["name"],
                 "last_flapped": float(-1),
-                "speed": int(speed),
+                "speed": float(speed),
                 "mac_address": interface["mac"],
                 "mtu": int(interface["mtu"]),
             }
