@@ -916,7 +916,7 @@ class NetIronDriver(NetworkDriver):
                 hostname = r1.group(1)
 
         facts = {
-            "uptime": uptime,
+            "uptime": float(uptime),
             "vendor": str(vendor),
             "model": str(model),
             "hostname": str(hostname),
@@ -1091,6 +1091,11 @@ class NetIronDriver(NetworkDriver):
             )
         info = textfsm_extractor(self, "show_interface", self.show_int)
 
+        show_mpls_interface = self.device.send_command_timing(
+            "show mpls interface brief", delay_factor=self._show_command_delay_factor
+        )
+        mpls_info = textfsm_extractor(self, "show_mpls_interface_brief", show_mpls_interface)
+
         result = {}
         for interface in info:
             port = self.standardize_interface_name(interface["port"])
@@ -1115,7 +1120,14 @@ class NetIronDriver(NetworkDriver):
                 "speed": float(speed),
                 "mac_address": interface["mac"],
                 "mtu": int(interface["mtu"]),
+                "mpls_enabled": False,
             }
+
+        # Add MPLS Enabled value
+        for mpls_interface in mpls_info:
+            if mpls_interface["ldp"].lower() == "yes":
+                port = self.standardize_interface_name(mpls_interface["interface"])
+                result[port]["mpls_enabled"] = True
 
         # Get lags
         lags = self.get_lags()
@@ -1123,7 +1135,7 @@ class NetIronDriver(NetworkDriver):
 
         # Remove extra keys to make tests pass
         if "pytest" in sys.modules:
-            return self._delete_keys_from_dict(result, ["children", "type"])
+            return self._delete_keys_from_dict(result, ["children", "type", "mpls_enabled"])
 
         return result
 

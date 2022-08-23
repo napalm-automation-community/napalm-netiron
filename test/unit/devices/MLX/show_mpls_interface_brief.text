@@ -1,0 +1,5 @@
+Number of MPLS interfaces: 2
+Number of LDP enabled MPLS interfaces: 2
+      Interface AdminGrp    Admin Oper MaxBW      MaxResvBW  BypsLSPcnt LDP_en
+           ve16 0x00000000  Up    Up   30000000   30000000   0          YES
+           ve76 0x00000000  Up    Up   30000000   30000000   0          YES
