@@ -869,7 +869,7 @@ class NetIronDriver(NetworkDriver):
 
     def get_facts(self):
         """get_facts method."""
-        uptime = None
+        uptime = -1
         vendor = "Brocade"
         model = None
         hostname = None
