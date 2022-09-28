@@ -1048,6 +1048,8 @@ class NetIronDriver(NetworkDriver):
         port = re.sub(r"^loopback(\d+)$", "Loopback\\1", port)
         # Convert tnX to tunnelX
         port = re.sub(r"^tn(\d+)$", "Tunnel\\1", port)
+        # Conver gre-tnlX to TunnelX
+        port = re.sub(r"^gre-tnl(\d+)$", "Tunnel\\1", port)
         # Convert veX to VeX
         port = re.sub(r"^ve(\d+)$", "Ve\\1", port)
         # Convert mgmt1 to Ethernetmgmt1
@@ -1127,7 +1129,8 @@ class NetIronDriver(NetworkDriver):
         for mpls_interface in mpls_info:
             if mpls_interface["ldp"].lower() == "yes":
                 port = self.standardize_interface_name(mpls_interface["interface"])
-                result[port]["mpls_enabled"] = True
+                if result.get(port):
+                    result[port]["mpls_enabled"] = True
 
         # Get lags
         lags = self.get_lags()
