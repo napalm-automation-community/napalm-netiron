@@ -1098,6 +1098,8 @@ class NetIronDriver(NetworkDriver):
         )
         mpls_info = textfsm_extractor(self, "show_mpls_interface_brief", show_mpls_interface)
 
+        vlans = self.get_vlans()
+
         result = {}
         for interface in info:
             port = self.standardize_interface_name(interface["port"])
@@ -1125,6 +1127,17 @@ class NetIronDriver(NetworkDriver):
                 "mpls_enabled": False,
             }
 
+            # Add ve_children to VEs
+            if re.match(r"^Ve", port):
+                # Get list of interfaces with the same VLAN as the Ve, excluding the Ve.
+                # These are the physical interfaces that form the Ve.
+                result[port]["ve_children"] = []
+                for vlan, data in vlans.items():
+                    if port in data["interfaces"]:
+                        for interface in data["interfaces"]:
+                            if interface != port:
+                                result[port]["ve_children"].append(interface)
+
         # Add MPLS Enabled value
         for mpls_interface in mpls_info:
             if mpls_interface["ldp"].lower() == "yes":
@@ -1138,7 +1151,7 @@ class NetIronDriver(NetworkDriver):
 
         # Remove extra keys to make tests pass
         if "pytest" in sys.modules:
-            return self._delete_keys_from_dict(result, ["children", "type", "mpls_enabled"])
+            return self._delete_keys_from_dict(result, ["children", "type", "mpls_enabled", "ve_children"])
 
         return result
 
